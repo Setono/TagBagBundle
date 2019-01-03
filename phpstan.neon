@@ -1,0 +1,11 @@
+parameters:
+    paths:
+        - './'
+
+    reportUnmatchedIgnoredErrors: true
+
+    excludes_analyse:
+        # Makes PHPStan crash
+        - 'DependencyInjection/Configuration.php'
+        - './Tests/'
+        - './vendor/'
