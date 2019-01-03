@@ -26,7 +26,8 @@ final class SetonoTagBagExtension extends Extension implements PrependExtensionI
 
     public function prepend(ContainerBuilder $container): void
     {
-        if(!$container->has('twig')) {
+        $bundles = $container->getParameter('kernel.bundles');
+        if(!isset($bundles['TwigBundle'])) {
             return;
         }
 
