@@ -20,7 +20,7 @@
         "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.10.7",
         "roave/security-advisories": "dev-master",
-        "symplify/easy-coding-standard": "^5.2"
+        "symplify/easy-coding-standard": "^5.2.6"
     },
     "prefer-stable": true,
     "autoload": {
