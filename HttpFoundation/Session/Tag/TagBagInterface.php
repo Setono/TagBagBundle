@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 
 interface TagBagInterface extends SessionBagInterface
 {
+    public const SECTION_HEAD = 'head';
+    public const SECTION_BODY_BEGIN = 'body_begin';
+    public const SECTION_BODY_END = 'body_end';
+
     /**
      * Adds a tag for a section.
      *
