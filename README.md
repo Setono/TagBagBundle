@@ -33,6 +33,68 @@ return [
 ];
 ```
 
+## Usage
+
+You can get the `TagBag` from the session like so:
+
+```php
+<?php
+
+/** @var Symfony\Component\HttpFoundation\Session\SessionInterface $session */
+$session;
+
+/** @var Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface $tagBag */
+$tagBag = $session->getBag('tags');
+
+$tagBag->add('<script>console.log</script>', 'body_end');
+```
+
+then in your template:
+
+```html
+        <!-- ... -->
+        {% for tag in tag_bag.tags('body_end') %}
+            {{ tag|raw }}
+        {% endfor %}
+    </body>
+</html>
+```
+
+If you need the `TagBag` injected you can use the service `session.tag_bag`, i.e.:
+
+```php
+<?php
+
+class YourService
+{
+    private $tagBag;
+    
+    public function __construct(Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface $tagBag) 
+    {
+        $this->tagBag = $tagBag;
+    }
+    
+    public function method(): void 
+    {
+        $this->tagBag->add('<script>console.log</script>', 'body_end');
+    }
+}
+```
+
+then in your service definition:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="YourService">
+            <argument type="service" id="session.tag_bag"/>
+        </service>
+    </services>
+</container>
+```
+
 [ico-version]: https://img.shields.io/packagist/v/setono/tag-bag-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/Setono/TagBagBundle/master.svg?style=flat-square
