@@ -97,7 +97,7 @@ then in your service definition:
 
 [ico-version]: https://img.shields.io/packagist/v/setono/tag-bag-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Setono/TagBagBundle/master.svg?style=flat-square
+[ico-travis]: https://travis-ci.com/Setono/TagBagBundle.svg?branch=master
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/TagBagBundle.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/setono/tag-bag-bundle
