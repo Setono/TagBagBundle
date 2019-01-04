@@ -8,9 +8,5 @@
         <service id="Setono\TagBagBundle\HttpFoundation\Session\SessionConfigurator">
             <argument type="service" id="session.tag_bag"/>
         </service>
-
-        <service id="Setono\TagBagBundle\Twig\TagBagVariable">
-            <argument type="service" id="request_stack" on-invalid="null"/>
-        </service>
     </services>
 </container>

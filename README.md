@@ -53,9 +53,7 @@ then in your template:
 
 ```html
         <!-- ... -->
-        {% for tag in tag_bag.tags('body_end') %}
-            {{ tag|raw }}
-        {% endfor %}
+        {{ tags('body_end') }}
     </body>
 </html>
 ```
