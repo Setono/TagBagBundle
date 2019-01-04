@@ -1,7 +1,4 @@
 language: php
-php:
-    - 7.1
-    - 7.2
 
 dist: trusty
 
@@ -10,6 +7,15 @@ sudo: false
 cache:
     directories:
         - ~/.composer/cache
+
+matrix:
+  include:
+    - php: 7.1
+    - php: 7.1
+      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
+    - php: 7.2
+    - php: 7.2
+      env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
 install:
     - composer update --no-interaction --prefer-dist ${COMPOSER_FLAGS}
