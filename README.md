@@ -39,5 +39,5 @@ return [
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/TagBagBundle.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/setono/tag-bag-bundle
-[link-travis]: https://travis-ci.org/Setono/TagBagBundle
+[link-travis]: https://travis-ci.com/Setono/TagBagBundle
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/TagBagBundle
