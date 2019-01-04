@@ -17,6 +17,7 @@
         "symfony/http-foundation": "^3.4|^4.1"
     },
     "require-dev": {
+        "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.10.7",
         "roave/security-advisories": "dev-master",
         "symplify/easy-coding-standard": "^5.2"
@@ -38,7 +39,8 @@
     },
     "scripts": {
         "analyse": "./vendor/bin/phpstan analyse -c phpstan.neon -l max",
-        "check-style": "./vendor/bin/ecs check DependencyInjection/ HttpFoundation/",
-        "fix-style": "./vendor/bin/ecs check --fix DependencyInjection/ HttpFoundation/"
+        "check-style": "./vendor/bin/ecs check DependencyInjection/ HttpFoundation/ Tag/ Twig/",
+        "fix-style": "./vendor/bin/ecs check --fix DependencyInjection/ HttpFoundation/ Tag/ Twig/",
+        "test": "./vendor/bin/phpspec run"
     }
 }

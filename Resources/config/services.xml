@@ -9,7 +9,7 @@
             <argument type="service" id="session.tag_bag"/>
         </service>
 
-        <service id="Setono\TagBagBundle\Twig\GlobalVariable">
+        <service id="Setono\TagBagBundle\Twig\TagBagVariable">
             <argument type="service" id="request_stack" on-invalid="null"/>
         </service>
     </services>

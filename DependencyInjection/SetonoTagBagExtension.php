@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\DependencyInjection;
 
-use Setono\TagBagBundle\Twig\GlobalVariable;
+use Setono\TagBagBundle\Twig\TagBagVariable;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -27,14 +27,14 @@ final class SetonoTagBagExtension extends Extension implements PrependExtensionI
     public function prepend(ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
-        if(!isset($bundles['TwigBundle'])) {
+        if (!isset($bundles['TwigBundle'])) {
             return;
         }
 
         $container->prependExtensionConfig('twig', [
             'globals' => [
-                'tag_bag' => '@'.GlobalVariable::class
-            ]
+                'tag_bag' => '@'.TagBagVariable::class,
+            ],
         ]);
     }
 }

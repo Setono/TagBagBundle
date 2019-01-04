@@ -7,7 +7,7 @@ namespace Setono\TagBagBundle\Twig;
 use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class GlobalVariable
+class TagBagVariable
 {
     /**
      * @var RequestStack|null
@@ -26,12 +26,13 @@ class GlobalVariable
      *  * getTags(['section1', 'section2']) returns a nested array of section => tags.
      *
      * @param mixed $sections
+     *
      * @return array
      */
     public function getTags($sections = null): array
     {
         $tagBag = $this->getTagBag();
-        if(null === $tagBag) {
+        if (null === $tagBag) {
             return [];
         }
 
@@ -59,13 +60,13 @@ class GlobalVariable
 
         $request = $this->requestStack->getCurrentRequest();
 
-        if(null === $request) {
+        if (null === $request) {
             return null;
         }
 
         $session = $request->getSession();
 
-        if(null === $session) {
+        if (null === $session) {
             return null;
         }
 
