@@ -9,17 +9,17 @@ class TagBag implements TagBagInterface
     /**
      * @var string
      */
+    private $storageKey;
+
+    /**
+     * @var string
+     */
     private $name = 'tags';
 
     /**
      * @var array
      */
     private $tags = [];
-
-    /**
-     * @var string
-     */
-    private $storageKey;
 
     public function __construct(string $storageKey = 'tags')
     {
