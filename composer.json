@@ -20,6 +20,7 @@
         "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.10.7",
         "roave/security-advisories": "dev-master",
+        "sebastian/comparator": "^2.0|^3.0",
         "symfony/templating": "^4.1",
         "symfony/twig-bundle": "^4.1",
         "symplify/easy-coding-standard": "^5.3"
