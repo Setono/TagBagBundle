@@ -1,7 +1,4 @@
 parameters:
-    paths:
-        - './'
-
     reportUnmatchedIgnoredErrors: true
 
     excludes_analyse:

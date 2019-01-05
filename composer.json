@@ -30,9 +30,13 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Setono\\TagBagBundle\\": ""
-        },
-        "exclude-from-classmap": [ "/Tests/" ]
+            "Setono\\TagBagBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Setono\\TagBagBundle\\Tests\\": "tests/"
+        }
     },
     "extra": {
         "branch-alias": {
@@ -43,9 +47,9 @@
         "sort-packages": true
     },
     "scripts": {
-        "analyse": "./vendor/bin/phpstan analyse -c phpstan.neon -l max",
-        "check-style": "./vendor/bin/ecs check DependencyInjection/ HttpFoundation/ Tag/ Twig/",
-        "fix-style": "./vendor/bin/ecs check --fix DependencyInjection/ HttpFoundation/ Tag/ Twig/",
+        "analyse": "./vendor/bin/phpstan analyse -c phpstan.neon -l max src/",
+        "check-style": "./vendor/bin/ecs check src/ tests/",
+        "fix-style": "./vendor/bin/ecs check --fix src/ tests/",
         "test": [
             "@phpspec",
             "@phpunit"

@@ -1,5 +1,4 @@
 suites:
     main:
-        src_path: .
         namespace: Setono\TagBagBundle
         psr4_prefix: Setono\TagBagBundle

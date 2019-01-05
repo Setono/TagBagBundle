@@ -12,7 +12,7 @@ final class SetonoTagBagExtensionTest extends AbstractExtensionTestCase
     protected function getContainerExtensions(): array
     {
         return [
-            new SetonoTagBagExtension()
+            new SetonoTagBagExtension(),
         ];
     }
 
