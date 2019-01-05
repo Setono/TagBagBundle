@@ -11,17 +11,17 @@
     ],
     "require": {
         "php": "^7.1.3",
-        "symfony/config": "^3.4|^4.1",
-        "symfony/dependency-injection": "^3.4|^4.1",
-        "symfony/framework-bundle": "^3.4|^4.1",
-        "symfony/http-foundation": "^3.4|^4.1"
+        "symfony/config": "^4.1",
+        "symfony/dependency-injection": "^4.1",
+        "symfony/framework-bundle": "^4.1",
+        "symfony/http-foundation": "^4.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.10.7",
         "roave/security-advisories": "dev-master",
-        "symfony/templating": "^3.4|^4.1",
-        "symfony/twig-bundle": "^3.4|^4.1",
+        "symfony/templating": "^4.1",
+        "symfony/twig-bundle": "^4.1",
         "symplify/easy-coding-standard": "^5.2.22"
     },
     "prefer-stable": true,
