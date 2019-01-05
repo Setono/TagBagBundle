@@ -8,4 +8,5 @@ parameters:
         # Makes PHPStan crash
         - 'DependencyInjection/Configuration.php'
         - './spec/'
+        - './Tests/'
         - './vendor/'
