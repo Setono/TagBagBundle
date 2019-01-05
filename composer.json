@@ -17,8 +17,10 @@
         "symfony/http-foundation": "^4.1"
     },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^3.1",
         "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.10.7",
+        "phpunit/phpunit": "^6|^7",
         "roave/security-advisories": "dev-master",
         "sebastian/comparator": "^2.0|^3.0",
         "symfony/templating": "^4.1",
@@ -44,6 +46,11 @@
         "analyse": "./vendor/bin/phpstan analyse -c phpstan.neon -l max",
         "check-style": "./vendor/bin/ecs check DependencyInjection/ HttpFoundation/ Tag/ Twig/",
         "fix-style": "./vendor/bin/ecs check --fix DependencyInjection/ HttpFoundation/ Tag/ Twig/",
-        "test": "./vendor/bin/phpspec run"
+        "test": [
+            "@phpspec",
+            "@phpunit"
+        ],
+        "phpspec": "./vendor/bin/phpspec run",
+        "phpunit": "./vendor/bin/phpunit"
     }
 }
