@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Setono\TagBagBundle;
 
+use Setono\TagBagBundle\DependencyInjection\Compiler\RegisterTypeRenderersPass;
 use Setono\TagBagBundle\DependencyInjection\Compiler\SessionConfiguratorPass;
 use Setono\TagBagBundle\DependencyInjection\Compiler\TwigEnginePass;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -13,6 +16,7 @@ class SetonoTagBagBundle extends Bundle
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new SessionConfiguratorPass());
+        $container->addCompilerPass(new RegisterTypeRenderersPass());
         $container->addCompilerPass(new TwigEnginePass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1); // the priority needs to be higher than the pass that extracts the tagged twig extensions
     }
 }

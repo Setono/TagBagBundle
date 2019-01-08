@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\HttpFoundation\Session\Tag;
 
+use Setono\TagBagBundle\Exception\WrongTagTypeException;
+use Setono\TagBagBundle\Collection\TagCollectionInterface;
+use Setono\TagBagBundle\Tag\TagInterface;
+use Setono\TagBagBundle\Tag\TypedTag;
+use Setono\TagBagBundle\Collection\TagCollection;
+
 class TagBag implements TagBagInterface
 {
     /**
@@ -17,7 +23,7 @@ class TagBag implements TagBagInterface
     private $name = 'tags';
 
     /**
-     * @var array
+     * @var TagCollectionInterface[][]
      */
     private $tags = [];
 
@@ -46,9 +52,25 @@ class TagBag implements TagBagInterface
         return $this->all();
     }
 
-    public function add($tag, string $section): void
+    public function add($tag, string $section, string $type = null): void
     {
-        $this->tags[$section][] = (string) $tag;
+        $tag = $this->getTagObject($tag, $type);
+
+        if (!isset($this->tags[$section][$tag->getType()])) {
+            $this->tags[$section][$tag->getType()] = new TagCollection($tag->getType());
+        }
+
+        $this->tags[$section][$tag->getType()]->add($tag);
+    }
+
+    public function addScript($tag, string $section): void
+    {
+        $this->add($tag, $section, TagInterface::TYPE_SCRIPT);
+    }
+
+    public function addStyle($tag, string $section): void
+    {
+        $this->add($tag, $section, TagInterface::TYPE_STYLE);
     }
 
     public function get(string $section, array $default = []): array
@@ -80,5 +102,33 @@ class TagBag implements TagBagInterface
     public function keys(): array
     {
         return array_keys($this->tags);
+    }
+
+    protected function getTagObject($tag, ?string $expectedType): TagInterface
+    {
+        if (null === $expectedType) {
+            $expectedType = $this->getType($tag, TagInterface::TYPE_NONE);
+        }
+
+        if (is_string($tag)) {
+            $tag = new TypedTag($tag, $expectedType);
+        }
+
+        if ($tag->getType() !== $expectedType) {
+            throw new WrongTagTypeException($tag, $expectedType);
+        }
+
+        return $tag;
+    }
+
+    protected function getType($tag, string $default): string
+    {
+        $type = $default;
+
+        if ($tag instanceof TagInterface) {
+            $type = $tag->getType();
+        }
+
+        return $type;
     }
 }

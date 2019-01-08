@@ -22,6 +22,22 @@ interface TagBagInterface extends SessionBagInterface
     public function add($tag, string $section): void;
 
     /**
+     * Adds a script tag for a section.
+     *
+     * @param string|TagInterface $tag
+     * @param string              $section
+     */
+    public function addScript($tag, string $section): void;
+
+    /**
+     * Adds a style tag for a section.
+     *
+     * @param string|TagInterface $tag
+     * @param string              $section
+     */
+    public function addStyle($tag, string $section): void;
+
+    /**
      * Gets and clears tags from the stack.
      *
      * @param string $section

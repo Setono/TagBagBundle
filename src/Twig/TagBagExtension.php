@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Twig;
 
 use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
+use Setono\TagBagBundle\Collection\TagCollectionInterface;
+use Setono\TagBagBundle\TypeRenderer\TypeRendererInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -12,12 +14,18 @@ use Twig\TwigFunction;
 class TagBagExtension extends AbstractExtension
 {
     /**
+     * @var TypeRendererInterface
+     */
+    private $typeRenderer;
+
+    /**
      * @var RequestStack|null
      */
     private $requestStack;
 
-    public function __construct(?RequestStack $requestStack)
+    public function __construct(TypeRendererInterface $typeRenderer, ?RequestStack $requestStack)
     {
+        $this->typeRenderer = $typeRenderer;
         $this->requestStack = $requestStack;
     }
 
@@ -49,11 +57,11 @@ class TagBagExtension extends AbstractExtension
         }
 
         if (null === $sections || '' === $sections || [] === $sections) {
-            return $this->arrayToString($tagBag->all());
+            return $this->sectionsToString($tagBag->all());
         }
 
         if (\is_string($sections)) {
-            return $this->arrayToString($tagBag->get($sections));
+            return $this->sectionsToString([$tagBag->get($sections)]);
         }
 
         $result = [];
@@ -61,7 +69,7 @@ class TagBagExtension extends AbstractExtension
             $result[$section] = $tagBag->get($section);
         }
 
-        return $this->arrayToString($result);
+        return $this->sectionsToString($result);
     }
 
     public function headTags(): string
@@ -79,15 +87,18 @@ class TagBagExtension extends AbstractExtension
         return $this->tags(TagBagInterface::SECTION_BODY_END);
     }
 
-    private function arrayToString(array $arr): string
+    private function sectionsToString(array $sections): string
     {
         $res = '';
 
-        foreach ($arr as $item) {
-            if (is_array($item)) {
-                $res .= $this->arrayToString($item);
-            } else {
-                $res .= $item;
+        foreach ($sections as $section) {
+            /** @var TagCollectionInterface $type */
+            foreach ($section as $type) {
+                if (!$this->typeRenderer->supports($type->getType())) {
+                    continue;
+                }
+
+                $res .= $this->typeRenderer->render($type);
             }
         }
 

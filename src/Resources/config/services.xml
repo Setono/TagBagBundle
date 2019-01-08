@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <services>
-        <service id="session.tag_bag" class="Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBag" />
-        <service id="Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface" alias="session.tag_bag" />
-
-        <service id="Setono\TagBagBundle\HttpFoundation\Session\SessionConfigurator">
-            <argument type="service" id="session.tag_bag"/>
-        </service>
-    </services>
+    <imports>
+        <import resource="services/misc.xml"/>
+        <import resource="services/type_renderer.xml"/>
+    </imports>
 </container>

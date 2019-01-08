@@ -39,6 +39,7 @@ You can get the `TagBag` from the session like so:
 
 ```php
 <?php
+use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
 
 /** @var Symfony\Component\HttpFoundation\Session\SessionInterface $session */
 $session;
@@ -46,14 +47,31 @@ $session;
 /** @var Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface $tagBag */
 $tagBag = $session->getBag('tags');
 
-$tagBag->add('<script>console.log</script>', 'body_end');
+$tagBag->add("<script>console.log('test')</script>", TagBagInterface::SECTION_HEAD);
+
+// you could do the same like this:
+$tagBag->addScript("console.log('test');", TagBagInterface::SECTION_HEAD);
 ```
 
-then in your template:
+And to output all tags you've defined, including tags in custom sections, you can use a template like this:
 
 ```html
-        <!-- ... -->
-        {{ tags('body_end') }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        {{ head_tags() }}
+    </head>
+    <body>
+        {{ body_begin_tags() }}
+        
+        <h1>This is your page content</h1>
+        <p>Lorem ipsum</p>
+        
+        {{ body_end_tags() }}
+        {{ tags() }}
     </body>
 </html>
 ```
@@ -62,12 +80,13 @@ If you need the `TagBag` injected you can use the service `session.tag_bag`, i.e
 
 ```php
 <?php
+use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
 
 class YourService
 {
     private $tagBag;
     
-    public function __construct(Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface $tagBag) 
+    public function __construct(TagBagInterface $tagBag) 
     {
         $this->tagBag = $tagBag;
     }

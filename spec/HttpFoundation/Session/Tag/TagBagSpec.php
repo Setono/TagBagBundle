@@ -4,6 +4,8 @@ namespace spec\Setono\TagBagBundle\HttpFoundation\Session\Tag;
 
 use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBag;
 use PhpSpec\ObjectBehavior;
+use Setono\TagBagBundle\Collection\TagCollectionInterface;
+use Setono\TagBagBundle\Tag\TagInterface;
 
 class TagBagSpec extends ObjectBehavior
 {
@@ -32,8 +34,15 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_clears(): void
     {
-        $expected = $this->addTag();
-        $this->clear()->shouldReturn($expected);
+        $this->add('test', 'section');
+
+        $actual = $this->clear();
+
+        $actual->shouldBeArray();
+        $actual->shouldHaveKey('section');
+        $actual['section']->shouldBeArray();
+        $actual['section']->shouldHaveKey(TagInterface::TYPE_NONE);
+        $actual['section'][TagInterface::TYPE_NONE]->shouldBeAnInstanceOf(TagCollectionInterface::class);
 
         $this->all()->shouldReturn([]);
     }
@@ -43,9 +52,17 @@ class TagBagSpec extends ObjectBehavior
         $this->add('tag1', 'section1');
         $this->add('tag2', 'section2');
 
-        $this->get('section2')->shouldReturn([
-            'tag2'
-        ]);
+        $actual = $this->get('section2');
+        $actual->shouldBeArray();
+        $actual[TagInterface::TYPE_NONE]->shouldBeAnInstanceOf(TagCollectionInterface::class);
+
+        /** @var TagCollectionInterface $tags */
+        $tags = $actual[TagInterface::TYPE_NONE];
+        $tags->toArray()->shouldBeArray();
+
+        /** @var TagInterface $tag */
+        $tag = $tags->toArray()[0];
+        $tag->__toString()->shouldBe('tag2');
 
         $this->get('section2', [])->shouldReturn([]);
     }
@@ -80,16 +97,5 @@ class TagBagSpec extends ObjectBehavior
         $this->add('tag', 'section4');
 
         $this->keys()->shouldReturn(['section1', 'section2', 'section3', 'section4']);
-    }
-
-    private function addTag(): array
-    {
-        $this->add('test', 'section');
-
-        return [
-            'section' => [
-                'test'
-            ]
-        ];
     }
 }
