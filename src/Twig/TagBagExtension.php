@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Twig;
 
 use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
-use Setono\TagBagBundle\Collection\TagCollectionInterface;
-use Setono\TagBagBundle\TypeRenderer\TypeRendererInterface;
+use Setono\TagBagBundle\Registry\TypeRendererRegistryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -14,18 +13,18 @@ use Twig\TwigFunction;
 class TagBagExtension extends AbstractExtension
 {
     /**
-     * @var TypeRendererInterface
+     * @var TypeRendererRegistryInterface
      */
-    private $typeRenderer;
+    private $typeRendererRegistry;
 
     /**
      * @var RequestStack|null
      */
     private $requestStack;
 
-    public function __construct(TypeRendererInterface $typeRenderer, ?RequestStack $requestStack)
+    public function __construct(TypeRendererRegistryInterface $typeRendererRegistry, ?RequestStack $requestStack)
     {
-        $this->typeRenderer = $typeRenderer;
+        $this->typeRendererRegistry = $typeRendererRegistry;
         $this->requestStack = $requestStack;
     }
 
@@ -57,19 +56,19 @@ class TagBagExtension extends AbstractExtension
         }
 
         if (null === $sections || '' === $sections || [] === $sections) {
-            return $this->sectionsToString($tagBag->all());
+            return $this->renderSections($tagBag->all());
         }
 
         if (\is_string($sections)) {
-            return $this->sectionsToString([$tagBag->get($sections)]);
+            return $this->renderSections([$sections => $tagBag->getSection($sections)]);
         }
 
         $result = [];
         foreach ($sections as $section) {
-            $result[$section] = $tagBag->get($section);
+            $result[$section] = $tagBag->getSection($section);
         }
 
-        return $this->sectionsToString($result);
+        return $this->renderSections($result);
     }
 
     public function headTags(): string
@@ -87,22 +86,20 @@ class TagBagExtension extends AbstractExtension
         return $this->tags(TagBagInterface::SECTION_BODY_END);
     }
 
-    private function sectionsToString(array $sections): string
+    private function renderSections(array $sections): string
     {
-        $res = '';
+        $str = '';
 
-        foreach ($sections as $section) {
-            /** @var TagCollectionInterface $type */
-            foreach ($section as $type) {
-                if (!$this->typeRenderer->supports($type->getType())) {
-                    continue;
-                }
+        foreach ($sections as $sectionId => $section) {
+            $types = array_keys($section);
 
-                $res .= $this->typeRenderer->render($type);
+            foreach ($types as $type) {
+                $typeRenderer = $this->typeRendererRegistry->get((string) $type);
+                $str .= $typeRenderer->render($section[$type]);
             }
         }
 
-        return $res;
+        return $str;
     }
 
     private function getTagBag(): ?TagBagInterface

@@ -2,19 +2,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Setono\TagBagBundle\TypeRenderer\CompositeTypeRenderer" />
-        <service id="Setono\TagBagBundle\TypeRenderer\TypeRendererInterface" alias="Setono\TagBagBundle\TypeRenderer\CompositeTypeRenderer" />
-
         <service id="Setono\TagBagBundle\TypeRenderer\NoneTypeRenderer">
-            <tag name="setono_tag_bag.type_renderer"/>
+            <tag name="setono_tag_bag.type_renderer" type="none"/>
         </service>
 
         <service id="Setono\TagBagBundle\TypeRenderer\ScriptTypeRenderer">
-            <tag name="setono_tag_bag.type_renderer"/>
+            <tag name="setono_tag_bag.type_renderer" type="script"/>
         </service>
 
         <service id="Setono\TagBagBundle\TypeRenderer\StyleTypeRenderer">
-            <tag name="setono_tag_bag.type_renderer"/>
+            <tag name="setono_tag_bag.type_renderer" type="style"/>
         </service>
     </services>
 </container>
