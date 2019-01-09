@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Registry;
 
+use Setono\TagBagBundle\Exception\ExistingTypeRendererException;
+use Setono\TagBagBundle\Exception\NonExistentTypeRendererException;
 use Setono\TagBagBundle\TypeRenderer\TypeRendererInterface;
 
 final class TypeRendererRegistry implements TypeRendererRegistryInterface
@@ -16,7 +18,7 @@ final class TypeRendererRegistry implements TypeRendererRegistryInterface
     public function register(string $type, TypeRendererInterface $typeRenderer): void
     {
         if ($this->has($type)) {
-            throw new \RuntimeException(sprintf('A type renderer for the given type, %s, already exists', $type));
+            throw new ExistingTypeRendererException($type);
         }
 
         $this->typeRenderers[$type] = $typeRenderer;
@@ -30,7 +32,7 @@ final class TypeRendererRegistry implements TypeRendererRegistryInterface
     public function get(string $type): TypeRendererInterface
     {
         if (!$this->has($type)) {
-            throw new \RuntimeException(sprintf('A type renderer for the given type, %s, does not exist', $type));
+            throw new NonExistentTypeRendererException($type, array_keys($this->typeRenderers));
         }
 
         return $this->typeRenderers[$type];
