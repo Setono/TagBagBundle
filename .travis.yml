@@ -17,8 +17,6 @@ matrix:
         -   php: 7.2
         -   php: 7.2
             env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
-    allow_failures:
-        -   env: 'COMPOSER_FLAGS="--prefer-stable --prefer-lowest"'
 
 install:
     - composer update --no-interaction --prefer-dist ${COMPOSER_FLAGS}
