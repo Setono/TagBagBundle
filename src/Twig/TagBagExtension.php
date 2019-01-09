@@ -94,7 +94,7 @@ class TagBagExtension extends AbstractExtension
             $types = array_keys($section);
 
             foreach ($types as $type) {
-                $typeRenderer = $this->typeRendererRegistry->get($type);
+                $typeRenderer = $this->typeRendererRegistry->get((string) $type);
                 $str .= $typeRenderer->render($section[$type]);
             }
         }
