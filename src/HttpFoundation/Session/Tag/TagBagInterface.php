@@ -18,8 +18,9 @@ interface TagBagInterface extends SessionBagInterface
      *
      * @param string|TagInterface $tag
      * @param string              $section
+     * @param string|null         $type
      */
-    public function add($tag, string $section): void;
+    public function add($tag, string $section, string $type = null): void;
 
     /**
      * Adds a script tag for a section.
@@ -38,17 +39,17 @@ interface TagBagInterface extends SessionBagInterface
     public function addStyle($tag, string $section): void;
 
     /**
-     * Gets and clears tags from the stack.
+     * Gets and clears tags from a specific section.
      *
      * @param string $section
      * @param array  $default Default value if $type does not exist
      *
      * @return array
      */
-    public function get(string $section, array $default = []): array;
+    public function getSection(string $section, array $default = []): array;
 
     /**
-     * Gets and clears tags from the stack.
+     * Gets and clears all tags from the stack.
      *
      * @return array
      */
@@ -61,12 +62,12 @@ interface TagBagInterface extends SessionBagInterface
      *
      * @return bool
      */
-    public function has(string $section): bool;
+    public function hasSection(string $section): bool;
 
     /**
      * Returns a list of all defined sections.
      *
      * @return array
      */
-    public function keys(): array;
+    public function getSections(): array;
 }

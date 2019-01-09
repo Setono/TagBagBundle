@@ -8,5 +8,8 @@
         <service id="Setono\TagBagBundle\HttpFoundation\Session\SessionConfigurator">
             <argument type="service" id="session.tag_bag"/>
         </service>
+
+        <service id="Setono\TagBagBundle\Registry\TypeRendererRegistry"/>
+        <service id="Setono\TagBagBundle\Registry\TypeRendererRegistryInterface" alias="Setono\TagBagBundle\Registry\TypeRendererRegistry"/>
     </services>
 </container>

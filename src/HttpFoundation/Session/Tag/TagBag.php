@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\HttpFoundation\Session\Tag;
 
 use Setono\TagBagBundle\Exception\WrongTagTypeException;
-use Setono\TagBagBundle\Collection\TagCollectionInterface;
 use Setono\TagBagBundle\Tag\TagInterface;
-use Setono\TagBagBundle\Tag\TypedTag;
-use Setono\TagBagBundle\Collection\TagCollection;
 
 class TagBag implements TagBagInterface
 {
@@ -23,7 +20,7 @@ class TagBag implements TagBagInterface
     private $name = 'tags';
 
     /**
-     * @var TagCollectionInterface[][]
+     * @var array
      */
     private $tags = [];
 
@@ -54,13 +51,13 @@ class TagBag implements TagBagInterface
 
     public function add($tag, string $section, string $type = null): void
     {
-        $tag = $this->getTagObject($tag, $type);
-
-        if (!isset($this->tags[$section][$tag->getType()])) {
-            $this->tags[$section][$tag->getType()] = new TagCollection($tag->getType());
+        if (null !== $type && $tag instanceof TagInterface && $type !== $tag->getType()) {
+            throw new WrongTagTypeException($tag, $type);
         }
 
-        $this->tags[$section][$tag->getType()]->add($tag);
+        $type = $this->resolveType($tag, $type, TagInterface::TYPE_NONE);
+
+        $this->tags[$section][$type][] = (string) $tag;
     }
 
     public function addScript($tag, string $section): void
@@ -73,9 +70,9 @@ class TagBag implements TagBagInterface
         $this->add($tag, $section, TagInterface::TYPE_STYLE);
     }
 
-    public function get(string $section, array $default = []): array
+    public function getSection(string $section, array $default = []): array
     {
-        if (!$this->has($section)) {
+        if (!$this->hasSection($section)) {
             return $default;
         }
 
@@ -94,41 +91,57 @@ class TagBag implements TagBagInterface
         return $tags;
     }
 
-    public function has(string $section): bool
+    public function hasSection(string $section): bool
     {
         return array_key_exists($section, $this->tags) && $this->tags[$section];
     }
 
-    public function keys(): array
+    public function getSections(): array
     {
         return array_keys($this->tags);
     }
 
-    protected function getTagObject($tag, ?string $expectedType): TagInterface
+    public function hasTags(string $section, string $type): bool
     {
-        if (null === $expectedType) {
-            $expectedType = $this->getType($tag, TagInterface::TYPE_NONE);
+        if (!$this->hasSection($section)) {
+            return false;
         }
 
-        if (is_string($tag)) {
-            $tag = new TypedTag($tag, $expectedType);
-        }
-
-        if ($tag->getType() !== $expectedType) {
-            throw new WrongTagTypeException($tag, $expectedType);
-        }
-
-        return $tag;
+        return array_key_exists($type, $this->tags[$section]) && $this->tags[$section][$type];
     }
 
-    protected function getType($tag, string $default): string
+    public function getTags(string $section, string $type, array $default = []): array
     {
-        $type = $default;
-
-        if ($tag instanceof TagInterface) {
-            $type = $tag->getType();
+        if (!$this->hasTags($section, $type)) {
+            return $default;
         }
 
-        return $type;
+        $return = $this->tags[$section][$type];
+
+        unset($this->tags[$section][$type]);
+
+        return $return;
+    }
+
+    public function getTypes(string $section): array
+    {
+        if (!$this->hasSection($section)) {
+            return [];
+        }
+
+        return array_keys($this->tags[$section]);
+    }
+
+    protected function resolveType($tag, ?string $type, string $defaultType): string
+    {
+        if ($tag instanceof TagInterface) {
+            return $tag->getType();
+        }
+
+        if (null !== $type) {
+            return $type;
+        }
+
+        return $defaultType;
     }
 }

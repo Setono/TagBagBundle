@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\DependencyInjection\Compiler;
 
 use Setono\TagBagBundle\Factory\TwigTagFactory;
+use Setono\TagBagBundle\Registry\TypeRendererRegistryInterface;
 use Setono\TagBagBundle\Twig\TagBagExtension;
-use Setono\TagBagBundle\TypeRenderer\TypeRendererInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -33,7 +33,7 @@ class TwigEnginePass implements CompilerPassInterface
         // create the twig extension service
         $definition = new Definition(
             TagBagExtension::class, [
-                new Reference(TypeRendererInterface::class),
+                new Reference(TypeRendererRegistryInterface::class),
                 new Reference('request_stack', ContainerInterface::NULL_ON_INVALID_REFERENCE),
             ]
         );
