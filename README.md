@@ -57,21 +57,21 @@ And to output all tags you've defined, including tags in custom sections, you ca
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        {{ head_tags() }}
+        {{ setono_tag_bag_head_tags() }}
     </head>
     <body>
-        {{ body_begin_tags() }}
+        {{ setono_tag_bag_body_begin_tags() }}
         
         <h1>This is your page content</h1>
         <p>Lorem ipsum</p>
         
-        {{ body_end_tags() }}
-        {{ tags() }}
+        {{ setono_tag_bag_body_end_tags() }}
+        {{ setono_tag_bag_tags() }}
     </body>
 </html>
 ```
@@ -116,7 +116,7 @@ then in your service definition:
 
 In the `TagBagInterface` there are three constants you can use for common sections on a web page, i.e. `head`, `body_begin`, `body_end`.
 
-Also there are three associated twig functions for those sections: `head_tags()`, `body_begin_tags()`, `body_end_tags()`
+Also there are three associated twig functions for those sections: `setono_tag_bag_head_tags()`, `setono_tag_bag_body_begin_tags()`, `setono_tag_bag_body_end_tags()`
 
 [ico-version]: https://img.shields.io/packagist/v/setono/tag-bag-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
