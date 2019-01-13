@@ -31,10 +31,10 @@ class TagBagExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('tags', [$this, 'tags'], ['is_safe' => ['html']]),
-            new TwigFunction('head_tags', [$this, 'headTags'], ['is_safe' => ['html']]),
-            new TwigFunction('body_begin_tags', [$this, 'bodyBeginTags'], ['is_safe' => ['html']]),
-            new TwigFunction('body_end_tags', [$this, 'bodyEndTags'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_tags', [$this, 'tags'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_head_tags', [$this, 'headTags'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_body_begin_tags', [$this, 'bodyBeginTags'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_body_end_tags', [$this, 'bodyEndTags'], ['is_safe' => ['html']]),
         ];
     }
 
