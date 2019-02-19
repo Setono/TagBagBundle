@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Tag;
 
-class TypedTag implements TagInterface
+class TypedTag implements TagInterface, ContentAwareInterface
 {
     /**
      * @var string
      */
-    protected $tag;
+    protected $content;
 
     /**
      * @var string
      */
     protected $type = self::TYPE_NONE;
 
-    public function __construct(string $tag, string $type)
+    public function __construct(string $content, string $type)
     {
-        $this->tag = $tag;
+        $this->content = $content;
         $this->type = $type;
     }
 
@@ -27,8 +27,8 @@ class TypedTag implements TagInterface
         return $this->type;
     }
 
-    public function __toString(): string
+    public function getContent(): string
     {
-        return $this->tag;
+        return $this->content;
     }
 }

@@ -6,8 +6,8 @@ namespace Setono\TagBagBundle\Tag;
 
 final class NoneTypedTag extends TypedTag
 {
-    public function __construct(string $tag)
+    public function __construct(string $content)
     {
-        parent::__construct($tag, TagInterface::TYPE_NONE);
+        parent::__construct($content, TagInterface::TYPE_NONE);
     }
 }

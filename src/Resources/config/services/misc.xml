@@ -2,14 +2,20 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="session.tag_bag" class="Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBag" />
-        <service id="Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface" alias="session.tag_bag" />
+        <service id="Setono\TagBagBundle\TagBag\ServiceFactory"/>
 
-        <service id="Setono\TagBagBundle\HttpFoundation\Session\SessionConfigurator">
-            <argument type="service" id="session.tag_bag"/>
+        <service id="Setono\TagBagBundle\TagBag\TagBagInterface">
+            <factory service="Setono\TagBagBundle\TagBag\ServiceFactory" method="create"/>
+            <argument type="service" id="session"/>
         </service>
 
-        <service id="Setono\TagBagBundle\Registry\TypeRendererRegistry"/>
-        <service id="Setono\TagBagBundle\Registry\TypeRendererRegistryInterface" alias="Setono\TagBagBundle\Registry\TypeRendererRegistry"/>
+        <service id="Setono\TagBagBundle\TagBag\TagBag">
+            <argument type="service" id="setono.tag_bag.renderer.composite"/>
+        </service>
+
+        <service id="Setono\TagBagBundle\Session\SessionConfigurator">
+            <argument type="service" id="Setono\TagBagBundle\TagBag\TagBag"/>
+        </service>
+
     </services>
 </container>

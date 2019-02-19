@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Setono\TagBagBundle\TypeRenderer;
+namespace Setono\TagBagBundle\Renderer;
 
-abstract class TypeRenderer implements TypeRendererInterface
+abstract class Renderer implements RendererInterface
 {
     /**
-     * @param array       $tags
+     * @param string      $tag
      * @param string|null $wrapper The HTML tag to wrap the tags in, i.e. <script>
      *
      * @return string
      */
-    protected function renderWithWrapper(array $tags, ?string $wrapper): string
+    protected function renderWithWrapper(string $tag, ?string $wrapper): string
     {
         $str = '';
 
@@ -20,7 +20,7 @@ abstract class TypeRenderer implements TypeRendererInterface
             $str = $wrapper;
         }
 
-        $str .= implode($tags);
+        $str .= $tag;
 
         if (null !== $wrapper) {
             $wrapper = '</'.substr($wrapper, 1);

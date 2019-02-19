@@ -6,7 +6,7 @@ use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBag;
 use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
 use Setono\TagBagBundle\Registry\TypeRendererRegistry;
 use Setono\TagBagBundle\Tag\TagInterface;
-use Setono\TagBagBundle\Twig\TagBagExtension;
+use Setono\TagBagBundle\Twig\TagInjectorExtension;
 use PhpSpec\ObjectBehavior;
 use Setono\TagBagBundle\TypeRenderer\NoneTypeRenderer;
 use Setono\TagBagBundle\TypeRenderer\ScriptTypeRenderer;
@@ -36,7 +36,7 @@ class TagBagExtensionSpec extends ObjectBehavior
     }
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(TagBagExtension::class);
+        $this->shouldHaveType(TagInjectorExtension::class);
     }
 
     public function it_returns_empty_array_when_request_stack_is_null(): void

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Setono\TagBagBundle\HttpFoundation\Session;
+namespace Setono\TagBagBundle\Session;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 

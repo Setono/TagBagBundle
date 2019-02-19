@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Setono\TagBagBundle\HttpFoundation\Session;
+namespace Setono\TagBagBundle\Session;
 
-use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
+use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class SessionConfigurator implements SessionConfiguratorInterface
+final class SessionConfigurator implements SessionConfiguratorInterface
 {
     /**
      * @var TagBagInterface
