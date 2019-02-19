@@ -9,4 +9,4 @@ build:
             COMPOSER_MEMORY_LIMIT: -1
 
 filter:
-    excluded_paths: [spec/*, Tests/*]
+    excluded_paths: [spec/*, tests/*]
