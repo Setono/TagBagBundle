@@ -10,6 +10,8 @@ use Webmozart\Assert\Assert;
 
 final class TagBag implements TagBagInterface
 {
+    public const NAME = 'setono_tag_bag_tags';
+
     /**
      * @var RendererInterface
      */
@@ -21,16 +23,11 @@ final class TagBag implements TagBagInterface
     private $storageKey;
 
     /**
-     * @var string
-     */
-    private $name = 'tags';
-
-    /**
      * @var array
      */
     private $tags = [];
 
-    public function __construct(RendererInterface $renderer, string $storageKey = 'tags')
+    public function __construct(RendererInterface $renderer, string $storageKey = self::NAME)
     {
         $this->renderer = $renderer;
         $this->storageKey = $storageKey;
@@ -38,7 +35,7 @@ final class TagBag implements TagBagInterface
 
     public function getName(): string
     {
-        return $this->name;
+        return self::NAME;
     }
 
     public function initialize(array &$tags): void

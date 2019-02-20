@@ -11,7 +11,7 @@ class ServiceFactory
     public static function create(SessionInterface $session): TagBagInterface
     {
         /** @var TagBagInterface $tagBag */
-        $tagBag = $session->getBag('tags');
+        $tagBag = $session->getBag(TagBag::NAME);
 
         return $tagBag;
     }

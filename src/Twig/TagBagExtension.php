@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Twig;
 
+use Setono\TagBagBundle\TagBag\TagBag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
@@ -109,7 +110,7 @@ final class TagBagExtension extends AbstractExtension
         }
 
         /** @var TagBagInterface $tagBag */
-        $tagBag = $session->getBag('tags');
+        $tagBag = $session->getBag(TagBag::NAME);
 
         return $tagBag;
     }
