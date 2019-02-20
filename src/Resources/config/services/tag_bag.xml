@@ -10,7 +10,7 @@
         </service>
 
         <service id="Setono\TagBagBundle\TagBag\TagBag">
-            <argument type="service" id="setono.tag_bag.renderer.composite"/>
+            <argument type="service" id="setono_tag_bag.renderer.composite"/>
         </service>
     </services>
 </container>

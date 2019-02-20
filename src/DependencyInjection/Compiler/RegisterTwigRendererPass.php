@@ -22,7 +22,7 @@ final class RegisterTwigRendererPass implements CompilerPassInterface
         }
 
         $twigRenderer = new Definition(TwigRenderer::class, [new Reference('twig')]);
-        $twigRenderer->addTag('setono.tag_bag.renderer');
-        $container->setDefinition('setono.tag_bag.renderer.twig_tag', $twigRenderer);
+        $twigRenderer->addTag('setono_tag_bag.renderer');
+        $container->setDefinition('setono_tag_bag.renderer.twig_tag', $twigRenderer);
     }
 }
