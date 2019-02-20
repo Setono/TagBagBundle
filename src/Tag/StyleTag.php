@@ -6,8 +6,8 @@ namespace Setono\TagBagBundle\Tag;
 
 final class StyleTag extends ContentTag
 {
-    public function __construct(string $content)
+    public function __construct(string $content, string $key)
     {
-        parent::__construct($content, TagInterface::TYPE_STYLE);
+        parent::__construct($content, TagInterface::TYPE_STYLE, $key);
     }
 }

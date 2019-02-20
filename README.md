@@ -62,7 +62,7 @@ class YourService
     {
         $this->tagBag->add(
             // the script tag will be wrapped in <script> tags when outputted
-            new ScriptTag('console.log("This will be output in the console");'),
+            new ScriptTag('console.log("This will be output in the console");', 'key'),
             // This is one of three predefined sections. You can use your own custom section if you need to
             TagBagInterface::SECTION_BODY_END
         );
@@ -102,7 +102,7 @@ Included in the bundle are four tags. If you need another tag, just implement th
 <?php
 use Setono\TagBagBundle\Tag\HtmlTag;
 
-$tag = new HtmlTag('<div class="class-name">tag</div>');
+$tag = new HtmlTag('<div class="class-name">tag</div>', 'key');
 ```
 
 **Script tag**
@@ -111,7 +111,7 @@ $tag = new HtmlTag('<div class="class-name">tag</div>');
 <?php
 use Setono\TagBagBundle\Tag\ScriptTag;
 
-$tag = new ScriptTag('alert("Hey!")');
+$tag = new ScriptTag('alert("Hey!")', 'key');
 ```
 
 A `ScriptTag` is wrapped in `<script>` tags by the `ScriptRenderer`.
@@ -122,7 +122,7 @@ A `ScriptTag` is wrapped in `<script>` tags by the `ScriptRenderer`.
 <?php
 use Setono\TagBagBundle\Tag\StyleTag;
 
-$tag = new StyleTag('body { background-color: red; }');
+$tag = new StyleTag('body { background-color: red; }', 'key');
 ```
 
 A `StyleTag` is wrapped in `<style>` tags by the `StyleRenderer`.
@@ -134,7 +134,7 @@ A `StyleTag` is wrapped in `<style>` tags by the `StyleRenderer`.
 use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTag;
 
-$tag = new TwigTag('App/Tag/tag.js.twig', TagInterface::TYPE_SCRIPT, [
+$tag = new TwigTag('App/Tag/tag.js.twig', TagInterface::TYPE_SCRIPT, 'key', [
     'param' => 'value'
 ]);
 ```

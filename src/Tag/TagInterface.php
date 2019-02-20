@@ -16,4 +16,13 @@ interface TagInterface
      * @return string
      */
     public function getType(): string;
+
+    /**
+     * Returns the key for this tag.
+     * This is used as a key for each tag in a given section which in turn
+     * means that you can't add multiple tags with the same key in a given section.
+     *
+     * @return string
+     */
+    public function getKey(): string;
 }

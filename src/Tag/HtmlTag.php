@@ -6,8 +6,8 @@ namespace Setono\TagBagBundle\Tag;
 
 final class HtmlTag extends ContentTag
 {
-    public function __construct(string $content)
+    public function __construct(string $content, string $key)
     {
-        parent::__construct($content, TagInterface::TYPE_HTML);
+        parent::__construct($content, TagInterface::TYPE_HTML, $key);
     }
 }

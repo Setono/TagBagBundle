@@ -14,12 +14,23 @@ class ContentTag implements TagInterface, ContentAwareInterface
     /**
      * @var string
      */
-    protected $type = self::TYPE_HTML;
+    protected $type;
 
-    public function __construct(string $content, string $type)
+    /**
+     * @var string
+     */
+    protected $key;
+
+    public function __construct(string $content, string $type, string $key)
     {
         $this->content = $content;
         $this->type = $type;
+        $this->key = $key;
+    }
+
+    public function getContent(): string
+    {
+        return $this->content;
     }
 
     public function getType(): string
@@ -27,8 +38,8 @@ class ContentTag implements TagInterface, ContentAwareInterface
         return $this->type;
     }
 
-    public function getContent(): string
+    public function getKey(): string
     {
-        return $this->content;
+        return $this->key;
     }
 }

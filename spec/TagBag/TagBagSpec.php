@@ -43,11 +43,11 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_clears(): void
     {
-        $this->add(new HtmlTag('test'), 'section');
+        $this->add(new HtmlTag('test', 'key'), 'section');
 
         $this->clear()->shouldReturn([
             'section' => [
-                'test'
+                'key' => 'test'
             ]
         ]);
 
@@ -56,11 +56,11 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_gets_section(): void
     {
-        $this->add(new HtmlTag('tag1'), 'section1');
-        $this->add(new HtmlTag('tag2'), 'section2');
+        $this->add(new HtmlTag('tag1', 'key'), 'section1');
+        $this->add(new HtmlTag('tag2', 'key'), 'section2');
 
         $this->getSection('section2')->shouldReturn([
-            'tag2'
+            'key' => 'tag2'
         ]);
 
         $this->getSection('section2')->shouldReturn([]);
@@ -68,9 +68,21 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_returns_default_if_section_does_not_exist(): void
     {
-        $this->add(new HtmlTag('tag1'), 'section1');
-        $this->add(new HtmlTag('tag2'), 'section2');
+        $this->add(new HtmlTag('tag1', 'key'), 'section1');
+        $this->add(new HtmlTag('tag2', 'key'), 'section2');
 
         $this->getSection('section3', [])->shouldReturn([]);
+    }
+
+    public function it_overwrites_key_in_same_section(): void
+    {
+        $this->add(new HtmlTag('tag1', 'key'), 'section1');
+        $this->add(new HtmlTag('tag2', 'key'), 'section1');
+
+        $this->all()->shouldReturn([
+            'section1' => [
+                'key' => 'tag2'
+            ]
+        ]);
     }
 }
