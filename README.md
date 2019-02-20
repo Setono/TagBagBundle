@@ -1,16 +1,18 @@
 # Symfony Tag Bag Bundle
-This bundle creates a session bag named `tags` which intended use is to inject tags into your pages.
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
+This bundle creates a session bag named `setono_tag_bag_tags` which intended use is to inject tags into your pages.
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tags](#tags)
 - [Renderers](#renderers)
 - [Twig functions](#twig-functions)
+- [Projects using Tag Bag Bundle](#projects-using-tag-bag-bundle)
 
 ## Installation
 
@@ -163,6 +165,10 @@ The `TwigRenderer` first renders the template with the given parameters and then
 In the `TagBagInterface` there are three constants you can use for common sections on a web page, i.e. `head`, `body_begin`, `body_end`.
 
 Also there are three associated twig functions for those sections: `setono_tag_bag_head_tags()`, `setono_tag_bag_body_begin_tags()`, `setono_tag_bag_body_end_tags()`. Lastly you have the 'catch all' function named `setono_tag_bag_tags()`
+
+## Projects using Tag Bag Bundle
+- [Sylius Addwish plugin](https://github.com/Setono/SyliusAddwishPlugin)
+- [Sylius Strands plugin](https://github.com/Setono/SyliusStrandsPlugin)
 
 [ico-version]: https://img.shields.io/packagist/v/setono/tag-bag-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
