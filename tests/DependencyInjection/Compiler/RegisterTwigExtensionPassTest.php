@@ -6,12 +6,11 @@ namespace Setono\TagBagBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Setono\TagBagBundle\DependencyInjection\Compiler\RegisterTwigExtensionPass;
-use Setono\TagBagBundle\Factory\TwigTagFactory;
-use Setono\TagBagBundle\Twig\TagInjectorExtension;
+use Setono\TagBagBundle\Twig\TagBagExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class TwigEnginePassTest extends AbstractCompilerPassTestCase
+class RegisterTwigExtensionPassTest extends AbstractCompilerPassTestCase
 {
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
@@ -28,8 +27,7 @@ class TwigEnginePassTest extends AbstractCompilerPassTestCase
 
         $this->compile();
 
-        $this->assertContainerBuilderHasService('setono.tag_bag.factory.twig_tag', TwigTagFactory::class);
-        $this->assertContainerBuilderHasService(TagInjectorExtension::class, TagInjectorExtension::class);
-        $this->assertContainerBuilderHasServiceDefinitionWithTag(TagInjectorExtension::class, 'twig.extension');
+        $this->assertContainerBuilderHasService(TagBagExtension::class, TagBagExtension::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(TagBagExtension::class, 'twig.extension');
     }
 }

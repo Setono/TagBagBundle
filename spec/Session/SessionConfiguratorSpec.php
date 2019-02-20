@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Setono\TagBagBundle\HttpFoundation\Session;
+namespace spec\Setono\TagBagBundle\Session;
 
-use Setono\TagBagBundle\HttpFoundation\Session\SessionConfigurator;
+use Setono\TagBagBundle\Session\SessionConfigurator;
 use PhpSpec\ObjectBehavior;
-use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
+use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionConfiguratorSpec extends ObjectBehavior

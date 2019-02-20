@@ -6,7 +6,7 @@ use Setono\TagBagBundle\Tag\NoneTag;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class NoneTypedTagSpec extends ObjectBehavior
+class NoneTagSpec extends ObjectBehavior
 {
     public function let(): void
     {
