@@ -6,6 +6,12 @@ This bundle creates a session bag named `tags` which intended use is to inject t
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Tags](#tags)
+- [Renderers](#renderers)
+- [Twig functions](#twig-functions)
+
 ## Installation
 
 ### Step 1: Download
@@ -85,25 +91,62 @@ To output all the tags you've defined, including tags in custom sections, you ca
 </html>
 ```
 
-then in your service definition:
+## Tags
+Included in the bundle are four tags. If you need another tag, just implement the `TagInterface` and you're ready to go.
 
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
+**Html tag**
+```php
+<?php
+use Setono\TagBagBundle\Tag\HtmlTag;
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <services>
-        <service id="YourService">
-            <argument type="service" id="session.tag_bag"/>
-        </service>
-    </services>
-</container>
+$tag = new HtmlTag('<div class="class-name">tag</div>');
 ```
 
-### Twig functions
+**Script tag**
+```php
+<?php
+use Setono\TagBagBundle\Tag\ScriptTag;
+
+$tag = new ScriptTag('alert("Hey!")');
+```
+
+A `ScriptTag` is wrapped in `<script>` tags by the `ScriptRenderer`.
+
+**Style tag**
+```php
+<?php
+use Setono\TagBagBundle\Tag\StyleTag;
+
+$tag = new StyleTag('body { background-color: red; }');
+```
+
+A `StyleTag` is wrapped in `<style>` tags by the `StyleRenderer`.
+
+**Twig tag**
+```php
+<?php
+use Setono\TagBagBundle\Tag\TagInterface;
+use Setono\TagBagBundle\Tag\TwigTag;
+
+$tag = new TwigTag('App/Tag/tag.js.twig', TagInterface::TYPE_SCRIPT, [
+    'param' => 'value'
+]);
+```
+
+A `TwigTag` is rendered by the twig engine and wrapped in a tag that matches the type of the tag. In the example above it will be wrapped in a `<script>` tag.
+
+## Renderers
+The bundle contains four renderers that corresponds to the tags. A renderer implements the `RendererInterface` and is tagged with `setono_tag_bag.renderer`.
+
+**Html renderer**
+
+
+
+## Twig functions
 
 In the `TagBagInterface` there are three constants you can use for common sections on a web page, i.e. `head`, `body_begin`, `body_end`.
 
-Also there are three associated twig functions for those sections: `setono_tag_bag_head_tags()`, `setono_tag_bag_body_begin_tags()`, `setono_tag_bag_body_end_tags()`
+Also there are three associated twig functions for those sections: `setono_tag_bag_head_tags()`, `setono_tag_bag_body_begin_tags()`, `setono_tag_bag_body_end_tags()`. Lastly you have the 'catch all' function named `setono_tag_bag_tags()`
 
 [ico-version]: https://img.shields.io/packagist/v/setono/tag-bag-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square

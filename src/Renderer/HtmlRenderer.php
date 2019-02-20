@@ -8,7 +8,7 @@ use Setono\TagBagBundle\Exception\UnexpectedTypeException;
 use Setono\TagBagBundle\Tag\ContentAwareInterface;
 use Setono\TagBagBundle\Tag\TagInterface;
 
-final class NoneRenderer extends Renderer
+final class HtmlRenderer extends Renderer
 {
     public function supports(TagInterface $tag): bool
     {

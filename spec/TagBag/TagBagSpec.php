@@ -3,7 +3,7 @@
 namespace spec\Setono\TagBagBundle\TagBag;
 
 use Setono\TagBagBundle\Renderer\CompositeRenderer;
-use Setono\TagBagBundle\Renderer\NoneRenderer;
+use Setono\TagBagBundle\Renderer\HtmlRenderer;
 use Setono\TagBagBundle\Renderer\ScriptRenderer;
 use Setono\TagBagBundle\Renderer\StyleRenderer;
 use Setono\TagBagBundle\Tag\HtmlTag;
@@ -14,7 +14,7 @@ class TagBagSpec extends ObjectBehavior
 {
     public function let(): void
     {
-        $renderer = new CompositeRenderer(new ScriptRenderer(), new StyleRenderer(), new NoneRenderer());
+        $renderer = new CompositeRenderer(new ScriptRenderer(), new StyleRenderer(), new HtmlRenderer());
         $this->beConstructedWith($renderer);
     }
 
