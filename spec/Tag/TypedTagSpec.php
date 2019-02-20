@@ -25,6 +25,6 @@ class TypedTagSpec extends ObjectBehavior
 
     public function it_returns_correct_tag(): void
     {
-        $this->__toString()->shouldReturn('tag');
+        $this->getContent()->shouldReturn('tag');
     }
 }

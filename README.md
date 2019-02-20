@@ -1,5 +1,5 @@
 # Symfony Tag Bag Bundle
-This bundle creates a session bag named `TagBag` which intended use is to inject tags into your pages.
+This bundle creates a session bag named `tags` which intended use is to inject tags into your pages.
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
@@ -34,26 +34,35 @@ return [
 ```
 
 ## Usage
-
-You can get the `TagBag` from the session like so:
+You can autowire the `TagBag` like this:
 
 ```php
 <?php
-use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
+use Setono\TagBagBundle\Tag\ScriptTag;
+use Setono\TagBagBundle\TagBag\TagBagInterface;
 
-/** @var Symfony\Component\HttpFoundation\Session\SessionInterface $session */
-$session;
-
-/** @var Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface $tagBag */
-$tagBag = $session->getBag('tags');
-
-$tagBag->add("<script>console.log('test')</script>", TagBagInterface::SECTION_HEAD);
-
-// you could do the same like this:
-$tagBag->addScript("console.log('test');", TagBagInterface::SECTION_HEAD);
+class YourService
+{
+    private $tagBag;
+    
+    public function __construct(TagBagInterface $tagBag) 
+    {
+        $this->tagBag = $tagBag;
+    }
+    
+    public function method(): void 
+    {
+        $this->tagBag->add(
+            // the script tag will be wrapped in <script> tags when outputted
+            new ScriptTag('console.log("This will be output in the console");'),
+            // This is one of three predefined sections. You can use your own custom section if you need to
+            TagBagInterface::SECTION_BODY_END
+        );
+    }
+}
 ```
 
-And to output all tags you've defined, including tags in custom sections, you can use a template like this:
+To output all the tags you've defined, including tags in custom sections, you can use a template like this:
 
 ```html
 <!DOCTYPE html>
@@ -74,28 +83,6 @@ And to output all tags you've defined, including tags in custom sections, you ca
         {{ setono_tag_bag_tags() }}
     </body>
 </html>
-```
-
-If you need the `TagBag` injected you can use the service `session.tag_bag`, i.e.:
-
-```php
-<?php
-use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
-
-class YourService
-{
-    private $tagBag;
-    
-    public function __construct(TagBagInterface $tagBag) 
-    {
-        $this->tagBag = $tagBag;
-    }
-    
-    public function method(): void 
-    {
-        $this->tagBag->add('<script>console.log</script>', 'body_end');
-    }
-}
 ```
 
 then in your service definition:

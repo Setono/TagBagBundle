@@ -16,12 +16,4 @@ interface TagInterface
      * @return string
      */
     public function getType(): string;
-
-    /**
-     * Will return this tag represented as a string
-     * This is the string that will be output onto your page.
-     *
-     * @return string
-     */
-    public function __toString(): string;
 }

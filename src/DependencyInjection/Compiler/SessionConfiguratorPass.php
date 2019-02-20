@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\DependencyInjection\Compiler;
 
-use Setono\TagBagBundle\HttpFoundation\Session\SessionConfigurator;
+use Setono\TagBagBundle\Session\SessionConfigurator;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class SessionConfiguratorPass implements CompilerPassInterface
+final class SessionConfiguratorPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

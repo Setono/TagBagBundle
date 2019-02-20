@@ -4,27 +4,21 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Twig;
 
-use Setono\TagBagBundle\HttpFoundation\Session\Tag\TagBagInterface;
-use Setono\TagBagBundle\Registry\TypeRendererRegistryInterface;
+use Setono\TagBagBundle\TagBag\TagBag;
+use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class TagBagExtension extends AbstractExtension
+final class TagBagExtension extends AbstractExtension
 {
-    /**
-     * @var TypeRendererRegistryInterface
-     */
-    private $typeRendererRegistry;
-
     /**
      * @var RequestStack|null
      */
     private $requestStack;
 
-    public function __construct(TypeRendererRegistryInterface $typeRendererRegistry, ?RequestStack $requestStack)
+    public function __construct(?RequestStack $requestStack)
     {
-        $this->typeRendererRegistry = $typeRendererRegistry;
         $this->requestStack = $requestStack;
     }
 
@@ -90,13 +84,8 @@ class TagBagExtension extends AbstractExtension
     {
         $str = '';
 
-        foreach ($sections as $sectionId => $section) {
-            $types = array_keys($section);
-
-            foreach ($types as $type) {
-                $typeRenderer = $this->typeRendererRegistry->get((string) $type);
-                $str .= $typeRenderer->render($section[$type]);
-            }
+        foreach ($sections as $section) {
+            $str .= implode('', $section);
         }
 
         return $str;
@@ -121,7 +110,7 @@ class TagBagExtension extends AbstractExtension
         }
 
         /** @var TagBagInterface $tagBag */
-        $tagBag = $session->getBag('tags');
+        $tagBag = $session->getBag(TagBag::NAME);
 
         return $tagBag;
     }
