@@ -59,7 +59,7 @@ final class TagBag implements TagBagInterface
 
         $renderedTag = $this->renderer->render($tag);
 
-        $this->tags[$section][] = $renderedTag;
+        $this->tags[$section][$tag->getKey()] = $renderedTag;
     }
 
     public function getSection(string $section, array $default = []): array

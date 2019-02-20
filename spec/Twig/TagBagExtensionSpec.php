@@ -72,13 +72,13 @@ class TagBagExtensionSpec extends ObjectBehavior
 
     private function initTagBag(TagBagInterface $tagBag): void
     {
-        $tagBag->add(new StyleTag('tag1'), 'section1');
-        $tagBag->add(new HtmlTag('tag2'), 'section1');
-        $tagBag->add(new ScriptTag('tag3'), 'section2');
-        $tagBag->add(new ScriptTag('tag4'), 'section2');
-        $tagBag->add(new HtmlTag('tag5'), 'section3');
-        $tagBag->add(new StyleTag('tag6'), 'section3');
-        $tagBag->add(new ScriptTag('tag7'), 'section3');
-        $tagBag->add(new HtmlTag('tag8'), 'section3');
+        $tagBag->add(new StyleTag('tag1', 'key1'), 'section1');
+        $tagBag->add(new HtmlTag('tag2', 'key2'), 'section1');
+        $tagBag->add(new ScriptTag('tag3', 'key3'), 'section2');
+        $tagBag->add(new ScriptTag('tag4', 'key4'), 'section2');
+        $tagBag->add(new HtmlTag('tag5', 'key5'), 'section3');
+        $tagBag->add(new StyleTag('tag6', 'key6'), 'section3');
+        $tagBag->add(new ScriptTag('tag7', 'key7'), 'section3');
+        $tagBag->add(new HtmlTag('tag8', 'key8'), 'section3');
     }
 }

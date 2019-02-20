@@ -10,7 +10,7 @@ class HtmlTagSpec extends ObjectBehavior
 {
     public function let(): void
     {
-        $this->beConstructedWith('tag');
+        $this->beConstructedWith('tag', 'key');
     }
 
     public function it_is_initializable(): void
@@ -21,5 +21,10 @@ class HtmlTagSpec extends ObjectBehavior
     public function it_returns_correct_type(): void
     {
         $this->getType()->shouldReturn('html');
+    }
+
+    public function it_returns_correct_key(): void
+    {
+        $this->getKey()->shouldReturn('key');
     }
 }
