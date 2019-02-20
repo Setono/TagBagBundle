@@ -19,7 +19,7 @@ final class RegisterRenderersPass implements CompilerPassInterface
     {
         $definition = new Definition(CompositeRenderer::class);
 
-        foreach ($container->findTaggedServiceIds('setono_tag_bag.renderer') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('setono.tag_bag.renderer') as $id => $attributes) {
             $definition->addArgument(new Reference($id));
         }
 
