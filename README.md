@@ -95,6 +95,7 @@ To output all the tags you've defined, including tags in custom sections, you ca
 Included in the bundle are four tags. If you need another tag, just implement the `TagInterface` and you're ready to go.
 
 **Html tag**
+
 ```php
 <?php
 use Setono\TagBagBundle\Tag\HtmlTag;
@@ -103,6 +104,7 @@ $tag = new HtmlTag('<div class="class-name">tag</div>');
 ```
 
 **Script tag**
+
 ```php
 <?php
 use Setono\TagBagBundle\Tag\ScriptTag;
@@ -113,6 +115,7 @@ $tag = new ScriptTag('alert("Hey!")');
 A `ScriptTag` is wrapped in `<script>` tags by the `ScriptRenderer`.
 
 **Style tag**
+
 ```php
 <?php
 use Setono\TagBagBundle\Tag\StyleTag;
@@ -123,6 +126,7 @@ $tag = new StyleTag('body { background-color: red; }');
 A `StyleTag` is wrapped in `<style>` tags by the `StyleRenderer`.
 
 **Twig tag**
+
 ```php
 <?php
 use Setono\TagBagBundle\Tag\TagInterface;
@@ -133,14 +137,26 @@ $tag = new TwigTag('App/Tag/tag.js.twig', TagInterface::TYPE_SCRIPT, [
 ]);
 ```
 
-A `TwigTag` is rendered by the twig engine and wrapped in a tag that matches the type of the tag. In the example above it will be wrapped in a `<script>` tag.
+A `TwigTag` is rendered by the `TwigRenderer` and wrapped in a tag that matches the type of the tag. In the example above it will be wrapped in a `<script>` tag.
 
 ## Renderers
 The bundle contains four renderers that corresponds to the tags. A renderer implements the `RendererInterface` and is tagged with `setono_tag_bag.renderer`.
 
 **Html renderer**
 
+The `HtmlRenderer` basically just renders the content you've input in the tag.
 
+**Script renderer**
+
+The `ScriptRenderer` wraps the content in a `<script>` tag.
+
+**Style renderer**
+
+The `StyleRenderer` wraps the content in a `<style>` tag.
+
+**Twig renderer**
+
+The `TwigRenderer` first renders the template with the given parameters and then wraps the content in a tag that matches the tag's type.
 
 ## Twig functions
 
