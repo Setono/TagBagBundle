@@ -12,7 +12,7 @@ final class NoneRenderer extends Renderer
 {
     public function supports(TagInterface $tag): bool
     {
-        return TagInterface::TYPE_NONE === $tag->getType() && $tag instanceof ContentAwareInterface;
+        return TagInterface::TYPE_HTML === $tag->getType() && $tag instanceof ContentAwareInterface;
     }
 
     public function render(TagInterface $tag): string

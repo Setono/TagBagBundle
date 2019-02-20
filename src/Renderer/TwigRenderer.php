@@ -44,6 +44,6 @@ final class TwigRenderer extends Renderer
             throw new \RuntimeException(sprintf('Template `%s` could not be rendered', $tag->getTemplate()));
         }
 
-        return $this->renderWithWrapper($res, TagInterface::TYPE_NONE !== $tag->getType() ? sprintf('<%s>', $tag->getType()) : null);
+        return $this->renderWithWrapper($res, TagInterface::TYPE_HTML !== $tag->getType() ? sprintf('<%s>', $tag->getType()) : null);
     }
 }

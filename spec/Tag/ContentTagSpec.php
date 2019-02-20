@@ -2,11 +2,11 @@
 
 namespace spec\Setono\TagBagBundle\Tag;
 
-use Setono\TagBagBundle\Tag\TypedTag;
+use Setono\TagBagBundle\Tag\ContentTag;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class TypedTagSpec extends ObjectBehavior
+class ContentTagSpec extends ObjectBehavior
 {
     public function let(): void
     {
@@ -15,7 +15,7 @@ class TypedTagSpec extends ObjectBehavior
 
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(TypedTag::class);
+        $this->shouldHaveType(ContentTag::class);
     }
 
     public function it_returns_correct_type(): void

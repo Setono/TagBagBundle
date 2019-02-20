@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Tag;
 
-final class StyleTag extends TypedTag
+final class StyleTag extends ContentTag
 {
     public function __construct(string $content)
     {

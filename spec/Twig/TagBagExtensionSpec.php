@@ -6,7 +6,7 @@ use Setono\TagBagBundle\Renderer\CompositeRenderer;
 use Setono\TagBagBundle\Renderer\NoneRenderer;
 use Setono\TagBagBundle\Renderer\ScriptRenderer;
 use Setono\TagBagBundle\Renderer\StyleRenderer;
-use Setono\TagBagBundle\Tag\NoneTag;
+use Setono\TagBagBundle\Tag\HtmlTag;
 use Setono\TagBagBundle\Tag\ScriptTag;
 use Setono\TagBagBundle\Tag\StyleTag;
 use Setono\TagBagBundle\TagBag\TagBag;
@@ -73,12 +73,12 @@ class TagBagExtensionSpec extends ObjectBehavior
     private function initTagBag(TagBagInterface $tagBag): void
     {
         $tagBag->add(new StyleTag('tag1'), 'section1');
-        $tagBag->add(new NoneTag('tag2'), 'section1');
+        $tagBag->add(new HtmlTag('tag2'), 'section1');
         $tagBag->add(new ScriptTag('tag3'), 'section2');
         $tagBag->add(new ScriptTag('tag4'), 'section2');
-        $tagBag->add(new NoneTag('tag5'), 'section3');
+        $tagBag->add(new HtmlTag('tag5'), 'section3');
         $tagBag->add(new StyleTag('tag6'), 'section3');
         $tagBag->add(new ScriptTag('tag7'), 'section3');
-        $tagBag->add(new NoneTag('tag8'), 'section3');
+        $tagBag->add(new HtmlTag('tag8'), 'section3');
     }
 }

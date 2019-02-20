@@ -6,7 +6,7 @@ use Setono\TagBagBundle\Renderer\CompositeRenderer;
 use Setono\TagBagBundle\Renderer\NoneRenderer;
 use Setono\TagBagBundle\Renderer\ScriptRenderer;
 use Setono\TagBagBundle\Renderer\StyleRenderer;
-use Setono\TagBagBundle\Tag\NoneTag;
+use Setono\TagBagBundle\Tag\HtmlTag;
 use Setono\TagBagBundle\TagBag\TagBag;
 use PhpSpec\ObjectBehavior;
 
@@ -43,7 +43,7 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_clears(): void
     {
-        $this->add(new NoneTag('test'), 'section');
+        $this->add(new HtmlTag('test'), 'section');
 
         $this->clear()->shouldReturn([
             'section' => [
@@ -56,8 +56,8 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_gets_section(): void
     {
-        $this->add(new NoneTag('tag1'), 'section1');
-        $this->add(new NoneTag('tag2'), 'section2');
+        $this->add(new HtmlTag('tag1'), 'section1');
+        $this->add(new HtmlTag('tag2'), 'section2');
 
         $this->getSection('section2')->shouldReturn([
             'tag2'
@@ -68,8 +68,8 @@ class TagBagSpec extends ObjectBehavior
 
     public function it_returns_default_if_section_does_not_exist(): void
     {
-        $this->add(new NoneTag('tag1'), 'section1');
-        $this->add(new NoneTag('tag2'), 'section2');
+        $this->add(new HtmlTag('tag1'), 'section1');
+        $this->add(new HtmlTag('tag2'), 'section2');
 
         $this->getSection('section3', [])->shouldReturn([]);
     }

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Tag;
 
-final class NoneTag extends TypedTag
+final class HtmlTag extends ContentTag
 {
     public function __construct(string $content)
     {
-        parent::__construct($content, TagInterface::TYPE_NONE);
+        parent::__construct($content, TagInterface::TYPE_HTML);
     }
 }

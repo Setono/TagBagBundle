@@ -6,7 +6,7 @@ namespace Setono\TagBagBundle\Tag;
 
 interface TagInterface
 {
-    public const TYPE_NONE = 'none';
+    public const TYPE_HTML = 'html';
     public const TYPE_SCRIPT = 'script';
     public const TYPE_STYLE = 'style';
 
