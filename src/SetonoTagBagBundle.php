@@ -16,7 +16,7 @@ final class SetonoTagBagBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new RegisterTwigRendererPass() );
+        //$container->addCompilerPass(new RegisterTwigRendererPass());
         $container->addCompilerPass(new RegisterRenderersPass());
         $container->addCompilerPass(new RegisterSessionBagPass());
         $container->addCompilerPass(new RegisterTwigExtensionPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1); // the priority needs to be higher than the pass that extracts the tagged twig extensions
