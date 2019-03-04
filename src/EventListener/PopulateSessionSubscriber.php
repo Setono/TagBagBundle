@@ -16,9 +16,15 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
      */
     private $tagBag;
 
-    public function __construct(TagBagInterface $tagBag)
+    /**
+     * @var string
+     */
+    private $sessionKey;
+
+    public function __construct(TagBagInterface $tagBag, string $sessionKey)
     {
         $this->tagBag = $tagBag;
+        $this->sessionKey = $sessionKey;
     }
 
     public static function getSubscribedEvents(): array
@@ -30,6 +36,11 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
 
     public function populate(FilterResponseEvent $event): void
     {
-        $event->getRequest()->getSession()->set('test', $this->tagBag->all());
+        $session = $event->getRequest()->getSession();
+        if(null === $session) {
+            return;
+        }
+
+        $session->set($this->sessionKey, $this->tagBag->all());
     }
 }

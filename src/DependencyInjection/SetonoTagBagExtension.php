@@ -19,6 +19,8 @@ final class SetonoTagBagExtension extends Extension
     public function load(array $config, ContainerBuilder $container): void
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        $container->setParameter('setono_tag_bag.session_key', 'setono_tag_bag_tags'); // @todo make it configurable
         $loader->load('services.xml');
     }
 }

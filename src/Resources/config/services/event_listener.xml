@@ -4,11 +4,13 @@
     <services>
         <service id="Setono\TagBagBundle\EventListener\PopulateTagBagSubscriber">
             <argument type="service" id="Setono\TagBagBundle\TagBag\TagBagInterface"/>
+            <argument>%setono_tag_bag.session_key%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="Setono\TagBagBundle\EventListener\PopulateSessionSubscriber">
             <argument type="service" id="Setono\TagBagBundle\TagBag\TagBagInterface"/>
+            <argument>%setono_tag_bag.session_key%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
     </services>
