@@ -13,10 +13,5 @@
         <service id="Setono\TagBagBundle\Renderer\StyleRenderer">
             <tag name="setono_tag_bag.renderer"/>
         </service>
-
-        <service id="Setono\TagBagBundle\Renderer\TwigRenderer">
-            <argument type="service" id="twig"/>
-            <tag name="setono_tag_bag.renderer"/>
-        </service>
     </services>
 </container>

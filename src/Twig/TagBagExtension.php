@@ -6,20 +6,19 @@ namespace Setono\TagBagBundle\Twig;
 
 use Setono\TagBagBundle\TagBag\TagBag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class TagBagExtension extends AbstractExtension
 {
     /**
-     * @var RequestStack|null
+     * @var TagBagInterface
      */
-    private $requestStack;
+    private $tagBag;
 
-    public function __construct(?RequestStack $requestStack)
+    public function __construct(TagBagInterface $tagBag)
     {
-        $this->requestStack = $requestStack;
+        $this->tagBag = $tagBag;
     }
 
     public function getFunctions(): array
@@ -44,22 +43,17 @@ final class TagBagExtension extends AbstractExtension
      */
     public function tags($sections = null): string
     {
-        $tagBag = $this->getTagBag();
-        if (null === $tagBag) {
-            return '';
-        }
-
         if (null === $sections || '' === $sections || [] === $sections) {
-            return $this->renderSections($tagBag->all());
+            return $this->renderSections($this->tagBag->all());
         }
 
         if (\is_string($sections)) {
-            return $this->renderSections([$sections => $tagBag->getSection($sections)]);
+            return $this->renderSections([$sections => $this->tagBag->getSection($sections)]);
         }
 
         $result = [];
         foreach ($sections as $section) {
-            $result[$section] = $tagBag->getSection($section);
+            $result[$section] = $this->tagBag->getSection($section);
         }
 
         return $this->renderSections($result);
@@ -89,29 +83,5 @@ final class TagBagExtension extends AbstractExtension
         }
 
         return $str;
-    }
-
-    private function getTagBag(): ?TagBagInterface
-    {
-        if (null === $this->requestStack) {
-            return null;
-        }
-
-        $request = $this->requestStack->getCurrentRequest();
-
-        if (null === $request) {
-            return null;
-        }
-
-        $session = $request->getSession();
-
-        if (null === $session) {
-            return null;
-        }
-
-        /** @var TagBagInterface $tagBag */
-        $tagBag = $session->getBag(TagBag::NAME);
-
-        return $tagBag;
     }
 }

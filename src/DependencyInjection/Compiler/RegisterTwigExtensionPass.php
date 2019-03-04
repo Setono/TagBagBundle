@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\DependencyInjection\Compiler;
 
+use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Setono\TagBagBundle\Twig\TagBagExtension;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -24,7 +24,7 @@ final class RegisterTwigExtensionPass implements CompilerPassInterface
 
         $definition = new Definition(
             TagBagExtension::class, [
-                new Reference('request_stack', ContainerInterface::NULL_ON_INVALID_REFERENCE),
+                new Reference(TagBagInterface::class),
             ]
         );
         $definition->addTag('twig.extension');
