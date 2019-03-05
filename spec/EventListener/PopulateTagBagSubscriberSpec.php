@@ -40,8 +40,19 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
         $this->populate($event);
     }
 
+    public function it_does_not_set_tag_bag_when_session_is_not_started(GetResponseEvent $event, Request $request, SessionInterface $session): void
+    {
+        $session->has(Argument::any())->shouldNotBeCalled();
+        $session->isStarted()->willReturn(false);
+        $request->getSession()->willReturn($session)->shouldBeCalled();
+        $event->getRequest()->willReturn($request)->shouldBeCalled();
+
+        $this->populate($event);
+    }
+
     public function it_does_not_set_tag_bag_when_session_does_not_have_session(GetResponseEvent $event, Request $request, SessionInterface $session): void
     {
+        $session->isStarted()->willReturn(true);
         $session->has(Argument::any())->willReturn(false)->shouldBeCalled();
         $session->get(Argument::any())->shouldNotBeCalled();
 
@@ -55,6 +66,7 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
     {
         $arr = ['section' => ['tag1']];
 
+        $session->isStarted()->willReturn(true);
         $session->has(Argument::any())->willReturn(true);
         $session->get(Argument::any())->willReturn($arr);
 

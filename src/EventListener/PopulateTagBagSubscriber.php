@@ -41,6 +41,10 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if(!$session->isStarted()) {
+            return;
+        }
+
         if (!$session->has($this->sessionKey)) {
             return;
         }
