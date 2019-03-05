@@ -23,35 +23,12 @@ class TagBagSpec extends ObjectBehavior
         $this->shouldHaveType(TagBag::class);
     }
 
-    public function it_gets_storage_key(): void
-    {
-        $this->getStorageKey()->shouldReturn(TagBag::NAME);
-    }
-
-    public function it_gets_name(): void
-    {
-        $this->getName()->shouldReturn(TagBag::NAME);
-    }
-
     public function it_can_initialize_array(): void
     {
         $arr = ['test'];
         $this->getWrappedObject()->initialize($arr);
 
         $this->all()->shouldReturn(['test']);
-    }
-
-    public function it_clears(): void
-    {
-        $this->add(new HtmlTag('test', 'key'), 'section');
-
-        $this->clear()->shouldReturn([
-            'section' => [
-                'key' => 'test'
-            ]
-        ]);
-
-        $this->all()->shouldReturn([]);
     }
 
     public function it_gets_section(): void
@@ -84,5 +61,15 @@ class TagBagSpec extends ObjectBehavior
                 'key' => 'tag2'
             ]
         ]);
+    }
+
+    public function it_counts(): void
+    {
+        $this->add(new HtmlTag('tag1', 'key1'), 'section1');
+        $this->add(new HtmlTag('tag2', 'key2'), 'section1');
+        $this->add(new HtmlTag('tag1', 'key1'), 'section2');
+        $this->add(new HtmlTag('tag2', 'key2'), 'section2');
+
+        $this->count()->shouldReturn(4);
     }
 }

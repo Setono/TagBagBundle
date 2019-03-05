@@ -13,46 +13,20 @@ use Setono\TagBagBundle\TagBag\TagBag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use PhpSpec\ObjectBehavior;
 use Setono\TagBagBundle\Twig\TagBagExtension;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class TagBagExtensionSpec extends ObjectBehavior
 {
-    public function let(RequestStack $requestStack, Request $request, SessionInterface $session): void
+    public function let(): void
     {
         $renderer = new CompositeRenderer(new ScriptRenderer(), new StyleRenderer(), new HtmlRenderer());
         $tagBag = new TagBag($renderer);
         $this->initTagBag($tagBag);
 
-        $requestStack->getCurrentRequest()->willReturn($request);
-        $request->getSession()->willReturn($session);
-        $session->getBag(TagBag::NAME)->willReturn($tagBag);
-
-
-        $this->beConstructedWith($requestStack);
+        $this->beConstructedWith($tagBag);
     }
     public function it_is_initializable(): void
     {
         $this->shouldHaveType(TagBagExtension::class);
-    }
-
-    public function it_returns_empty_array_when_request_stack_is_null(): void
-    {
-        $this->beConstructedWith(null);
-        $this->tags()->shouldReturn('');
-    }
-
-    public function it_returns_empty_array_when_current_request_is_null(RequestStack $requestStack): void
-    {
-        $requestStack->getCurrentRequest()->willReturn(null);
-        $this->tags()->shouldReturn('');
-    }
-
-    public function it_returns_empty_array_when_session_is_null(Request $request): void
-    {
-        $request->getSession()->willReturn(null);
-        $this->tags()->shouldReturn('');
     }
 
     public function it_returns_all_tags(): void
