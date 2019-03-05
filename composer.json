@@ -26,7 +26,7 @@
         "sebastian/comparator": "^2.0|^3.0",
         "symfony/templating": "^4.0",
         "symfony/twig-bundle": "^4.0",
-        "symplify/easy-coding-standard": "^5"
+        "symplify/easy-coding-standard": "~5.2.0"
     },
     "prefer-stable": true,
     "autoload": {
