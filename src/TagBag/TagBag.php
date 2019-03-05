@@ -10,47 +10,24 @@ use Webmozart\Assert\Assert;
 
 final class TagBag implements TagBagInterface
 {
-    public const NAME = 'setono_tag_bag_tags';
-
     /**
      * @var RendererInterface
      */
     private $renderer;
 
     /**
-     * @var string
-     */
-    private $storageKey;
-
-    /**
      * @var array
      */
     private $tags = [];
 
-    public function __construct(RendererInterface $renderer, string $storageKey = self::NAME)
+    public function __construct(RendererInterface $renderer)
     {
         $this->renderer = $renderer;
-        $this->storageKey = $storageKey;
     }
 
-    public function getName(): string
+    public function initialize(array $tags): void
     {
-        return self::NAME;
-    }
-
-    public function initialize(array &$tags): void
-    {
-        $this->tags = &$tags;
-    }
-
-    public function getStorageKey(): string
-    {
-        return $this->storageKey;
-    }
-
-    public function clear(): array
-    {
-        return $this->all();
+        $this->tags = $tags;
     }
 
     public function add(TagInterface $tag, string $section = self::SECTION_BODY_END): void
@@ -81,6 +58,27 @@ final class TagBag implements TagBagInterface
         $this->tags = [];
 
         return $tags;
+    }
+
+    /**
+     * Returns the total number of tags.
+     *
+     * @return int
+     */
+    public function count(): int
+    {
+        $sections = count($this->tags);
+
+        if (0 === $sections) {
+            return 0;
+        }
+
+        $c = 0;
+        foreach ($this->tags as $section) {
+            $c += count($section);
+        }
+
+        return $c;
     }
 
     private function hasSection(string $section): bool

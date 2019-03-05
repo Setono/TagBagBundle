@@ -30,14 +30,22 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::RESPONSE => 'populate'
+            KernelEvents::RESPONSE => 'populate',
         ];
     }
 
     public function populate(FilterResponseEvent $event): void
     {
         $session = $event->getRequest()->getSession();
-        if(null === $session) {
+        if (null === $session) {
+            return;
+        }
+
+        if (!$session->isStarted()) {
+            return;
+        }
+
+        if (0 === $this->tagBag->count()) {
             return;
         }
 

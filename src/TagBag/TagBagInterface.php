@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\TagBag;
 
+use Countable;
 use Setono\TagBagBundle\Tag\TagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 
-interface TagBagInterface extends SessionBagInterface
+interface TagBagInterface extends Countable
 {
     public const SECTION_HEAD = 'head';
     public const SECTION_BODY_BEGIN = 'body_begin';
     public const SECTION_BODY_END = 'body_end';
 
     /**
-     * Adds a tag in the given section with the given life cycle option.
+     * Adds a tag in the given section.
      *
      * @param TagInterface $tag
      * @param string       $section
@@ -37,4 +37,11 @@ interface TagBagInterface extends SessionBagInterface
      * @return array
      */
     public function getSection(string $section, array $default = []): array;
+
+    /**
+     * Initializes the tag bag.
+     *
+     * @param array $tags
+     */
+    public function initialize(array $tags);
 }

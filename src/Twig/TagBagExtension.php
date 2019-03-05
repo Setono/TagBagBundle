@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Twig;
 
-use Setono\TagBagBundle\TagBag\TagBag;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

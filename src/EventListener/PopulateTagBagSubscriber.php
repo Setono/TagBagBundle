@@ -30,18 +30,18 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => 'populate'
+            KernelEvents::REQUEST => 'populate',
         ];
     }
 
     public function populate(GetResponseEvent $event): void
     {
         $session = $event->getRequest()->getSession();
-        if(null === $session) {
+        if (null === $session) {
             return;
         }
 
-        if(!$session->has($this->sessionKey)) {
+        if (!$session->has($this->sessionKey)) {
             return;
         }
 
