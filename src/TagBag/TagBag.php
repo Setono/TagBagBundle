@@ -73,12 +73,9 @@ final class TagBag implements TagBagInterface
             return 0;
         }
 
-        $c = 0;
-        foreach ($this->tags as $section) {
-            $c += count($section);
-        }
-
-        return $c;
+        return array_sum(array_map(function (array $section) {
+            return count($section);
+        }, $this->tags));
     }
 
     private function hasSection(string $section): bool

@@ -62,4 +62,14 @@ class TagBagSpec extends ObjectBehavior
             ]
         ]);
     }
+
+    public function it_counts(): void
+    {
+        $this->add(new HtmlTag('tag1', 'key1'), 'section1');
+        $this->add(new HtmlTag('tag2', 'key2'), 'section1');
+        $this->add(new HtmlTag('tag1', 'key1'), 'section2');
+        $this->add(new HtmlTag('tag2', 'key2'), 'section2');
+
+        $this->count()->shouldReturn(4);
+    }
 }
