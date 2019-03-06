@@ -2,6 +2,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="setono_tag_bag.tag_bag" alias="Setono\TagBagBundle\TagBag\TagBag"/>
         <service id="Setono\TagBagBundle\TagBag\TagBagInterface" alias="Setono\TagBagBundle\TagBag\TagBag"/>
 
         <service id="Setono\TagBagBundle\TagBag\TagBag">
