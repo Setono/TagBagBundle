@@ -45,6 +45,8 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $session->set($this->sessionKey, $this->tagBag->all());
+        $existing = $session->get($this->sessionKey, []);
+
+        $session->set($this->sessionKey, array_merge($existing, $this->tagBag->all()));
     }
 }

@@ -27,7 +27,7 @@ final class TagBag implements TagBagInterface
 
     public function initialize(array $tags): void
     {
-        $this->tags = $tags;
+        $this->tags = array_merge($this->tags, $tags);
     }
 
     public function add(TagInterface $tag, string $section = self::SECTION_BODY_END): void
