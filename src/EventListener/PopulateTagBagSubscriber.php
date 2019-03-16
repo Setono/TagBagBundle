@@ -36,7 +36,17 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
 
     public function populate(GetResponseEvent $event): void
     {
-        $session = $event->getRequest()->getSession();
+        if(!$event->isMasterRequest()) {
+            return;
+        }
+
+        $request = $event->getRequest();
+
+        if($request->isXmlHttpRequest()) {
+            return;
+        }
+
+        $session = $request->getSession();
         if (null === $session) {
             return;
         }
@@ -50,6 +60,7 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
         }
 
         $arr = $session->get($this->sessionKey);
+        $session->remove($this->sessionKey);
 
         $this->tagBag->initialize($arr);
     }

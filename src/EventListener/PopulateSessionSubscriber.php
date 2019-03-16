@@ -41,10 +41,6 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (!$session->isStarted()) {
-            return;
-        }
-
         if (0 === $this->tagBag->count()) {
             return;
         }
