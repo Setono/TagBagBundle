@@ -36,7 +36,7 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
 
     public function populate(FinishRequestEvent $event): void
     {
-        if(!$event->isMasterRequest()) {
+        if (!$event->isMasterRequest()) {
             return;
         }
 

@@ -30,9 +30,30 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
         $this::getSubscribedEvents()->shouldHaveKey(KernelEvents::REQUEST);
     }
 
+    public function it_does_not_set_tag_bag_when_request_is_not_master_request(GetResponseEvent $event): void
+    {
+        $event->isMasterRequest()->willReturn(false);
+        $event->getRequest()->shouldNotBeCalled();
+
+        $this->populate($event);
+    }
+
+    public function it_does_not_set_tag_bag_when_request_is_xml_request(GetResponseEvent $event, Request $request): void
+    {
+        $request->isXmlHttpRequest()->willReturn(true);
+        $request->getSession()->shouldNotBeCalled();
+
+        $event->isMasterRequest()->willReturn(false);
+        $event->getRequest()->willReturn($request);
+
+        $this->populate($event);
+    }
+
     public function it_does_not_set_tag_bag_when_session_is_null(GetResponseEvent $event, Request $request, SessionInterface $session): void
     {
         $request->getSession()->willReturn(null)->shouldBeCalled();
+        $request->isXmlHttpRequest()->willReturn(false);
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request)->shouldBeCalled();
 
         $session->has(Argument::any())->shouldNotBeCalled();
@@ -45,6 +66,8 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
         $session->has(Argument::any())->shouldNotBeCalled();
         $session->isStarted()->willReturn(false);
         $request->getSession()->willReturn($session)->shouldBeCalled();
+        $request->isXmlHttpRequest()->willReturn(false);
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request)->shouldBeCalled();
 
         $this->populate($event);
@@ -57,6 +80,8 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
         $session->get(Argument::any())->shouldNotBeCalled();
 
         $request->getSession()->willReturn($session);
+        $request->isXmlHttpRequest()->willReturn(false);
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
 
         $this->populate($event);
@@ -68,9 +93,11 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
 
         $session->isStarted()->willReturn(true);
         $session->has(Argument::any())->willReturn(true);
-        $session->get(Argument::any())->willReturn($arr);
+        $session->get($this->sessionKey, [])->willReturn($arr);
 
         $request->getSession()->willReturn($session);
+        $request->isXmlHttpRequest()->willReturn(false);
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
 
         $tagBag->initialize($arr)->shouldBeCalled();

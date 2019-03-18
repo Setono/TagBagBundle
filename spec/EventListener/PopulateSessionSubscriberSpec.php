@@ -8,7 +8,7 @@ use Prophecy\Argument;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class PopulateSessionSubscriberSpec extends ObjectBehavior
@@ -27,50 +27,49 @@ class PopulateSessionSubscriberSpec extends ObjectBehavior
 
     public function it_listens_to_response_event(): void
     {
-        $this::getSubscribedEvents()->shouldHaveKey(KernelEvents::RESPONSE);
+        $this::getSubscribedEvents()->shouldHaveKey(KernelEvents::FINISH_REQUEST);
     }
 
-    public function it_does_not_set_session_when_session_is_null(FilterResponseEvent $event, Request $request, SessionInterface $session): void
+    public function it_does_not_set_session_request_is_not_master_request(FinishRequestEvent $event, Request $request): void
+    {
+        $event->isMasterRequest()->willReturn(false);
+        $event->getRequest()->shouldNotBeCalled();
+
+        $this->populate($event);
+    }
+
+    public function it_does_not_set_session_when_session_is_null(FinishRequestEvent $event, Request $request, SessionInterface $session): void
     {
         $request->getSession()->willReturn(null)->shouldBeCalled();
-        $event->getRequest()->willReturn($request)->shouldBeCalled();
-
-        $session->isStarted()->shouldNotBeCalled();
-
-        $this->populate($event);
-    }
-
-    public function it_does_not_set_session_when_session_is_not_started(FilterResponseEvent $event, Request $request, SessionInterface $session): void
-    {
-        $session->isStarted()->willReturn(false)->shouldBeCalled();
-        $request->getSession()->willReturn($session)->shouldBeCalled();
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request)->shouldBeCalled();
 
         $session->set(Argument::cetera())->shouldNotBeCalled();
+        $session->remove(Argument::any())->shouldNotBeCalled();
 
         $this->populate($event);
     }
 
-    public function it_does_not_set_session_when_tag_bag_is_empty(TagBagInterface $tagBag, FilterResponseEvent $event, Request $request, SessionInterface $session): void
+    public function it_removes_session_if_tag_bag_is_empty(TagBagInterface $tagBag, FinishRequestEvent $event, Request $request, SessionInterface $session): void
     {
         $tagBag->count()->willReturn(0)->shouldBeCalled();
-        $session->isStarted()->willReturn(true);
         $request->getSession()->willReturn($session);
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request);
 
-        $session->set(Argument::cetera())->shouldNotBeCalled();
+        $session->remove($this->sessionKey)->shouldBeCalled();
 
         $this->populate($event);
     }
 
-    public function it_sets_session(TagBagInterface $tagBag, FilterResponseEvent $event, Request $request, SessionInterface $session): void
+    public function it_sets_session(TagBagInterface $tagBag, FinishRequestEvent $event, Request $request, SessionInterface $session): void
     {
         $tags = ['section' => ['tag1']];
 
         $tagBag->count()->willReturn(1)->shouldBeCalled();
         $tagBag->all()->willReturn($tags)->shouldBeCalled();
-        $session->isStarted()->willReturn(true)->shouldBeCalled();
         $request->getSession()->willReturn($session)->shouldBeCalled();
+        $event->isMasterRequest()->willReturn(true);
         $event->getRequest()->willReturn($request)->shouldBeCalled();
 
         $session->set($this->sessionKey, $tags)->shouldBeCalled();

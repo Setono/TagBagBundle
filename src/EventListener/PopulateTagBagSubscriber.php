@@ -36,13 +36,13 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
 
     public function populate(GetResponseEvent $event): void
     {
-        if(!$event->isMasterRequest()) {
+        if (!$event->isMasterRequest()) {
             return;
         }
 
         $request = $event->getRequest();
 
-        if($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest()) {
             return;
         }
 
