@@ -6,7 +6,7 @@ namespace Setono\TagBagBundle\EventListener;
 
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PopulateSessionSubscriber implements EventSubscriberInterface
@@ -30,23 +30,25 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::RESPONSE => 'populate',
+            KernelEvents::FINISH_REQUEST => 'populate',
         ];
     }
 
-    public function populate(FilterResponseEvent $event): void
+    public function populate(FinishRequestEvent $event): void
     {
+        if(!$event->isMasterRequest()) {
+            return;
+        }
+
         $session = $event->getRequest()->getSession();
         if (null === $session) {
             return;
         }
 
-        if (0 === $this->tagBag->count()) {
-            return;
+        if ($this->tagBag->count() > 0) {
+            $session->set($this->sessionKey, $this->tagBag->all());
+        } else {
+            $session->remove($this->sessionKey);
         }
-
-        $existing = $session->get($this->sessionKey, []);
-
-        $session->set($this->sessionKey, array_merge($existing, $this->tagBag->all()));
     }
 }

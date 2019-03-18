@@ -59,9 +59,6 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $arr = $session->get($this->sessionKey);
-        $session->remove($this->sessionKey);
-
-        $this->tagBag->initialize($arr);
+        $this->tagBag->initialize($session->get($this->sessionKey, []));
     }
 }
