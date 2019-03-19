@@ -169,6 +169,7 @@ Also there are three associated twig functions for those sections: `setono_tag_b
 ## Projects using Tag Bag Bundle
 - [Sylius Addwish plugin](https://github.com/Setono/SyliusAddwishPlugin)
 - [Sylius Strands plugin](https://github.com/Setono/SyliusStrandsPlugin)
+- [Sylius Analytics plugin](https://github.com/Setono/SyliusAnalyticsPlugin)
 
 [ico-version]: https://img.shields.io/packagist/v/setono/tag-bag-bundle.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
