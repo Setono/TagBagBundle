@@ -29,12 +29,17 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
+        /*
+         * The priority needs to be higher than Symfony\Component\HttpKernel\EventListener\SessionListener
+         * which is -1000, but still lower than 0 so that people can listen to the response event without
+         * worrying about priorities
+         */
         return [
-            KernelEvents::FINISH_REQUEST => [['populate', -1024]],
+            KernelEvents::RESPONSE => [['onKernelResponse', -100]],
         ];
     }
 
-    public function populate(FinishRequestEvent $event): void
+    public function onKernelResponse(FinishRequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
