@@ -6,7 +6,7 @@ namespace Setono\TagBagBundle\EventListener;
 
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FinishRequestEvent;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PopulateSessionSubscriber implements EventSubscriberInterface
@@ -39,7 +39,7 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelResponse(FinishRequestEvent $event): void
+    public function onKernelResponse(FilterResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
