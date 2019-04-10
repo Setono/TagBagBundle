@@ -29,12 +29,17 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
+        /*
+         * The priority needs to be lower than Symfony\Component\HttpKernel\EventListener\SessionListener
+         * which is 128, but still higher than 0 so that people can listen to the request event without
+         * worrying about priorities
+         */
         return [
-            KernelEvents::REQUEST => [['populate', 1024]],
+            KernelEvents::REQUEST => [['onKernelRequest', 100]],
         ];
     }
 
-    public function populate(GetResponseEvent $event): void
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
