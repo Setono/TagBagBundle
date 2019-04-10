@@ -30,7 +30,7 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::FINISH_REQUEST => 'populate',
+            KernelEvents::FINISH_REQUEST => [['populate', -1024]],
         ];
     }
 

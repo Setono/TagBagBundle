@@ -30,7 +30,7 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            KernelEvents::REQUEST => 'populate',
+            KernelEvents::REQUEST => [['populate', 1024]],
         ];
     }
 
