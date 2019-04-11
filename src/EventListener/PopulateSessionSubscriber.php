@@ -35,7 +35,7 @@ final class PopulateSessionSubscriber implements EventSubscriberInterface
          * worrying about priorities
          */
         return [
-            KernelEvents::RESPONSE => [['onKernelResponse', -100]],
+            KernelEvents::RESPONSE => ['onKernelResponse', -100],
         ];
     }
 

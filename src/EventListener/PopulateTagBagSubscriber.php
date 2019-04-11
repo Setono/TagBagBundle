@@ -35,7 +35,7 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
          * worrying about priorities
          */
         return [
-            KernelEvents::REQUEST => [['onKernelRequest', 100]],
+            KernelEvents::REQUEST => ['onKernelRequest', 100],
         ];
     }
 
