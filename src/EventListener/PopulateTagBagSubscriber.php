@@ -47,16 +47,8 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        if ($request->isXmlHttpRequest()) {
-            return;
-        }
-
         $session = $request->getSession();
         if (null === $session) {
-            return;
-        }
-
-        if (!$session->isStarted()) {
             return;
         }
 
