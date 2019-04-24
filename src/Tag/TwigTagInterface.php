@@ -7,7 +7,7 @@ namespace Setono\TagBagBundle\Tag;
 interface TwigTagInterface extends TagInterface
 {
     /**
-     * Returns tre twig template.
+     * Returns the twig template.
      *
      * @return string
      */
