@@ -6,7 +6,7 @@ on:
         - cron: 5 8 * * 3
 jobs:
     checks:
-        name: Sylius (PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }})
+        name: 'PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }} with composer args: ${{ matrix.composer-args }}'
         runs-on: ${{ matrix.operating-system }}
         strategy:
             fail-fast: false

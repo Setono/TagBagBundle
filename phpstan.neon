@@ -3,10 +3,11 @@ includes:
     - vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
 
 parameters:
-	reportUnmatchedIgnoredErrors: true
+	reportUnmatchedIgnoredErrors: false
 
 	excludes_analyse:
 		- 'src/DependencyInjection/Configuration.php'
 
 	ignoreErrors:
 		- '/Parameter #1 $configuration of method Symfony\Component\DependencyInjection\Extension\Extension::processConfiguration() expects Symfony\Component\Config\Definition\ConfigurationInterface, Symfony\Component\Config\Definition\ConfigurationInterface|null given./'
+		- '/Binary operation "\.=" between string and array\|string\|null results in an error\./'
