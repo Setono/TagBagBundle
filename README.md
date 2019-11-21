@@ -3,7 +3,7 @@
 [![Latest Version][ico-version]][link-packagist]
 [![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 This bundle creates a session bag named `setono_tag_bag_tags` which intended use is to inject tags into your pages.
@@ -176,9 +176,9 @@ Also there are three associated twig functions for those sections: `setono_tag_b
 [ico-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/unstable
 [ico-license]: https://poser.pugx.org/setono/tag-bag-bundle/license
-[ico-travis]: https://travis-ci.com/Setono/TagBagBundle.svg?branch=master
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/TagBagBundle.svg?style=flat-square
+[ico-github-actions]: https://github.com/Setono/TagBagBundle/workflows/Build/badge.svg
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/TagBagBundle.svg
 
 [link-packagist]: https://packagist.org/packages/setono/tag-bag-bundle
-[link-travis]: https://travis-ci.com/Setono/TagBagBundle
+[link-github-actions]: https://github.com/Setono/TagBagBundle/actions
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/TagBagBundle
