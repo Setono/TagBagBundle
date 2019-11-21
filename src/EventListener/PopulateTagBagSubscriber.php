@@ -6,6 +6,7 @@ namespace Setono\TagBagBundle\EventListener;
 
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -41,9 +42,16 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $request = $event->getRequest();
+        /**
+         * Before SF5 the session could be null
+         *
+         * @var SessionInterface|null
+         */
+        $session = $event->getRequest()->getSession();
 
-        $session = $request->getSession();
+        if (null === $session) {
+            return;
+        }
 
         if (!$session->has($this->sessionKey)) {
             return;
