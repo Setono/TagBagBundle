@@ -6,19 +6,13 @@ namespace Setono\TagBagBundle\Tag;
 
 class ContentTag implements TagInterface, ContentAwareInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $content;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $key;
 
     public function __construct(string $content, string $type, string $key)

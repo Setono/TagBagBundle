@@ -6,24 +6,16 @@ namespace Setono\TagBagBundle\Tag;
 
 final class TwigTag implements TwigTagInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $template;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $parameters;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $key;
 
     public function __construct(string $template, string $type, string $key, array $parameters = [])

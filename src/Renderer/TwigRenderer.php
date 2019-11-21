@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Renderer;
 
+use Safe\Exceptions\PcreException;
+use Safe\Exceptions\StringsException;
+use function Safe\sprintf;
 use Setono\TagBagBundle\Exception\UnexpectedTypeException;
 use Setono\TagBagBundle\Tag\TagInterface;
 use Setono\TagBagBundle\Tag\TwigTagInterface;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 final class TwigRenderer extends Renderer
 {
+    /** @var Environment */
     private $environment;
 
     public function __construct(Environment $environment)
@@ -24,13 +31,11 @@ final class TwigRenderer extends Renderer
     }
 
     /**
-     * @param TagInterface $tag
-     *
-     * @return string
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws StringsException
+     * @throws SyntaxError
+     * @throws PcreException
      */
     public function render(TagInterface $tag): string
     {
@@ -39,10 +44,6 @@ final class TwigRenderer extends Renderer
         }
 
         $res = $this->environment->render($tag->getTemplate(), $tag->getParameters());
-
-        if (!is_string($res)) {
-            throw new \RuntimeException(sprintf('Template `%s` could not be rendered', $tag->getTemplate()));
-        }
 
         return $this->renderWithWrapper($res, TagInterface::TYPE_HTML !== $tag->getType() ? sprintf('<%s>', $tag->getType()) : null);
     }

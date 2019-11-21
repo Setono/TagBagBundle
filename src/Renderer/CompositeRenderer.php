@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Renderer;
 
+use Safe\Exceptions\StringsException;
 use Setono\TagBagBundle\Exception\UnsupportedTagException;
 use Setono\TagBagBundle\Tag\TagInterface;
 
 final class CompositeRenderer implements RendererInterface
 {
+    /** @var RendererInterface[] */
     private $tagRenderers;
 
     public function __construct(RendererInterface ...$tagRenderers)
@@ -27,6 +29,9 @@ final class CompositeRenderer implements RendererInterface
         return false;
     }
 
+    /**
+     * @throws StringsException
+     */
     public function render(TagInterface $tag): string
     {
         foreach ($this->tagRenderers as $tagRenderer) {

@@ -38,18 +38,6 @@ class PopulateSessionSubscriberSpec extends ObjectBehavior
         $this->onKernelResponse($event);
     }
 
-    public function it_does_not_set_session_when_session_is_null(FilterResponseEvent $event, Request $request, SessionInterface $session): void
-    {
-        $request->getSession()->willReturn(null)->shouldBeCalled();
-        $event->isMasterRequest()->willReturn(true);
-        $event->getRequest()->willReturn($request)->shouldBeCalled();
-
-        $session->set(Argument::any(), Argument::any())->shouldNotBeCalled();
-        $session->remove(Argument::any())->shouldNotBeCalled();
-
-        $this->onKernelResponse($event);
-    }
-
     public function it_removes_session_if_tag_bag_is_empty(TagBagInterface $tagBag, FilterResponseEvent $event, Request $request, SessionInterface $session): void
     {
         $tagBag->count()->willReturn(0)->shouldBeCalled();

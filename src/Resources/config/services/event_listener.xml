@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Setono\TagBagBundle\EventListener\PopulateTagBagSubscriber">
+        <service id="setono_tag_bag.event_listener.populate_tag_bag" class="Setono\TagBagBundle\EventListener\PopulateTagBagSubscriber">
             <argument type="service" id="Setono\TagBagBundle\TagBag\TagBagInterface"/>
             <argument>%setono_tag_bag.session_key%</argument>
             <tag name="kernel.event_subscriber"/>
         </service>
 
-        <service id="Setono\TagBagBundle\EventListener\PopulateSessionSubscriber">
+        <service id="setono_tag_bag.event_listener.populate_session" class="Setono\TagBagBundle\EventListener\PopulateSessionSubscriber">
             <argument type="service" id="Setono\TagBagBundle\TagBag\TagBagInterface"/>
             <argument>%setono_tag_bag.session_key%</argument>
             <tag name="kernel.event_subscriber"/>

@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Setono\TagBagBundle\Renderer\HtmlRenderer">
+        <service id="Setono\TagBagBundle\Renderer\RendererInterface" alias="setono_tag_bag.renderer.composite"/>
+
+        <service id="setono_tag_bag.renderer.composite" class="Setono\TagBagBundle\Renderer\CompositeRenderer">
+            <argument type="service" id="setono_tag_bag.renderer.html"/>
+        </service>
+
+        <service id="setono_tag_bag.renderer.html" class="Setono\TagBagBundle\Renderer\HtmlRenderer">
             <tag name="setono_tag_bag.renderer"/>
         </service>
 
-        <service id="Setono\TagBagBundle\Renderer\ScriptRenderer">
+        <service id="setono_tag_bag.renderer.script" class="Setono\TagBagBundle\Renderer\ScriptRenderer">
             <tag name="setono_tag_bag.renderer"/>
         </service>
 
-        <service id="Setono\TagBagBundle\Renderer\StyleRenderer">
+        <service id="setono_tag_bag.renderer.style" class="Setono\TagBagBundle\Renderer\StyleRenderer">
             <tag name="setono_tag_bag.renderer"/>
         </service>
     </services>

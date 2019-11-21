@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Renderer;
 
+use Safe\Exceptions\PcreException;
+use function Safe\preg_replace;
+
 abstract class Renderer implements RendererInterface
 {
     /**
-     * @param string      $tag
      * @param string|null $wrapper The HTML tag to wrap the tags in, i.e. <script>
      *
-     * @return string
+     * @throws PcreException
      */
     protected function renderWithWrapper(string $tag, ?string $wrapper): string
     {
@@ -23,7 +25,7 @@ abstract class Renderer implements RendererInterface
         $str .= $tag;
 
         if (null !== $wrapper) {
-            $wrapper = '</'.substr($wrapper, 1);
+            $wrapper = '</' . mb_substr($wrapper, 1);
             $str .= preg_replace('/ [^>]+/', '', $wrapper);
         }
 

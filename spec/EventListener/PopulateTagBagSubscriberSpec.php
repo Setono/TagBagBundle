@@ -38,17 +38,6 @@ class PopulateTagBagSubscriberSpec extends ObjectBehavior
         $this->onKernelRequest($event);
     }
 
-    public function it_does_not_set_tag_bag_when_session_is_null(GetResponseEvent $event, Request $request, SessionInterface $session): void
-    {
-        $request->getSession()->willReturn(null)->shouldBeCalled();
-        $event->isMasterRequest()->willReturn(true);
-        $event->getRequest()->willReturn($request)->shouldBeCalled();
-
-        $session->has(Argument::any())->shouldNotBeCalled();
-
-        $this->onKernelRequest($event);
-    }
-
     public function it_does_not_set_tag_bag_when_session_does_not_have_session(GetResponseEvent $event, Request $request, SessionInterface $session): void
     {
         $session->has(Argument::any())->willReturn(false)->shouldBeCalled();

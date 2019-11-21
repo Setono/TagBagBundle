@@ -13,9 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterTwigExtensionPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('twig')) {

@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\TagBag;
 
+use Safe\Exceptions\StringsException;
+use function Safe\sprintf;
 use Setono\TagBagBundle\Renderer\RendererInterface;
 use Setono\TagBagBundle\Tag\TagInterface;
 use Webmozart\Assert\Assert;
 
 final class TagBag implements TagBagInterface
 {
-    /**
-     * @var RendererInterface
-     */
+    /** @var RendererInterface */
     private $renderer;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $tags = [];
 
     public function __construct(RendererInterface $renderer)
@@ -30,6 +28,9 @@ final class TagBag implements TagBagInterface
         $this->tags = $tags;
     }
 
+    /**
+     * @throws StringsException
+     */
     public function add(TagInterface $tag, string $section = self::SECTION_BODY_END): void
     {
         Assert::true($this->renderer->supports($tag), sprintf('The tag %s is not supported by the given tag renderer', get_class($tag)));
@@ -62,8 +63,6 @@ final class TagBag implements TagBagInterface
 
     /**
      * Returns the total number of tags.
-     *
-     * @return int
      */
     public function count(): int
     {
@@ -73,13 +72,13 @@ final class TagBag implements TagBagInterface
             return 0;
         }
 
-        return (int) array_sum(array_map(function (array $section) {
+        return (int) array_sum(array_map(static function (array $section) {
             return count($section);
         }, $this->tags));
     }
 
     private function hasSection(string $section): bool
     {
-        return array_key_exists($section, $this->tags) && $this->tags[$section];
+        return array_key_exists($section, $this->tags) && count($this->tags[$section]) > 0;
     }
 }

@@ -6,19 +6,15 @@ namespace Setono\TagBagBundle\EventListener;
 
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class PopulateTagBagSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var TagBagInterface
-     */
+    /** @var TagBagInterface */
     private $tagBag;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $sessionKey;
 
     public function __construct(TagBagInterface $tagBag, string $sessionKey)
@@ -39,7 +35,7 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelRequest(GetResponseEvent $event): void
+    public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;
@@ -48,9 +44,6 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
 
         $session = $request->getSession();
-        if (null === $session) {
-            return;
-        }
 
         if (!$session->has($this->sessionKey)) {
             return;

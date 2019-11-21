@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Twig;
 
+use function is_string;
 use Setono\TagBagBundle\TagBag\TagBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class TagBagExtension extends AbstractExtension
 {
-    /**
-     * @var TagBagInterface
-     */
+    /** @var TagBagInterface */
     private $tagBag;
 
     public function __construct(TagBagInterface $tagBag)
@@ -36,9 +35,7 @@ final class TagBagExtension extends AbstractExtension
      *  * tags('section') returns the tags for that section
      *  * tags(['section1', 'section2']) returns the tags for those sections.
      *
-     * @param null|array|string $sections
-     *
-     * @return string
+     * @param array|string|null $sections
      */
     public function tags($sections = null): string
     {
@@ -46,7 +43,7 @@ final class TagBagExtension extends AbstractExtension
             return $this->renderSections($this->tagBag->all());
         }
 
-        if (\is_string($sections)) {
+        if (is_string($sections)) {
             return $this->renderSections([$sections => $this->tagBag->getSection($sections)]);
         }
 
