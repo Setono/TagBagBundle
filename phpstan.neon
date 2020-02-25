@@ -1,9 +1,11 @@
 includes:
-    - vendor/phpstan/phpstan-strict-rules/rules.neon
-    - vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+	- vendor/korbeil/phpstan-generic-rules/extension.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+	- vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
 
 parameters:
 	reportUnmatchedIgnoredErrors: false
+	checkMissingIterableValueType: false
 
 	excludes_analyse:
 		- 'src/DependencyInjection/Configuration.php'
