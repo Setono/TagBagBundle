@@ -176,7 +176,7 @@ Also there are three associated twig functions for those sections: `setono_tag_b
 [ico-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/unstable
 [ico-license]: https://poser.pugx.org/setono/tag-bag-bundle/license
-[ico-github-actions]: https://github.com/Setono/TagBagBundle/workflows/Build/badge.svg
+[ico-github-actions]: https://github.com/Setono/TagBagBundle/workflows/build/badge.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/TagBagBundle.svg
 
 [link-packagist]: https://packagist.org/packages/setono/tag-bag-bundle
