@@ -72,7 +72,7 @@ final class TagBag implements TagBagInterface
             return 0;
         }
 
-        return (int) array_sum(array_map(static function (array $section) {
+        return (int) array_sum(array_map(static function (array $section): int {
             return count($section);
         }, $this->tags));
     }

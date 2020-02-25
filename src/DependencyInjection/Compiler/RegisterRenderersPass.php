@@ -16,7 +16,7 @@ final class RegisterRenderersPass implements CompilerPassInterface
             return;
         }
 
-        $renderers = array_map(static function ($id) {
+        $renderers = array_map(static function ($id): Reference {
             return new Reference($id);
         }, array_keys($container->findTaggedServiceIds('setono_tag_bag.renderer')));
 
