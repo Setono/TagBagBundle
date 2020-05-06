@@ -20,6 +20,9 @@ use Setono\TagBagBundle\Storage\SessionStorage;
 use Setono\TagBagBundle\Twig\TagBagExtension;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 
+/**
+ * @covers \Setono\TagBagBundle\SetonoTagBagBundle
+ */
 final class SetonoTagBagBundleTest extends BaseBundleTestCase
 {
     protected function setUp(): void
