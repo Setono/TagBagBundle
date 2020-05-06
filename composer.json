@@ -1,7 +1,7 @@
 {
     "name": "setono/tag-bag-bundle",
     "type": "symfony-bundle",
-    "description": "A Symfony bundle that creates a session bag called tag which can be used to inject i.e. script tags on your website",
+    "description": "A Symfony bundle that integrates the tag bag library into Symfony",
     "license": "MIT",
     "authors": [
         {
@@ -11,28 +11,25 @@
     ],
     "require": {
         "php": "^7.2",
-        "symfony/config": "^4.4 || ^5.0",
+        "setono/tag-bag": "^1.0@dev",
+        "setono/tag-bag-twig": "^1.0@dev",
         "symfony/dependency-injection": "^4.4 || ^5.0",
         "symfony/framework-bundle": "^4.4 || ^5.0",
         "symfony/http-foundation": "^4.4 || ^5.0",
-        "thecodingmachine/safe": "^1.0",
         "webmozart/assert": "^1.1"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.2",
-        "kalessil/production-dependencies-guard": "dev-master",
         "korbeil/phpstan-generic-rules": "^0.2.4",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.0",
-        "phpspec/phpspec": "^5.1 || ^6.0",
-        "phpstan/phpstan": "^0.12.11",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "nyholm/symfony-bundle-test": "^1.6",
+        "phpstan/extension-installer": "^1.0.4",
+        "phpstan/phpstan": "^0.12.23",
         "phpstan/phpstan-strict-rules": "^0.12.2",
         "phpunit/phpunit": "^8.5",
         "roave/security-advisories": "dev-master",
-        "sebastian/comparator": "^2.0 || ^3.0",
         "sylius-labs/coding-standard": "^3.1",
-        "symfony/templating": "^4.4 || ^5.0",
         "symfony/twig-bundle": "^4.4 || ^5.0",
-        "symplify/easy-coding-standard": "^7.2",
         "thecodingmachine/phpstan-safe-rule": "^1.0"
     },
     "config": {
@@ -40,7 +37,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.4-dev"
+            "dev-master": "2.0-dev"
         }
     },
     "autoload": {

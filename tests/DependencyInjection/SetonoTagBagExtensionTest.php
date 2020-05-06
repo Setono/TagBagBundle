@@ -7,6 +7,9 @@ namespace Setono\TagBagBundle\Tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Setono\TagBagBundle\DependencyInjection\SetonoTagBagExtension;
 
+/**
+ * @covers \Setono\TagBagBundle\DependencyInjection\SetonoTagBagExtension
+ */
 final class SetonoTagBagExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions(): array

@@ -3,10 +3,11 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="Setono\TagBagBundle\TagBag\TagBagInterface" alias="setono_tag_bag.tag_bag"/>
+        <service id="Setono\TagBag\TagBagInterface" alias="setono_tag_bag.tag_bag"/>
 
-        <service id="setono_tag_bag.tag_bag" class="Setono\TagBagBundle\TagBag\TagBag">
-            <argument type="service" id="setono_tag_bag.renderer.composite"/>
+        <service id="setono_tag_bag.tag_bag" class="Setono\TagBag\TagBag">
+            <argument type="service" id="setono_tag_bag.renderer.default"/>
+            <argument type="service" id="setono_tag_bag.storage.session"/>
         </service>
     </services>
 </container>

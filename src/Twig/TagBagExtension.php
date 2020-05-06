@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Twig;
 
 use function is_string;
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\Tag\TagInterface;
+use Setono\TagBag\TagBagInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -32,19 +33,19 @@ final class TagBagExtension extends AbstractExtension
     /**
      * Returns some or all the existing tags:
      *  * tags() returns all the tags
-     *  * tags('section') returns the tags for that section
-     *  * tags(['section1', 'section2']) returns the tags for those sections.
+     *  * tags('section1') returns the tags for section1
+     *  * tags(['section1', 'section2']) returns the tags section1 and section2
      *
      * @param array|string|null $sections
      */
     public function tags($sections = null): string
     {
         if (null === $sections || '' === $sections || [] === $sections) {
-            return $this->renderSections($this->tagBag->all());
+            return $this->renderSections($this->tagBag->getAll());
         }
 
         if (is_string($sections)) {
-            return $this->renderSections([$sections => $this->tagBag->getSection($sections)]);
+            return $this->renderSections([$this->tagBag->getSection($sections)]);
         }
 
         $result = [];
@@ -57,27 +58,21 @@ final class TagBagExtension extends AbstractExtension
 
     public function headTags(): string
     {
-        return $this->tags(TagBagInterface::SECTION_HEAD);
+        return $this->tags(TagInterface::SECTION_HEAD);
     }
 
     public function bodyBeginTags(): string
     {
-        return $this->tags(TagBagInterface::SECTION_BODY_BEGIN);
+        return $this->tags(TagInterface::SECTION_BODY_BEGIN);
     }
 
     public function bodyEndTags(): string
     {
-        return $this->tags(TagBagInterface::SECTION_BODY_END);
+        return $this->tags(TagInterface::SECTION_BODY_END);
     }
 
     private function renderSections(array $sections): string
     {
-        $str = '';
-
-        foreach ($sections as $section) {
-            $str .= implode('', $section);
-        }
-
-        return $str;
+        return implode('', $sections);
     }
 }
