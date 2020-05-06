@@ -13,9 +13,9 @@ This bundle integrates the [tag bag library](https://github.com/Setono/tag-bag) 
 It is especially useful when you want to inject tags that are dynamic by nature. This could be ecommerce tracking,
 affiliate tracking etc.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Projects using Tag Bag Bundle](#projects-using-tag-bag-bundle)
+It works by adding tags to the tag bag within the request cycle. When the request cycle is done, the remaining tags will
+be saved to the session. On a new page load, the tag bag will be restored. This is what makes it extremely versatile when
+you want to track events in your HTML, but the event is happening in a service/controller somewhere.
 
 ## Installation
 
