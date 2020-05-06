@@ -62,7 +62,7 @@ class YourService
     public function method(): void 
     {
         $this->tagBag->addTag(
-            new ScriptTag('console.log("This will be output in the console");', 'key'),
+            new ScriptTag('key', 'console.log("This will be output in the console");')
         );
     }
 }
