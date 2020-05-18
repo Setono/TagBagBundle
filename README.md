@@ -62,7 +62,7 @@ class YourService
     public function method(): void 
     {
         $this->tagBag->addTag(
-            new ScriptTag('key', 'console.log("This will be output in the console");')
+            new ScriptTag('console.log("This will be output in the console");')
         );
     }
 }
@@ -77,22 +77,22 @@ To output all the tags you've defined, including tags in custom sections, you ca
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        {{ setono_tag_bag_head_tags() }}
+        {{ setono_tag_bag_render_head() }}
     </head>
     <body>
-        {{ setono_tag_bag_body_begin_tags() }}
+        {{ setono_tag_bag_render_body_begin() }}
         
         <h1>This is your page content</h1>
         <p>Lorem ipsum</p>
         
-        {{ setono_tag_bag_tags('custom_section') }}        
+        {{ setono_tag_bag_render_section('custom_section') }}        
 
         <h2>More page content</h2>
         <p>Lorem ipsum</p>
 
         
-        {{ setono_tag_bag_body_end_tags() }}
-        {{ setono_tag_bag_tags() }} {# This is a catch all that will output the tags that wasn't output before #}
+        {{ setono_tag_bag_render_body_end() }}
+        {{ setono_tag_bag_render_all() }} {# This is a catch all that will output the tags that wasn't output before #}
     </body>
 </html>
 ```

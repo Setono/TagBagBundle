@@ -8,6 +8,7 @@
         <service id="setono_tag_bag.tag_bag" class="Setono\TagBag\TagBag">
             <argument type="service" id="setono_tag_bag.renderer.default"/>
             <argument type="service" id="setono_tag_bag.storage.session"/>
+            <argument type="service" id="event_dispatcher"/>
         </service>
     </services>
 </container>

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Twig;
 
-use function is_string;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
 use Twig\Extension\AbstractExtension;
@@ -23,56 +22,36 @@ final class TagBagExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('setono_tag_bag_tags', [$this, 'tags'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_head_tags', [$this, 'headTags'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_body_begin_tags', [$this, 'bodyBeginTags'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_body_end_tags', [$this, 'bodyEndTags'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_render_all', [$this, 'renderAll'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_render_section', [$this, 'renderSection'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_render_head', [$this, 'renderHead'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_render_body_begin', [$this, 'renderBodyBegin'], ['is_safe' => ['html']]),
+            new TwigFunction('setono_tag_bag_render_body_end', [$this, 'renderBodyEnd'], ['is_safe' => ['html']]),
         ];
     }
 
-    /**
-     * Returns some or all the existing tags:
-     *  * tags() returns all the tags
-     *  * tags('section1') returns the tags for section1
-     *  * tags(['section1', 'section2']) returns the tags section1 and section2
-     *
-     * @param array|string|null $sections
-     */
-    public function tags($sections = null): string
+    public function renderAll(): string
     {
-        if (null === $sections || '' === $sections || [] === $sections) {
-            return $this->renderSections($this->tagBag->getAll());
-        }
-
-        if (is_string($sections)) {
-            return $this->renderSections([$this->tagBag->getSection($sections)]);
-        }
-
-        $result = [];
-        foreach ($sections as $section) {
-            $result[$section] = $this->tagBag->getSection($section);
-        }
-
-        return $this->renderSections($result);
+        return $this->tagBag->renderAll();
     }
 
-    public function headTags(): string
+    public function renderSection(string $section): string
     {
-        return $this->tags(TagInterface::SECTION_HEAD);
+        return $this->tagBag->renderSection($section);
     }
 
-    public function bodyBeginTags(): string
+    public function renderHead(): string
     {
-        return $this->tags(TagInterface::SECTION_BODY_BEGIN);
+        return $this->renderSection(TagInterface::SECTION_HEAD);
     }
 
-    public function bodyEndTags(): string
+    public function renderBodyBegin(): string
     {
-        return $this->tags(TagInterface::SECTION_BODY_END);
+        return $this->renderSection(TagInterface::SECTION_BODY_BEGIN);
     }
 
-    private function renderSections(array $sections): string
+    public function renderBodyEnd(): string
     {
-        return implode('', $sections);
+        return $this->renderSection(TagInterface::SECTION_BODY_END);
     }
 }

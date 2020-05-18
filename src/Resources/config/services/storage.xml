@@ -6,7 +6,12 @@
         <!-- Autowires the storage interface to the default storage service -->
         <service id="Setono\TagBag\Storage\StorageInterface" alias="setono_tag_bag.storage.default"/>
 
-        <!-- Aliases the default storage to the session storage -->
+        <!--
+        Aliases the default storage to the session storage.
+
+        This means that if you want to override the default storage, override this key, and then your new service
+        will automatically be autowired
+        -->
         <service id="setono_tag_bag.storage.default" alias="setono_tag_bag.storage.session"/>
         <service id="setono_tag_bag.storage.session" class="Setono\TagBagBundle\Storage\SessionStorage">
             <argument type="service" id="session"/>

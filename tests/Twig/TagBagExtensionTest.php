@@ -18,27 +18,27 @@ final class TagBagExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_head_tags(): void
+    public function it_renders_head_tags(): void
     {
         $tagBag = $this->prophesize(TagBagInterface::class);
-        $tagBag->getSection(TagInterface::SECTION_HEAD)->willReturn(null);
+        $tagBag->renderSection(TagInterface::SECTION_HEAD)->willReturn('');
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->headTags());
+        $this->assertSame('', $extension->renderHead());
     }
 
     /**
      * @test
      */
-    public function it_returns_body_begin_tags(): void
+    public function it_renders_body_begin_tags(): void
     {
         $tagBag = $this->prophesize(TagBagInterface::class);
-        $tagBag->getSection(TagInterface::SECTION_BODY_BEGIN)->willReturn(null);
+        $tagBag->renderSection(TagInterface::SECTION_BODY_BEGIN)->willReturn('');
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->bodyBeginTags());
+        $this->assertSame('', $extension->renderBodyBegin());
     }
 
     /**
@@ -47,28 +47,11 @@ final class TagBagExtensionTest extends TestCase
     public function it_returns_body_end_tags(): void
     {
         $tagBag = $this->prophesize(TagBagInterface::class);
-        $tagBag->getSection(TagInterface::SECTION_BODY_END)->willReturn(null);
+        $tagBag->renderSection(TagInterface::SECTION_BODY_END)->willReturn('');
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->bodyEndTags());
-    }
-
-    /**
-     * @test
-     */
-    public function it_returns_multiple_sections(): void
-    {
-        $tagBag = $this->createMock(TagBagInterface::class);
-        $tagBag
-            ->method('getSection')
-            ->withConsecutive(['section1'], ['section2'])
-            ->willReturnOnConsecutiveCalls(null, null)
-        ;
-
-        $extension = new TagBagExtension($tagBag);
-
-        $this->assertSame('', $extension->tags(['section1', 'section2']));
+        $this->assertSame('', $extension->renderBodyEnd());
     }
 
     /**
@@ -77,11 +60,11 @@ final class TagBagExtensionTest extends TestCase
     public function it_returns_all_tags(): void
     {
         $tagBag = $this->prophesize(TagBagInterface::class);
-        $tagBag->getAll()->willReturn([]);
+        $tagBag->renderAll()->willReturn('');
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->tags());
+        $this->assertSame('', $extension->renderAll());
     }
 
     /**
@@ -95,7 +78,7 @@ final class TagBagExtensionTest extends TestCase
         $extension = new TagBagExtension($tagBag->reveal());
         $functions = $extension->getFunctions();
 
-        $this->assertCount(4, $functions);
+        $this->assertCount(5, $functions);
         $this->assertContainsOnlyInstancesOf(TwigFunction::class, $functions);
     }
 }
