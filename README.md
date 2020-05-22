@@ -97,10 +97,15 @@ To output all the tags you've defined, including tags in custom sections, you ca
 </html>
 ```
 
+## Renderers
+
+If you have created your own renderer, remember to tag it `setono_tag_bag.renderer`.
+
 ## Projects using Tag Bag Bundle
 - [Sylius Addwish plugin](https://github.com/Setono/SyliusAddwishPlugin)
 - [Sylius Strands plugin](https://github.com/Setono/SyliusStrandsPlugin)
 - [Sylius Analytics plugin](https://github.com/Setono/SyliusAnalyticsPlugin)
+- [Sylius Facebook Tracking plugin](https://github.com/Setono/SyliusFacebookTrackingPlugin)
 
 [ico-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/stable
 [ico-unstable-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/unstable
