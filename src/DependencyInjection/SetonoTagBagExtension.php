@@ -23,11 +23,11 @@ final class SetonoTagBagExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        if (class_exists('Setono\TagBag\Tag\TwigTagInterface')) {
+        if (interface_exists('Setono\TagBag\Tag\TwigTagInterface')) {
             $loader->load('services/integrations/tag_bag_twig.xml');
         }
 
-        if (class_exists('Setono\TagBag\Tag\PhpTemplatesTagInterface')) {
+        if (interface_exists('Setono\TagBag\Tag\PhpTemplatesTagInterface')) {
             $loader->load('services/integrations/tag_bag_php_templates.xml');
         }
     }
