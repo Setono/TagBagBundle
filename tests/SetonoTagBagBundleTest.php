@@ -64,8 +64,8 @@ final class SetonoTagBagBundleTest extends BaseBundleTestCase
             ['id' => 'setono_tag_bag.renderer.content', 'class' => ContentRenderer::class],
             ['id' => 'setono_tag_bag.renderer.script', 'class' => ScriptRenderer::class],
             ['id' => 'setono_tag_bag.renderer.style', 'class' => StyleRenderer::class],
-//            ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
-//            ['id' => 'setono_tag_bag.renderer.php_templates', 'class' => PhpTemplatesRenderer::class],
+            ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
+            ['id' => 'setono_tag_bag.renderer.php_templates', 'class' => PhpTemplatesRenderer::class],
 
             // storage
             //['id' => StorageInterface::class, 'class' => SessionStorage::class], // todo why doesn't this work?
