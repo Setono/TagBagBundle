@@ -22,10 +22,5 @@
         <service id="setono_tag_bag.renderer.style" class="Setono\TagBag\Renderer\StyleRenderer">
             <tag name="setono_tag_bag.renderer" priority="128"/>
         </service>
-
-        <service id="setono_tag_bag.renderer.twig" class="Setono\TagBag\Renderer\TwigRenderer">
-            <argument type="service" id="twig"/>
-            <tag name="setono_tag_bag.renderer" priority="256"/>
-        </service>
     </services>
 </container>

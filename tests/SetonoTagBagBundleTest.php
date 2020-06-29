@@ -6,13 +6,14 @@ namespace Setono\TagBagBundle\Tests;
 
 use Nyholm\BundleTest\BaseBundleTestCase;
 use Nyholm\BundleTest\CompilerPass\PublicServicePass;
+use Setono\PhpTemplatesBundle\SetonoPhpTemplatesBundle;
 use Setono\TagBag\Renderer\CompositeRenderer;
 use Setono\TagBag\Renderer\ContentRenderer;
+use Setono\TagBag\Renderer\PhpTemplatesRenderer;
 use Setono\TagBag\Renderer\ScriptRenderer;
 use Setono\TagBag\Renderer\StyleRenderer;
 use Setono\TagBag\Renderer\TwigRenderer;
 use Setono\TagBag\TagBag;
-use Setono\TagBag\TagBagInterface;
 use Setono\TagBagBundle\EventListener\RestoreTagBagSubscriber;
 use Setono\TagBagBundle\EventListener\StoreTagBagSubscriber;
 use Setono\TagBagBundle\SetonoTagBagBundle;
@@ -44,6 +45,8 @@ final class SetonoTagBagBundleTest extends BaseBundleTestCase
     {
         $kernel = $this->createKernel();
         $kernel->addBundle(TwigBundle::class);
+        $kernel->addBundle(SetonoPhpTemplatesBundle::class);
+
         $this->bootKernel();
 
         $container = $this->getContainer();
@@ -61,7 +64,8 @@ final class SetonoTagBagBundleTest extends BaseBundleTestCase
             ['id' => 'setono_tag_bag.renderer.content', 'class' => ContentRenderer::class],
             ['id' => 'setono_tag_bag.renderer.script', 'class' => ScriptRenderer::class],
             ['id' => 'setono_tag_bag.renderer.style', 'class' => StyleRenderer::class],
-            ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
+//            ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
+//            ['id' => 'setono_tag_bag.renderer.php_templates', 'class' => PhpTemplatesRenderer::class],
 
             // storage
             //['id' => StorageInterface::class, 'class' => SessionStorage::class], // todo why doesn't this work?
