@@ -99,7 +99,8 @@ To output all the tags you've defined, including tags in custom sections, you ca
 
 ## Renderers
 
-If you have created your own renderer, remember to tag it `setono_tag_bag.renderer`.
+If you have created your own renderer, remember to tag it `setono_tag_bag.renderer`. If you're using autoconfiguration,
+it will be tagged automatically.
 
 ## Projects using Tag Bag Bundle
 - [Sylius Addwish plugin](https://github.com/Setono/SyliusAddwishPlugin)
