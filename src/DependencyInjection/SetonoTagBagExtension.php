@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\DependencyInjection;
 
-use Exception;
+use Setono\TagBag\Renderer\RendererInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -12,15 +12,23 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoTagBagExtension extends Extension
 {
-    /**
-     * @throws Exception
-     */
     public function load(array $config, ContainerBuilder $container): void
     {
-        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $container->registerForAutoconfiguration(RendererInterface::class)
+            ->addTag('setono_tag_bag.renderer', [
+                'priority' => 256,
+            ])
+        ;
 
-        $container->setParameter('setono_tag_bag.session_key', $config['session_key']);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+
+        if (class_exists('Setono\TagBag\Tag\TwigTagInterface')) {
+            $loader->load('services/integrations/tag_bag_twig.xml');
+        }
+
+        if (class_exists('Setono\TagBag\Tag\PhpTemplatesTagInterface')) {
+            $loader->load('services/integrations/tag_bag_php_templates.xml');
+        }
     }
 }

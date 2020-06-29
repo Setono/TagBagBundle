@@ -16,11 +16,14 @@ final class RegisterRenderersPass implements CompilerPassInterface
             return;
         }
 
-        $renderers = array_map(static function ($id): Reference {
-            return new Reference($id);
-        }, array_keys($container->findTaggedServiceIds('setono_tag_bag.renderer')));
-
         $renderer = $container->getDefinition('setono_tag_bag.renderer.composite');
-        $renderer->setArguments($renderers);
+
+        foreach ($container->findTaggedServiceIds('setono_tag_bag.renderer') as $id => $tags) {
+            foreach ($tags as $tag) {
+                $priority = $tag['priority'] ?? 0;
+
+                $renderer->addMethodCall('addRenderer', [new Reference($id), $priority]);
+            }
+        }
     }
 }

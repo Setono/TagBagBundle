@@ -4,24 +4,19 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\EventListener;
 
-use Setono\TagBagBundle\TagBag\TagBagInterface;
+use Setono\TagBag\TagBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class PopulateTagBagSubscriber implements EventSubscriberInterface
+final class RestoreTagBagSubscriber implements EventSubscriberInterface
 {
     /** @var TagBagInterface */
     private $tagBag;
 
-    /** @var string */
-    private $sessionKey;
-
-    public function __construct(TagBagInterface $tagBag, string $sessionKey)
+    public function __construct(TagBagInterface $tagBag)
     {
         $this->tagBag = $tagBag;
-        $this->sessionKey = $sessionKey;
     }
 
     public static function getSubscribedEvents(): array
@@ -42,21 +37,6 @@ final class PopulateTagBagSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /**
-         * Before SF5 the session could be null
-         *
-         * @var SessionInterface|null
-         */
-        $session = $event->getRequest()->getSession();
-
-        if (null === $session) {
-            return;
-        }
-
-        if (!$session->has($this->sessionKey)) {
-            return;
-        }
-
-        $this->tagBag->initialize($session->get($this->sessionKey, []));
+        $this->tagBag->restore();
     }
 }

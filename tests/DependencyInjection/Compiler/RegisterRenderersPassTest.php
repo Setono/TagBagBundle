@@ -8,7 +8,11 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Setono\TagBagBundle\DependencyInjection\Compiler\RegisterRenderersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * @covers \Setono\TagBagBundle\DependencyInjection\Compiler\RegisterRenderersPass
+ */
 class RegisterRenderersPassTest extends AbstractCompilerPassTestCase
 {
     protected function registerCompilerPass(ContainerBuilder $container): void
@@ -29,6 +33,6 @@ class RegisterRenderersPassTest extends AbstractCompilerPassTestCase
 
         $this->compile();
 
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('setono_tag_bag.renderer.composite', 0, 'renderer');
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('setono_tag_bag.renderer.composite', 'addRenderer', [new Reference('renderer'), 0]);
     }
 }
