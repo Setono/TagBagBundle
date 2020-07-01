@@ -18,6 +18,7 @@
         "symfony/framework-bundle": "^4.4 || ^5.0",
         "symfony/http-foundation": "^4.4 || ^5.0",
         "symfony/http-kernel": "^4.4 || ^5.0",
+        "thecodingmachine/safe": "^1.0",
         "twig/twig": "^2.0 || ^3.0",
         "webmozart/assert": "^1.1"
     },

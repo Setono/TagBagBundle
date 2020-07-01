@@ -7,7 +7,6 @@ namespace Setono\TagBagBundle\DependencyInjection\Compiler;
 use InvalidArgumentException;
 use ReflectionClass;
 use function Safe\sprintf;
-use Setono\TagBag\Tag\GtagInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -24,14 +23,16 @@ final class AddPathsToPhpTemplatesEnginePass implements CompilerPassInterface
 
     private static function addGtagPaths(ContainerBuilder $container): void
     {
-        if (!interface_exists(GtagInterface::class)) {
+        $interface = 'Setono\TagBag\Tag\GtagInterface';
+
+        if (!interface_exists($interface)) {
             return;
         }
 
-        $filename = (new ReflectionClass(GtagInterface::class))->getFileName();
+        $filename = (new ReflectionClass($interface))->getFileName();
         if (false === $filename) {
             throw new InvalidArgumentException(sprintf(
-                'The filename of interface %s could not be deduced', GtagInterface::class
+                'The filename of interface %s could not be deduced', $interface
             ));
         }
 
