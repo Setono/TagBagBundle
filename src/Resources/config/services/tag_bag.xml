@@ -9,6 +9,7 @@
             <argument type="service" id="setono_tag_bag.renderer.default"/>
             <argument type="service" id="setono_tag_bag.storage.session"/>
             <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="setono_tag_bag.generator.value_based_fingerprint"/>
         </service>
     </services>
 </container>

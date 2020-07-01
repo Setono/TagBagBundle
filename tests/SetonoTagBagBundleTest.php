@@ -7,6 +7,7 @@ namespace Setono\TagBagBundle\Tests;
 use Nyholm\BundleTest\BaseBundleTestCase;
 use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Setono\PhpTemplatesBundle\SetonoPhpTemplatesBundle;
+use Setono\TagBag\Generator\ValueBasedFingerprintGenerator;
 use Setono\TagBag\Renderer\CompositeRenderer;
 use Setono\TagBag\Renderer\ContentRenderer;
 use Setono\TagBag\Renderer\PhpTemplatesRenderer;
@@ -56,6 +57,10 @@ final class SetonoTagBagBundleTest extends BaseBundleTestCase
             // event listeners
             ['id' => 'setono_tag_bag.event_listener.restore_tag_bag_subscriber', 'class' => RestoreTagBagSubscriber::class],
             ['id' => 'setono_tag_bag.event_listener.store_tag_bag_subscriber', 'class' => StoreTagBagSubscriber::class],
+
+            // generators
+            ['id' => 'setono_tag_bag.generator.fingerprint.default', 'class' => ValueBasedFingerprintGenerator::class],
+            ['id' => 'setono_tag_bag.generator.value_based_fingerprint', 'class' => ValueBasedFingerprintGenerator::class],
 
             // renderers
             //['id' => RendererInterface::class, 'class' => CompositeRenderer::class], // todo why doesn't this work?

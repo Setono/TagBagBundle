@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <!-- Autowires the finger print generator interface to the default finger generator service -->
+        <service id="Setono\TagBag\Generator\FingerprintGeneratorInterface"
+                 alias="setono_tag_bag.generator.fingerprint.default"/>
+
+        <!-- Aliases the default fingerprint generator to the value based finger print generator -->
+        <service id="setono_tag_bag.generator.fingerprint.default"
+                 alias="setono_tag_bag.generator.value_based_fingerprint"/>
+
+        <service id="setono_tag_bag.generator.value_based_fingerprint"
+                 class="Setono\TagBag\Generator\ValueBasedFingerprintGenerator">
+        </service>
+    </services>
+</container>
