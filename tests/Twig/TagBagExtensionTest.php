@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Tests\Twig;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
 use Setono\TagBagBundle\Twig\TagBagExtension;
@@ -15,6 +16,8 @@ use Twig\TwigFunction;
  */
 final class TagBagExtensionTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
@@ -25,7 +28,7 @@ final class TagBagExtensionTest extends TestCase
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->renderHead());
+        self::assertSame('', $extension->renderHead());
     }
 
     /**
@@ -38,7 +41,7 @@ final class TagBagExtensionTest extends TestCase
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->renderBodyBegin());
+        self::assertSame('', $extension->renderBodyBegin());
     }
 
     /**
@@ -51,7 +54,7 @@ final class TagBagExtensionTest extends TestCase
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->renderBodyEnd());
+        self::assertSame('', $extension->renderBodyEnd());
     }
 
     /**
@@ -64,7 +67,7 @@ final class TagBagExtensionTest extends TestCase
 
         $extension = new TagBagExtension($tagBag->reveal());
 
-        $this->assertSame('', $extension->renderAll());
+        self::assertSame('', $extension->renderAll());
     }
 
     /**
@@ -78,7 +81,7 @@ final class TagBagExtensionTest extends TestCase
         $extension = new TagBagExtension($tagBag->reveal());
         $functions = $extension->getFunctions();
 
-        $this->assertCount(5, $functions);
-        $this->assertContainsOnlyInstancesOf(TwigFunction::class, $functions);
+        self::assertCount(5, $functions);
+        self::assertContainsOnlyInstancesOf(TwigFunction::class, $functions);
     }
 }

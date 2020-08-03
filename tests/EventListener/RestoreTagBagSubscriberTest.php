@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Tests\EventListener;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\TagBag\TagBagInterface;
 use Setono\TagBagBundle\EventListener\RestoreTagBagSubscriber;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 final class RestoreTagBagSubscriberTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

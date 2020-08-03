@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Tests\Storage;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\TagBag\Storage\StorageInterface;
 use Setono\TagBagBundle\Storage\SessionStorage;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 final class SessionStorageTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

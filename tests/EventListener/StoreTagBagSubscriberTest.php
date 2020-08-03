@@ -6,6 +6,7 @@ namespace Setono\TagBagBundle\Tests\EventListener;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\TagBag\TagBagInterface;
 use Setono\TagBagBundle\EventListener\StoreTagBagSubscriber;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 final class StoreTagBagSubscriberTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
