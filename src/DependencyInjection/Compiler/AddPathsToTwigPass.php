@@ -15,11 +15,11 @@ final class AddPathsToTwigPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('twig.loader.native_filesystem')) {
+        if (!$container->hasDefinition('twig.loader.filesystem')) {
             return;
         }
 
-        $twigLoader = $container->getDefinition('twig.loader.native_filesystem');
+        $twigLoader = $container->getDefinition('twig.loader.filesystem');
 
         self::addGtagPaths($twigLoader);
     }
