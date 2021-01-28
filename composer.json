@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "setono/tag-bag": "^1.0",
+        "setono/tag-bag": "^1.4",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
         "symfony/event-dispatcher": "^4.4 || ^5.0",
@@ -22,16 +22,16 @@
         "webmozart/assert": "^1.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "nyholm/symfony-bundle-test": "^1.6",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+        "nyholm/symfony-bundle-test": "^1.7",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.2",
+        "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-master",
-        "setono/code-quality-pack": "^1.0",
+        "setono/code-quality-pack": "^2.0",
         "setono/php-templates-bundle": "^1.0",
         "setono/tag-bag-gtag": "^1.0",
-        "setono/tag-bag-php-templates": "^1.0",
-        "setono/tag-bag-twig": "^1.0",
+        "setono/tag-bag-php-templates": "^1.2",
+        "setono/tag-bag-twig": "^1.1",
         "symfony/twig-bundle": "^4.4 || ^5.0"
     },
     "config": {
@@ -54,10 +54,9 @@
     },
     "prefer-stable": true,
     "scripts": {
-        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon -l max src/",
-        "check-style": "vendor/bin/ecs check src/ tests/",
-        "fix-style": "vendor/bin/ecs check --fix src/ tests/",
-        "phpspec": "vendor/bin/phpspec run",
-        "phpunit": "vendor/bin/phpunit"
+        "analyse": "phpstan analyse -c phpstan.neon -l max src/",
+        "check-style": "ecs check src/ tests/",
+        "fix-style": "ecs check --fix src/ tests/",
+        "phpunit": "phpunit"
     }
 }

@@ -10,6 +10,7 @@
             <argument type="service" id="setono_tag_bag.storage.session"/>
             <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="setono_tag_bag.generator.value_based_fingerprint"/>
+            <argument type="service" id="logger"/>
         </service>
     </services>
 </container>
