@@ -1,11 +1,8 @@
 # Symfony Tag Bag Bundle
 
 [![Latest Version][ico-version]][link-packagist]
-[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
-[![Coverage Status][ico-code-coverage]][link-code-coverage]
-[![Quality Score][ico-code-quality]][link-code-quality]
 
 This bundle integrates the [tag bag library](https://github.com/Setono/tag-bag) and creates a service named
 `setono_tag_bag.tag_bag` which you can use to inject tags onto pages.
@@ -109,13 +106,9 @@ it will be tagged automatically.
 - [Sylius Facebook Tracking plugin](https://github.com/Setono/SyliusFacebookTrackingPlugin)
 
 [ico-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/stable
-[ico-unstable-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/unstable
 [ico-license]: https://poser.pugx.org/setono/tag-bag-bundle/license
 [ico-github-actions]: https://github.com/Setono/TagBagBundle/workflows/build/badge.svg
-[ico-code-coverage]: https://img.shields.io/scrutinizer/coverage/g/Setono/TagBagBundle.svg
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/TagBagBundle.svg
 
 [link-packagist]: https://packagist.org/packages/setono/tag-bag-bundle
 [link-github-actions]: https://github.com/Setono/TagBagBundle/actions
 [link-code-coverage]: https://scrutinizer-ci.com/g/Setono/TagBagBundle/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/Setono/TagBagBundle

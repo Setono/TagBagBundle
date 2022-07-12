@@ -10,36 +10,34 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "setono/tag-bag": "^1.4",
-        "symfony/config": "^4.4 || ^5.0",
-        "symfony/dependency-injection": "^4.4 || ^5.0",
-        "symfony/event-dispatcher": "^4.4 || ^5.0",
-        "symfony/http-foundation": "^4.4 || ^5.0.7",
-        "symfony/http-kernel": "^4.4 || ^5.0",
-        "thecodingmachine/safe": "^1.0",
+        "symfony/config": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
         "twig/twig": "^2.0 || ^3.0",
-        "webmozart/assert": "^1.1"
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "nyholm/symfony-bundle-test": "^1.7",
-        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
-        "roave/security-advisories": "dev-master",
-        "setono/code-quality-pack": "^2.0",
+        "roave/security-advisories": "dev-latest",
+        "setono/code-quality-pack": "^2.2",
         "setono/php-templates-bundle": "^1.0",
         "setono/tag-bag-gtag": "^1.0",
         "setono/tag-bag-php-templates": "^1.2",
         "setono/tag-bag-twig": "^1.1",
-        "symfony/twig-bundle": "^4.4 || ^5.0"
+        "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0"
     },
     "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.2-dev"
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true,
+            "dealerdirect/phpcodesniffer-composer-installer": false
         }
     },
     "autoload": {
