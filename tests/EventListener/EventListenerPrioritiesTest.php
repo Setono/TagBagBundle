@@ -17,6 +17,7 @@ final class EventListenerPrioritiesTest extends TestCase
      */
     public function priorities_are_correct(): void
     {
+        /** @psalm-suppress InternalMethod */
         $sessionListenerEvents = SessionListener::getSubscribedEvents();
         $populateTagBagEvents = RestoreTagBagSubscriber::getSubscribedEvents();
         $populateSessionEvents = StoreTagBagSubscriber::getSubscribedEvents();

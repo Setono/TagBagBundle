@@ -4,39 +4,48 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Tests;
 
-use Nyholm\BundleTest\BaseBundleTestCase;
-use Nyholm\BundleTest\CompilerPass\PublicServicePass;
-use Setono\PhpTemplatesBundle\SetonoPhpTemplatesBundle;
+use Nyholm\BundleTest\TestKernel;
 use Setono\TagBag\Generator\ValueBasedFingerprintGenerator;
 use Setono\TagBag\Renderer\CompositeRenderer;
 use Setono\TagBag\Renderer\ContentRenderer;
-use Setono\TagBag\Renderer\PhpTemplatesRenderer;
+use Setono\TagBag\Renderer\RendererInterface;
 use Setono\TagBag\Renderer\ScriptRenderer;
 use Setono\TagBag\Renderer\StyleRenderer;
-use Setono\TagBag\Renderer\TwigRenderer;
+use Setono\TagBag\Storage\StorageInterface;
 use Setono\TagBag\TagBag;
+use Setono\TagBag\TagBagInterface;
 use Setono\TagBagBundle\EventListener\RestoreTagBagSubscriber;
 use Setono\TagBagBundle\EventListener\StoreTagBagSubscriber;
+use Setono\TagBagBundle\Renderer\TwigRenderer;
 use Setono\TagBagBundle\SetonoTagBagBundle;
 use Setono\TagBagBundle\Storage\SessionStorage;
-use Setono\TagBagBundle\Twig\TagBagExtension;
+use Setono\TagBagBundle\Twig\Extension;
+use Setono\TagBagBundle\Twig\Runtime;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @covers \Setono\TagBagBundle\SetonoTagBagBundle
  */
-final class SetonoTagBagBundleTest extends BaseBundleTestCase
+final class SetonoTagBagBundleTest extends KernelTestCase
 {
-    protected function setUp(): void
+    protected static function getKernelClass(): string
     {
-        parent::setUp();
-
-        $this->addCompilerPass(new PublicServicePass('|^setono_tag_bag.*|'));
+        return TestKernel::class;
     }
 
-    protected function getBundleClass(): string
+    protected static function createKernel(array $options = []): KernelInterface
     {
-        return SetonoTagBagBundle::class;
+        /**
+         * @var TestKernel $kernel
+         */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(SetonoTagBagBundle::class);
+        $kernel->addTestBundle(TwigBundle::class);
+        $kernel->handleOptions($options);
+
+        return $kernel;
     }
 
     /**
@@ -44,15 +53,12 @@ final class SetonoTagBagBundleTest extends BaseBundleTestCase
      */
     public function it_inits(): void
     {
-        $kernel = $this->createKernel();
-        $kernel->addBundle(TwigBundle::class);
-        $kernel->addBundle(SetonoPhpTemplatesBundle::class);
+        self::bootKernel();
+        $container = self::getContainer();
 
-        $this->bootKernel();
-
-        $container = $this->getContainer();
-
-        // test that all services exist and is the right class
+        /**
+         * @var list<array{id: string, class: class-string}>
+         */
         $services = [
             // event listeners
             ['id' => 'setono_tag_bag.event_listener.restore_tag_bag_subscriber', 'class' => RestoreTagBagSubscriber::class],
@@ -63,26 +69,26 @@ final class SetonoTagBagBundleTest extends BaseBundleTestCase
             ['id' => 'setono_tag_bag.generator.value_based_fingerprint', 'class' => ValueBasedFingerprintGenerator::class],
 
             // renderers
-            //['id' => RendererInterface::class, 'class' => CompositeRenderer::class], // todo why doesn't this work?
+            ['id' => RendererInterface::class, 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.default', 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.composite', 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.content', 'class' => ContentRenderer::class],
             ['id' => 'setono_tag_bag.renderer.script', 'class' => ScriptRenderer::class],
             ['id' => 'setono_tag_bag.renderer.style', 'class' => StyleRenderer::class],
             ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
-            ['id' => 'setono_tag_bag.renderer.php_templates', 'class' => PhpTemplatesRenderer::class],
 
             // storage
-            //['id' => StorageInterface::class, 'class' => SessionStorage::class], // todo why doesn't this work?
+            ['id' => StorageInterface::class, 'class' => SessionStorage::class],
             ['id' => 'setono_tag_bag.storage.default', 'class' => SessionStorage::class],
             ['id' => 'setono_tag_bag.storage.session', 'class' => SessionStorage::class],
 
             // tag bag
-            //['id' => TagBagInterface::class, 'class' => TagBag::class], // todo why doesn't this work?
+            ['id' => TagBagInterface::class, 'class' => TagBag::class],
             ['id' => 'setono_tag_bag.tag_bag', 'class' => TagBag::class],
 
             // twig
-            ['id' => 'setono_tag_bag.twig.tag_bag', 'class' => TagBagExtension::class],
+            ['id' => 'setono_tag_bag.twig.extension', 'class' => Extension::class],
+            ['id' => 'setono_tag_bag.twig.runtime', 'class' => Runtime::class],
         ];
 
         foreach ($services as $service) {

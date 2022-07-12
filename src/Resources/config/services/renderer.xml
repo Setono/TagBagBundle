@@ -12,15 +12,15 @@
         <service id="setono_tag_bag.renderer.composite" class="Setono\TagBag\Renderer\CompositeRenderer"/>
 
         <service id="setono_tag_bag.renderer.content" class="Setono\TagBag\Renderer\ContentRenderer">
-            <tag name="setono_tag_bag.renderer"/>
+            <tag name="setono_tag_bag.renderer" priority="-64"/>
         </service>
 
         <service id="setono_tag_bag.renderer.script" class="Setono\TagBag\Renderer\ScriptRenderer">
-            <tag name="setono_tag_bag.renderer" priority="128"/>
+            <tag name="setono_tag_bag.renderer"/>
         </service>
 
         <service id="setono_tag_bag.renderer.style" class="Setono\TagBag\Renderer\StyleRenderer">
-            <tag name="setono_tag_bag.renderer" priority="128"/>
+            <tag name="setono_tag_bag.renderer"/>
         </service>
     </services>
 </container>

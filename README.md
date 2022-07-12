@@ -111,4 +111,3 @@ it will be tagged automatically.
 
 [link-packagist]: https://packagist.org/packages/setono/tag-bag-bundle
 [link-github-actions]: https://github.com/Setono/TagBagBundle/actions
-[link-code-coverage]: https://scrutinizer-ci.com/g/Setono/TagBagBundle/code-structure

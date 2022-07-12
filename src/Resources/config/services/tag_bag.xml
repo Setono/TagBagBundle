@@ -7,10 +7,16 @@
 
         <service id="setono_tag_bag.tag_bag" class="Setono\TagBag\TagBag">
             <argument type="service" id="setono_tag_bag.renderer.default"/>
-            <argument type="service" id="setono_tag_bag.storage.session"/>
-            <argument type="service" id="event_dispatcher"/>
             <argument type="service" id="setono_tag_bag.generator.value_based_fingerprint"/>
-            <argument type="service" id="logger"/>
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher"/>
+            </call>
+            <call method="setStorage">
+                <argument type="service" id="setono_tag_bag.storage.session"/>
+            </call>
+            <call method="setLogger">
+                <argument type="service" id="logger"/>
+            </call>
         </service>
     </services>
 </container>

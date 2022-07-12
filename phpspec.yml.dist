@@ -1,4 +1,0 @@
-suites:
-    main:
-        namespace: Setono\TagBagBundle
-        psr4_prefix: Setono\TagBagBundle

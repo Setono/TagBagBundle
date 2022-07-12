@@ -11,8 +11,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class RestoreTagBagSubscriber implements EventSubscriberInterface
 {
-    /** @var TagBagInterface */
-    private $tagBag;
+    private TagBagInterface $tagBag;
 
     public function __construct(TagBagInterface $tagBag)
     {
@@ -33,7 +32,7 @@ final class RestoreTagBagSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 

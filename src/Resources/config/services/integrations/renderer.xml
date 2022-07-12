@@ -3,9 +3,10 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_tag_bag.renderer.php_templates" class="Setono\TagBag\Renderer\PhpTemplatesRenderer">
-            <argument type="service" id="setono_php_templates.engine.default"/>
-            <tag name="setono_tag_bag.renderer" priority="256"/>
+        <service id="setono_tag_bag.renderer.twig" class="Setono\TagBagBundle\Renderer\TwigRenderer">
+            <argument type="service" id="twig"/>
+
+            <tag name="setono_tag_bag.renderer" priority="64"/>
         </service>
     </services>
 </container>
