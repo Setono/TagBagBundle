@@ -15,12 +15,8 @@
             <tag name="setono_tag_bag.renderer" priority="-64"/>
         </service>
 
-        <service id="setono_tag_bag.renderer.script" class="Setono\TagBag\Renderer\ScriptRenderer">
-            <tag name="setono_tag_bag.renderer"/>
-        </service>
-
-        <service id="setono_tag_bag.renderer.style" class="Setono\TagBag\Renderer\StyleRenderer">
-            <tag name="setono_tag_bag.renderer"/>
+        <service id="setono_tag_bag.renderer.element" class="Setono\TagBag\Renderer\ElementRenderer">
+            <tag name="setono_tag_bag.renderer" priority="-32"/>
         </service>
     </services>
 </container>

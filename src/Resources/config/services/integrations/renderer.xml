@@ -6,7 +6,7 @@
         <service id="setono_tag_bag.renderer.twig" class="Setono\TagBagBundle\Renderer\TwigRenderer">
             <argument type="service" id="twig"/>
 
-            <tag name="setono_tag_bag.renderer" priority="64"/>
+            <tag name="setono_tag_bag.renderer" priority="-16"/>
         </service>
     </services>
 </container>

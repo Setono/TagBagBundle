@@ -6,9 +6,9 @@ namespace Setono\TagBagBundle\Tests\Twig;
 
 use Setono\TagBag\Renderer\CompositeRenderer;
 use Setono\TagBag\Renderer\ContentAwareRenderer;
-use Setono\TagBag\Renderer\ScriptRenderer;
+use Setono\TagBag\Renderer\ElementRenderer;
 use Setono\TagBag\Tag\ContentAwareTag;
-use Setono\TagBag\Tag\ScriptTag;
+use Setono\TagBag\Tag\InlineScriptTag;
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBag;
 use Setono\TagBagBundle\Twig\Extension;
@@ -27,13 +27,13 @@ final class ExtensionTest extends IntegrationTestCase
             public function load($class): Runtime
             {
                 $renderer = new CompositeRenderer();
-                $renderer->add(new ScriptRenderer());
+                $renderer->add(new ElementRenderer());
                 $renderer->add(new ContentAwareRenderer());
                 $tagBag = new TagBag($renderer);
 
-                $tagBag->add(ScriptTag::create('alert("header")')->withSection(TagInterface::SECTION_HEAD));
-                $tagBag->add(ScriptTag::create('alert("body begin")')->withSection(TagInterface::SECTION_BODY_BEGIN));
-                $tagBag->add(ScriptTag::create('alert("body end")')->withSection(TagInterface::SECTION_BODY_END));
+                $tagBag->add(InlineScriptTag::create('alert("header")')->withSection(TagInterface::SECTION_HEAD));
+                $tagBag->add(InlineScriptTag::create('alert("body begin")')->withSection(TagInterface::SECTION_BODY_BEGIN));
+                $tagBag->add(InlineScriptTag::create('alert("body end")')->withSection(TagInterface::SECTION_BODY_END));
                 $tagBag->add(ContentAwareTag::create('<div class="tag-1">content 1</div>')->withSection('section1'));
                 $tagBag->add(ContentAwareTag::create('<div class="tag-2">content 2</div>')->withSection('section2'));
 
