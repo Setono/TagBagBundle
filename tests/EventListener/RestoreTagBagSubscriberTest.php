@@ -28,7 +28,7 @@ final class RestoreTagBagSubscriberTest extends TestCase
         $tagBag->restore()->shouldBeCalled();
 
         $event = $this->prophesize(RequestEvent::class);
-        $event->isMasterRequest()->willReturn(true);
+        $event->isMainRequest()->willReturn(true);
 
         $subscriber = new RestoreTagBagSubscriber($tagBag->reveal());
         $subscriber->onKernelRequest($event->reveal());
@@ -43,7 +43,7 @@ final class RestoreTagBagSubscriberTest extends TestCase
         $tagBag->restore()->shouldNotBeCalled();
 
         $event = $this->prophesize(RequestEvent::class);
-        $event->isMasterRequest()->willReturn(false);
+        $event->isMainRequest()->willReturn(false);
 
         $subscriber = new RestoreTagBagSubscriber($tagBag->reveal());
         $subscriber->onKernelRequest($event->reveal());
@@ -65,6 +65,8 @@ final class RestoreTagBagSubscriberTest extends TestCase
     public function it_has_the_correct_priority(): void
     {
         $priority = RestoreTagBagSubscriber::getSubscribedEvents()[KernelEvents::REQUEST][1];
+
+        /** @psalm-suppress InternalMethod */
         $sessionListenerPriority = SessionListener::getSubscribedEvents()[KernelEvents::REQUEST][1];
 
         $this->assertLessThan($sessionListenerPriority, $priority);

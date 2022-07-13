@@ -4,31 +4,45 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Storage;
 
+use Setono\TagBag\Exception\StorageException;
 use Setono\TagBag\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class SessionStorage implements StorageInterface
 {
-    /** @var SessionInterface */
-    private $session;
+    private RequestStack $requestStack;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
     }
 
     public function store(string $data): void
     {
-        $this->session->set(self::DATA_KEY, $data);
+        $this->getSession()->set(self::DATA_KEY, $data);
     }
 
     public function restore(): ?string
     {
-        return $this->session->get(self::DATA_KEY);
+        /** @var mixed $data */
+        $data = $this->getSession()->get(self::DATA_KEY);
+
+        return is_string($data) ? $data : null;
     }
 
     public function remove(): void
     {
-        $this->session->remove(self::DATA_KEY);
+        $this->getSession()->remove(self::DATA_KEY);
+    }
+
+    private function getSession(): SessionInterface
+    {
+        try {
+            return $this->requestStack->getSession();
+        } catch (SessionNotFoundException $e) {
+            throw new StorageException($e->getMessage(), 0, $e);
+        }
     }
 }

@@ -12,23 +12,26 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoTagBagExtension extends Extension
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
+        /**
+         * @psalm-suppress PossiblyNullArgument
+         *
+         * @var array{renderer: array{twig: bool}} $config
+         */
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+
         $container->registerForAutoconfiguration(RendererInterface::class)
             ->addTag('setono_tag_bag.renderer', [
-                'priority' => 256,
+                'priority' => 128,
             ])
         ;
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        if (interface_exists('Setono\TagBag\Tag\TwigTagInterface')) {
-            $loader->load('services/integrations/tag_bag_twig.xml');
-        }
-
-        if (interface_exists('Setono\TagBag\Tag\PhpTemplatesTagInterface')) {
-            $loader->load('services/integrations/tag_bag_php_templates.xml');
+        if (true === $config['renderer']['twig']) {
+            $loader->load('services/integrations/renderer.xml');
         }
     }
 }

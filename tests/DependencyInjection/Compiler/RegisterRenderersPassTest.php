@@ -33,6 +33,6 @@ class RegisterRenderersPassTest extends AbstractCompilerPassTestCase
 
         $this->compile();
 
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('setono_tag_bag.renderer.composite', 'addRenderer', [new Reference('renderer'), 0]);
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('setono_tag_bag.renderer.composite', 'add', [new Reference('renderer')]);
     }
 }

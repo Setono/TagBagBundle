@@ -11,26 +11,25 @@
     ],
     "require": {
         "php": ">=7.4",
-        "setono/tag-bag": "^1.4",
-        "symfony/config": "^4.4 || ^5.4 || ^6.0",
-        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
-        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
-        "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
-        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
+        "setono/tag-bag": "2.x-dev",
+        "symfony/config": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^5.4 || ^6.0",
+        "symfony/http-foundation": "^5.4 || ^6.0",
+        "symfony/http-kernel": "^5.4 || ^6.0",
         "twig/twig": "^2.0 || ^3.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "nyholm/symfony-bundle-test": "^1.7",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
+        "nyholm/symfony-bundle-test": "^2.0",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
+        "psalm/plugin-phpunit": "^0.17.0",
+        "psalm/plugin-symfony": "^3.1",
         "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^2.2",
-        "setono/php-templates-bundle": "^1.0",
-        "setono/tag-bag-gtag": "^1.0",
-        "setono/tag-bag-php-templates": "^1.2",
-        "setono/tag-bag-twig": "^1.1",
-        "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0"
+        "symfony/twig-bundle": "^5.4 || ^6.0"
     },
     "prefer-stable": true,
     "autoload": {
@@ -45,16 +44,15 @@
     },
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true,
             "ergebnis/composer-normalize": true,
             "dealerdirect/phpcodesniffer-composer-installer": false
         },
         "sort-packages": true
     },
     "scripts": {
-        "analyse": "phpstan analyse -c phpstan.neon -l max src/",
-        "check-style": "ecs check src/ tests/",
-        "fix-style": "ecs check --fix src/ tests/",
+        "analyse": "psalm",
+        "check-style": "ecs check",
+        "fix-style": "ecs check --fix",
         "phpunit": "phpunit"
     }
 }

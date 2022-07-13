@@ -12,7 +12,7 @@
         </report>
     </coverage>
     <testsuites>
-        <testsuite name="SetonoTagBagBundle Test Suite">
+        <testsuite name="SetonoMetaConversionsApiBundle Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

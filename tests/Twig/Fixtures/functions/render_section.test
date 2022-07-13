@@ -1,0 +1,10 @@
+--TEST--
+"setono_tag_bag_render_section" function
+--TEMPLATE--
+{{ setono_tag_bag_render_section('section2') }}
+{{ setono_tag_bag_render_section('section1') }}
+--DATA--
+return []
+--EXPECT--
+<div class="tag-2">content 2</div>
+<div class="tag-1">content 1</div>

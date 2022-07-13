@@ -3,9 +3,13 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="setono_tag_bag.twig.tag_bag" class="Setono\TagBagBundle\Twig\TagBagExtension">
-            <argument type="service" id="setono_tag_bag.tag_bag"/>
+        <service id="setono_tag_bag.twig.extension" class="Setono\TagBagBundle\Twig\Extension">
             <tag name="twig.extension"/>
+        </service>
+
+        <service id="setono_tag_bag.twig.runtime" class="Setono\TagBagBundle\Twig\Runtime">
+            <argument type="service" id="setono_tag_bag.tag_bag"/>
+            <tag name="twig.runtime"/>
         </service>
     </services>
 </container>

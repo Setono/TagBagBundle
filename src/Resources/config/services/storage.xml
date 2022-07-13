@@ -13,8 +13,9 @@
         will automatically be autowired
         -->
         <service id="setono_tag_bag.storage.default" alias="setono_tag_bag.storage.session"/>
+        
         <service id="setono_tag_bag.storage.session" class="Setono\TagBagBundle\Storage\SessionStorage">
-            <argument type="service" id="session"/>
+            <argument type="service" id="request_stack"/>
         </service>
     </services>
 </container>

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Tests\EventListener;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Setono\TagBag\TagBagInterface;
@@ -63,20 +62,20 @@ final class StoreTagBagSubscriberTest extends TestCase
     public function it_has_the_correct_priority(): void
     {
         $priority = StoreTagBagSubscriber::getSubscribedEvents()[KernelEvents::RESPONSE][1];
+
+        /** @psalm-suppress InternalMethod */
         $sessionListenerPriority = SessionListener::getSubscribedEvents()[KernelEvents::RESPONSE][1];
 
         $this->assertGreaterThan($sessionListenerPriority, $priority);
     }
 
-    /**
-     * @return ResponseEvent|MockObject
-     */
     private function getResponseEvent(bool $masterRequest): ResponseEvent
     {
-        $kernel = $this->createMock(HttpKernelInterface::class);
-        $request = $this->createMock(Request::class);
-        $response = $this->createMock(Response::class);
-
-        return new ResponseEvent($kernel, $request, $masterRequest ? HttpKernelInterface::MASTER_REQUEST : HttpKernelInterface::SUB_REQUEST, $response);
+        return new ResponseEvent(
+            $this->createMock(HttpKernelInterface::class),
+            new Request(),
+            $masterRequest ? HttpKernelInterface::MAIN_REQUEST : HttpKernelInterface::SUB_REQUEST,
+            new Response()
+        );
     }
 }

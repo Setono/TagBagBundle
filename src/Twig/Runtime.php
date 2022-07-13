@@ -6,28 +6,15 @@ namespace Setono\TagBagBundle\Twig;
 
 use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
+use Twig\Extension\RuntimeExtensionInterface;
 
-final class TagBagExtension extends AbstractExtension
+final class Runtime implements RuntimeExtensionInterface
 {
-    /** @var TagBagInterface */
-    private $tagBag;
+    private TagBagInterface $tagBag;
 
     public function __construct(TagBagInterface $tagBag)
     {
         $this->tagBag = $tagBag;
-    }
-
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('setono_tag_bag_render_all', [$this, 'renderAll'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_render_section', [$this, 'renderSection'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_render_head', [$this, 'renderHead'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_render_body_begin', [$this, 'renderBodyBegin'], ['is_safe' => ['html']]),
-            new TwigFunction('setono_tag_bag_render_body_end', [$this, 'renderBodyEnd'], ['is_safe' => ['html']]),
-        ];
     }
 
     public function renderAll(): string
