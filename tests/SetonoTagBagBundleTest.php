@@ -72,7 +72,7 @@ final class SetonoTagBagBundleTest extends KernelTestCase
             ['id' => RendererInterface::class, 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.default', 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.composite', 'class' => CompositeRenderer::class],
-            ['id' => 'setono_tag_bag.renderer.content', 'class' => ContentAwareRenderer::class],
+            ['id' => 'setono_tag_bag.renderer.content_aware', 'class' => ContentAwareRenderer::class],
             ['id' => 'setono_tag_bag.renderer.script', 'class' => ScriptRenderer::class],
             ['id' => 'setono_tag_bag.renderer.style', 'class' => StyleRenderer::class],
             ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
