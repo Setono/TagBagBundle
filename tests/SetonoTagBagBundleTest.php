@@ -7,7 +7,7 @@ namespace Setono\TagBagBundle\Tests;
 use Nyholm\BundleTest\TestKernel;
 use Setono\TagBag\Generator\ValueBasedFingerprintGenerator;
 use Setono\TagBag\Renderer\CompositeRenderer;
-use Setono\TagBag\Renderer\ContentRenderer;
+use Setono\TagBag\Renderer\ContentAwareRenderer;
 use Setono\TagBag\Renderer\RendererInterface;
 use Setono\TagBag\Renderer\ScriptRenderer;
 use Setono\TagBag\Renderer\StyleRenderer;
@@ -72,7 +72,7 @@ final class SetonoTagBagBundleTest extends KernelTestCase
             ['id' => RendererInterface::class, 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.default', 'class' => CompositeRenderer::class],
             ['id' => 'setono_tag_bag.renderer.composite', 'class' => CompositeRenderer::class],
-            ['id' => 'setono_tag_bag.renderer.content', 'class' => ContentRenderer::class],
+            ['id' => 'setono_tag_bag.renderer.content', 'class' => ContentAwareRenderer::class],
             ['id' => 'setono_tag_bag.renderer.script', 'class' => ScriptRenderer::class],
             ['id' => 'setono_tag_bag.renderer.style', 'class' => StyleRenderer::class],
             ['id' => 'setono_tag_bag.renderer.twig', 'class' => TwigRenderer::class],
