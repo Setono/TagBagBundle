@@ -21,12 +21,12 @@ final class RestoreTagBagSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         /*
-         * The priority needs to be lower than Symfony\Component\HttpKernel\EventListener\SessionListener
-         * which is 128, but still higher than 0 so that people can listen to the request event without
+         * The priority needs to be lower than Symfony\Bundle\SecurityBundle\EventListener\FirewallListener
+         * which is 8, but still higher than 0 so that people can listen to the request event without
          * worrying about priorities
          */
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 100],
+            KernelEvents::REQUEST => ['onKernelRequest', 7],
         ];
     }
 
