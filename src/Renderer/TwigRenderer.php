@@ -6,7 +6,7 @@ namespace Setono\TagBagBundle\Renderer;
 
 use Setono\TagBag\Renderer\RendererInterface;
 use Setono\TagBag\Tag\TagInterface;
-use Setono\TagBag\Tag\TemplateTagInterface;
+use Setono\TagBag\Tag\TemplateTag;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
 
@@ -20,15 +20,15 @@ final class TwigRenderer implements RendererInterface
     }
 
     /**
-     * @psalm-assert-if-true TemplateTagInterface $tag
+     * @psalm-assert-if-true TemplateTag $tag
      */
     public function supports(TagInterface $tag): bool
     {
-        return $tag instanceof TemplateTagInterface && $tag->getTemplateType() === 'twig';
+        return $tag instanceof TemplateTag && $tag->getTemplateType() === 'twig';
     }
 
     /**
-     * @param TagInterface|TemplateTagInterface $tag
+     * @param TagInterface|TemplateTag $tag
      */
     public function render(TagInterface $tag): string
     {
