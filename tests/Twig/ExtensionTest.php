@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\Tests\Twig;
 
 use Setono\TagBag\Renderer\CompositeRenderer;
-use Setono\TagBag\Renderer\ContentRenderer;
+use Setono\TagBag\Renderer\ContentAwareRenderer;
 use Setono\TagBag\Renderer\ScriptRenderer;
 use Setono\TagBag\Tag\ContentAwareTag;
 use Setono\TagBag\Tag\ScriptTag;
@@ -28,7 +28,7 @@ final class ExtensionTest extends IntegrationTestCase
             {
                 $renderer = new CompositeRenderer();
                 $renderer->add(new ScriptRenderer());
-                $renderer->add(new ContentRenderer());
+                $renderer->add(new ContentAwareRenderer());
                 $tagBag = new TagBag($renderer);
 
                 $tagBag->add(ScriptTag::create('alert("header")')->withSection(TagInterface::SECTION_HEAD));
