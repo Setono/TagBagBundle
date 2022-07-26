@@ -22,9 +22,7 @@ final class SetonoTagBagExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
         $container->registerForAutoconfiguration(RendererInterface::class)
-            ->addTag('setono_tag_bag.renderer', [
-                'priority' => 128,
-            ])
+            ->addTag('setono_tag_bag.renderer')
         ;
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
