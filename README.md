@@ -101,9 +101,8 @@ it will be tagged automatically.
 
 ## Projects using Tag Bag Bundle
 - [Sylius Addwish plugin](https://github.com/Setono/SyliusAddwishPlugin)
-- [Sylius Strands plugin](https://github.com/Setono/SyliusStrandsPlugin)
 - [Sylius Analytics plugin](https://github.com/Setono/SyliusAnalyticsPlugin)
-- [Sylius Facebook Tracking plugin](https://github.com/Setono/SyliusFacebookTrackingPlugin)
+- [Sylius Facebook plugin](https://github.com/Setono/SyliusFacebookPlugin)
 
 [ico-version]: https://poser.pugx.org/setono/tag-bag-bundle/v/stable
 [ico-license]: https://poser.pugx.org/setono/tag-bag-bundle/license
