@@ -44,7 +44,7 @@ You can autowire the `TagBag` like this:
 
 ```php
 <?php
-use Setono\TagBag\Tag\ScriptTag;
+use Setono\TagBag\Tag\InlineScriptTag;
 use Setono\TagBag\TagBagInterface;
 
 class YourService
@@ -59,7 +59,7 @@ class YourService
     public function method(): void 
     {
         $this->tagBag->addTag(
-            new ScriptTag('console.log("This will be output in the console");')
+            InlineScriptTag::create('console.log("This will be output in the console");')
         );
     }
 }
