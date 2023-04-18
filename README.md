@@ -19,7 +19,7 @@ you want to track events in your HTML, but the event is happening in a service/c
 ### Step 1: Download
 
 ```bash
-$ composer require setono/tag-bag-bundle
+composer require setono/tag-bag-bundle
 ```
 
 ### Step 2: Enable the bundle
