@@ -56,6 +56,7 @@ jobs:
                     - "7.4"
                     - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
@@ -88,7 +89,7 @@ jobs:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
             -   name: "Run maglnet/composer-require-checker"
-                run: "composer-require-checker check"
+                run: "composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
 
             -   name: "Run composer-unused/composer-unused"
                 run: "composer-unused"
@@ -104,6 +105,7 @@ jobs:
                     - "7.4"
                     - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
@@ -149,6 +151,7 @@ jobs:
                     - "7.4"
                     - "8.0"
                     - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "lowest"
@@ -192,7 +195,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
