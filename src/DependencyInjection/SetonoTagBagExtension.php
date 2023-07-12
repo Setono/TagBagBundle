@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\TagBagBundle\DependencyInjection;
 
 use Setono\TagBag\Renderer\RendererInterface;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -28,7 +29,7 @@ final class SetonoTagBagExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        if (true === $config['renderer']['twig']) {
+        if (true === $config['renderer']['twig'] && $container::willBeAvailable('symfony/twig-bundle', TwigBundle::class, ['setono/tag-bag-bundle'])) {
             $loader->load('services/integrations/renderer.xml');
         }
     }

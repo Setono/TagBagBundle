@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\DependencyInjection;
 
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -23,7 +24,7 @@ final class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('twig')
-                            ->defaultTrue()
+                            ->defaultValue(class_exists(TwigBundle::class))
                             ->info('Whether to enable the twig renderer')
         ;
 
