@@ -61,9 +61,10 @@ final class StoreTagBagSubscriberTest extends TestCase
      */
     public function it_has_the_correct_priority(): void
     {
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $priority = StoreTagBagSubscriber::getSubscribedEvents()[KernelEvents::RESPONSE][1];
 
-        /** @psalm-suppress InternalMethod */
+        /** @psalm-suppress InternalMethod,PossiblyUndefinedArrayOffset */
         $sessionListenerPriority = SessionListener::getSubscribedEvents()[KernelEvents::RESPONSE][1];
 
         $this->assertGreaterThan($sessionListenerPriority, $priority);

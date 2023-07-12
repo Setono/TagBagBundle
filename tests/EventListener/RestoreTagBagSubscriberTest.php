@@ -64,9 +64,10 @@ final class RestoreTagBagSubscriberTest extends TestCase
      */
     public function it_has_the_correct_priority(): void
     {
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $priority = RestoreTagBagSubscriber::getSubscribedEvents()[KernelEvents::REQUEST][1];
 
-        /** @psalm-suppress InternalMethod */
+        /** @psalm-suppress InternalMethod,PossiblyUndefinedArrayOffset */
         $sessionListenerPriority = SessionListener::getSubscribedEvents()[KernelEvents::REQUEST][1];
 
         $this->assertLessThan($sessionListenerPriority, $priority);

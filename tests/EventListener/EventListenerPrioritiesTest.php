@@ -22,13 +22,19 @@ final class EventListenerPrioritiesTest extends TestCase
         $populateTagBagEvents = RestoreTagBagSubscriber::getSubscribedEvents();
         $populateSessionEvents = StoreTagBagSubscriber::getSubscribedEvents();
 
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $sessionListenerResponsePriority = $sessionListenerEvents[KernelEvents::RESPONSE][1];
+
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $sessionListenerRequestPriority = $sessionListenerEvents[KernelEvents::REQUEST][1];
 
         $this->assertIsInt($sessionListenerResponsePriority);
         $this->assertIsInt($sessionListenerRequestPriority);
 
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $responsePriority = $populateSessionEvents[KernelEvents::RESPONSE][1];
+
+        /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $requestPriority = $populateTagBagEvents[KernelEvents::REQUEST][1];
 
         $this->assertIsInt($responsePriority);
