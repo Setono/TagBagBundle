@@ -76,7 +76,7 @@ final class StoreTagBagSubscriberTest extends TestCase
             $this->createMock(HttpKernelInterface::class),
             new Request(),
             $masterRequest ? HttpKernelInterface::MAIN_REQUEST : HttpKernelInterface::SUB_REQUEST,
-            new Response()
+            new Response(),
         );
     }
 }

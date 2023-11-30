@@ -10,11 +10,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 final class Runtime implements RuntimeExtensionInterface
 {
-    private TagBagInterface $tagBag;
-
-    public function __construct(TagBagInterface $tagBag)
+    public function __construct(private readonly TagBagInterface $tagBag)
     {
-        $this->tagBag = $tagBag;
     }
 
     public function renderAll(): string
