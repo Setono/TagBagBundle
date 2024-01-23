@@ -56,7 +56,7 @@ final class SetonoTagBagBundleTest extends KernelTestCase
         $container = self::getContainer();
 
         /**
-         * @var list<array{id: string, class: class-string}>
+         * @var list<array{id: string, class: class-string}> $services
          */
         $services = [
             // event listeners

@@ -10,25 +10,25 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.1",
         "setono/tag-bag": "^2.2",
-        "symfony/config": "^5.4 || ^6.0",
-        "symfony/dependency-injection": "^5.4 || ^6.0",
-        "symfony/event-dispatcher": "^5.4 || ^6.0",
-        "symfony/http-foundation": "^5.4 || ^6.0",
-        "symfony/http-kernel": "^5.4 || ^6.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.0",
+        "symfony/http-foundation": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
         "twig/twig": "^2.0 || ^3.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
-        "nyholm/symfony-bundle-test": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.0",
+        "nyholm/symfony-bundle-test": "^2.0 || ^3.0",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.6",
         "psalm/plugin-phpunit": "^0.18",
         "psalm/plugin-symfony": "^5.0",
-        "setono/code-quality-pack": "^2.4",
-        "symfony/twig-bundle": "^5.4 || ^6.0"
+        "setono/code-quality-pack": "^2.6",
+        "symfony/twig-bundle": "^6.4 || ^7.0"
     },
     "prefer-stable": true,
     "autoload": {
@@ -43,8 +43,8 @@
     },
     "config": {
         "allow-plugins": {
-            "ergebnis/composer-normalize": true,
-            "dealerdirect/phpcodesniffer-composer-installer": false
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true
         },
         "sort-packages": true
     },
@@ -52,6 +52,7 @@
         "analyse": "psalm",
         "check-style": "ecs check",
         "fix-style": "ecs check --fix",
-        "phpunit": "phpunit"
+        "phpunit": "phpunit",
+        "rector": "rector"
     }
 }

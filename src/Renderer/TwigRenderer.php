@@ -12,11 +12,8 @@ use Webmozart\Assert\Assert;
 
 final class TwigRenderer implements RendererInterface
 {
-    private Environment $environment;
-
-    public function __construct(Environment $environment)
+    public function __construct(private readonly Environment $environment)
     {
-        $this->environment = $environment;
     }
 
     /**

@@ -11,11 +11,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class RestoreTagBagSubscriber implements EventSubscriberInterface
 {
-    private TagBagInterface $tagBag;
-
-    public function __construct(TagBagInterface $tagBag)
+    public function __construct(private readonly TagBagInterface $tagBag)
     {
-        $this->tagBag = $tagBag;
     }
 
     public static function getSubscribedEvents(): array
