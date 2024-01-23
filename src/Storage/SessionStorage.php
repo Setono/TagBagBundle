@@ -41,7 +41,12 @@ final class SessionStorage implements StorageInterface
 
     public function remove(): void
     {
-        $this->getSession()->remove(self::DATA_KEY);
+        $session = $this->getSession();
+        if (!$session->isStarted()) {
+            return;
+        }
+
+        $session->remove(self::DATA_KEY);
     }
 
     private function getSession(): SessionInterface
