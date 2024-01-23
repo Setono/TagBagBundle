@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+    -   name: Support question?
+        url: https://symfony-devs.slack.com
+        about: Please ask questions on the Symfony support channel. It's okay to tag a developer, but please understand that we also have other obligations ;)
+    -   name: Security issue
+        url: https://setono.com
+        about: Please send security vulnerabilities directly to security@setono.com
