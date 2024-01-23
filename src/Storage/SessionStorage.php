@@ -18,13 +18,23 @@ final class SessionStorage implements StorageInterface
 
     public function store(string $data): void
     {
-        $this->getSession()->set(self::DATA_KEY, $data);
+        $session = $this->getSession();
+        if (!$session->isStarted()) {
+            return;
+        }
+
+        $session->set(self::DATA_KEY, $data);
     }
 
     public function restore(): ?string
     {
+        $session = $this->getSession();
+        if (!$session->isStarted()) {
+            return null;
+        }
+
         /** @var mixed $data */
-        $data = $this->getSession()->get(self::DATA_KEY);
+        $data = $session->get(self::DATA_KEY);
 
         return is_string($data) ? $data : null;
     }

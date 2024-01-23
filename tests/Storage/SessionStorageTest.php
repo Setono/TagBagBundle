@@ -24,6 +24,7 @@ final class SessionStorageTest extends TestCase
     public function it_stores(): void
     {
         $session = $this->prophesize(SessionInterface::class);
+        $session->isStarted()->willReturn(true);
         $session->set(StorageInterface::DATA_KEY, 'data')->shouldBeCalled();
 
         $requestStack = $this->prophesize(RequestStack::class);
@@ -39,6 +40,7 @@ final class SessionStorageTest extends TestCase
     public function it_restores(): void
     {
         $session = $this->prophesize(SessionInterface::class);
+        $session->isStarted()->willReturn(true);
         $session->get(StorageInterface::DATA_KEY)->shouldBeCalled()->willReturn('data');
 
         $requestStack = $this->prophesize(RequestStack::class);
@@ -54,6 +56,7 @@ final class SessionStorageTest extends TestCase
     public function it_removes(): void
     {
         $session = $this->prophesize(SessionInterface::class);
+        $session->isStarted()->willReturn(true);
         $session->remove(StorageInterface::DATA_KEY)->shouldBeCalled()->willReturn('data');
 
         $requestStack = $this->prophesize(RequestStack::class);
