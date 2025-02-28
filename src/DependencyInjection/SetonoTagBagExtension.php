@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class SetonoTagBagExtension extends Extension
 {
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $container->registerForAutoconfiguration(RendererInterface::class)
             ->addTag('setono_tag_bag.renderer', [

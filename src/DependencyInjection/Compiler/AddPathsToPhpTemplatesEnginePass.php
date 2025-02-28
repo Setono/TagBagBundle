@@ -6,7 +6,6 @@ namespace Setono\TagBagBundle\DependencyInjection\Compiler;
 
 use InvalidArgumentException;
 use ReflectionClass;
-use function Safe\sprintf;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -32,7 +31,8 @@ final class AddPathsToPhpTemplatesEnginePass implements CompilerPassInterface
         $filename = (new ReflectionClass($interface))->getFileName();
         if (false === $filename) {
             throw new InvalidArgumentException(sprintf(
-                'The filename of interface %s could not be deduced', $interface
+                'The filename of interface %s could not be deduced',
+                $interface
             ));
         }
 
