@@ -6,7 +6,6 @@ namespace Setono\TagBagBundle\DependencyInjection\Compiler;
 
 use InvalidArgumentException;
 use ReflectionClass;
-use function Safe\sprintf;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -35,7 +34,8 @@ final class AddPathsToTwigPass implements CompilerPassInterface
         $filename = (new ReflectionClass($interface))->getFileName();
         if (false === $filename) {
             throw new InvalidArgumentException(sprintf(
-                'The filename of interface %s could not be deduced', $interface
+                'The filename of interface %s could not be deduced',
+                $interface
             ));
         }
 
