@@ -78,7 +78,7 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: "flex"
+                    tools: "flex, composer-dependency-analyser"
 
             -   name: "Remove require-dev section"
                 run: "composer config --unset require-dev"
@@ -89,9 +89,6 @@ jobs:
                     dependency-versions: "${{ matrix.dependencies }}"
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
-
-            -   name: "Install composer-dependency-analyser"
-                run: "composer global require shipmonk/composer-dependency-analyser"
 
             -   name: "Run dependency analysis"
                 run: "composer-dependency-analyser"
