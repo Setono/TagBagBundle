@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\TagBagBundle\Tests\Twig;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Setono\TagBag\Renderer\CompositeRenderer;
 use Setono\TagBag\Renderer\ContentAwareRenderer;
 use Setono\TagBag\Renderer\ElementRenderer;
@@ -49,8 +50,38 @@ final class ExtensionTest extends IntegrationTestCase
         ];
     }
 
-    public function getFixturesDir(): string
+    protected static function getFixturesDirectory(): string
     {
         return __DIR__ . '/Fixtures/';
+    }
+
+    #[DataProvider('provideTests')]
+    public function testIntegration(mixed $file, mixed $message, mixed $condition, mixed $templates, mixed $exception, mixed $outputs, mixed $deprecation = ''): void
+    {
+        $this->doIntegrationTest($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
+    }
+
+    /** @return array<string, array<mixed>> */
+    public static function provideTests(): array
+    {
+        /** @var array<string, array<mixed>> $tests */
+        $tests = (new self('provideTests'))->getTests('testIntegration');
+
+        return $tests;
+    }
+
+    #[DataProvider('provideLegacyTests')]
+    public function testLegacyIntegration(mixed $file, mixed $message, mixed $condition, mixed $templates, mixed $exception, mixed $outputs, mixed $deprecation = ''): void
+    {
+        $this->doIntegrationTest($file, $message, $condition, $templates, $exception, $outputs, $deprecation);
+    }
+
+    /** @return array<string, array<mixed>> */
+    public static function provideLegacyTests(): array
+    {
+        /** @var array<string, array<mixed>> $tests */
+        $tests = (new self('provideLegacyTests'))->getTests('testLegacyIntegration', true);
+
+        return $tests;
     }
 }

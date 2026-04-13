@@ -1,5 +1,0 @@
-{
-    "symbol-whitelist": [
-        "Symfony\\Bundle\\TwigBundle\\TwigBundle"
-    ]
-}

@@ -34,6 +34,7 @@ final class SetonoTagBagBundleTest extends KernelTestCase
         return TestKernel::class;
     }
 
+    /** @param array<string, mixed> $options */
     protected static function createKernel(array $options = []): KernelInterface
     {
         /**

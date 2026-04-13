@@ -9,9 +9,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-final class StoreTagBagSubscriber implements EventSubscriberInterface
+final readonly class StoreTagBagSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly TagBagInterface $tagBag)
+    public function __construct(private TagBagInterface $tagBag)
     {
     }
 

@@ -26,6 +26,6 @@ final class SetonoTagBagExtensionTest extends AbstractExtensionTestCase
     {
         $this->load();
 
-        $this->assertTrue(true);
+        $this->expectNotToPerformAssertions();
     }
 }

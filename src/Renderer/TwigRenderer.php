@@ -10,9 +10,9 @@ use Setono\TagBag\Tag\TemplateTag;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
 
-final class TwigRenderer implements RendererInterface
+final readonly class TwigRenderer implements RendererInterface
 {
-    public function __construct(private readonly Environment $environment)
+    public function __construct(private Environment $environment)
     {
     }
 

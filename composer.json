@@ -10,28 +10,22 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "setono/tag-bag": "^2.3",
-        "symfony/config": "^6.4 || ^7.0",
-        "symfony/dependency-injection": "^6.4 || ^7.0",
-        "symfony/event-dispatcher": "^6.4 || ^7.0",
-        "symfony/http-foundation": "^6.4 || ^7.0",
-        "symfony/http-kernel": "^6.4 || ^7.0",
-        "twig/twig": "^2.0 || ^3.0",
+        "symfony/config": "^6.4 || ^7.4",
+        "symfony/dependency-injection": "^6.4 || ^7.4",
+        "symfony/event-dispatcher": "^6.4 || ^7.4",
+        "symfony/http-foundation": "^6.4 || ^7.4",
+        "symfony/http-kernel": "^6.4 || ^7.4",
+        "twig/twig": "^3.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.3 || ^5.1",
-        "nyholm/symfony-bundle-test": "^2.0 || ^3.0",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^10.5.20",
-        "psalm/plugin-phpunit": "^0.19",
-        "psalm/plugin-symfony": "^5.1",
-        "setono/code-quality-pack": "^2.7",
-        "symfony/twig-bundle": "^6.4 || ^7.0"
-    },
-    "conflict": {
-        "vimeo/psalm": "5.24.0"
+        "matthiasnoback/symfony-dependency-injection-test": "^5.1 || ^6.0",
+        "nyholm/symfony-bundle-test": "^3.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "setono/code-quality-pack": "^3.2",
+        "symfony/twig-bundle": "^6.4 || ^7.4"
     },
     "prefer-stable": true,
     "autoload": {
@@ -47,12 +41,13 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true
         },
         "sort-packages": true
     },
     "scripts": {
-        "analyse": "psalm",
+        "analyse": "phpstan analyse",
         "check-style": "ecs check",
         "fix-style": "ecs check --fix",
         "phpunit": "phpunit",
