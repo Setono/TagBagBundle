@@ -24,7 +24,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^5.1 || ^6.0",
         "nyholm/symfony-bundle-test": "^3.0",
         "phpstan/phpstan-symfony": "^2.0",
-        "setono/code-quality-pack": "^3.2",
+        "setono/code-quality-pack": "^3.3",
         "symfony/twig-bundle": "^6.4 || ^7.4"
     },
     "prefer-stable": true,
@@ -42,7 +42,8 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
             "ergebnis/composer-normalize": true,
-            "infection/extension-installer": true
+            "infection/extension-installer": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },

@@ -28,8 +28,8 @@ final class EventListenerPrioritiesTest extends TestCase
         /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $sessionListenerRequestPriority = $sessionListenerEvents[KernelEvents::REQUEST][1];
 
-        $this->assertIsInt($sessionListenerResponsePriority);
-        $this->assertIsInt($sessionListenerRequestPriority);
+        self::assertIsInt($sessionListenerResponsePriority);
+        self::assertIsInt($sessionListenerRequestPriority);
 
         /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $responsePriority = $populateSessionEvents[KernelEvents::RESPONSE][1];
@@ -37,10 +37,10 @@ final class EventListenerPrioritiesTest extends TestCase
         /** @psalm-suppress PossiblyUndefinedArrayOffset */
         $requestPriority = $populateTagBagEvents[KernelEvents::REQUEST][1];
 
-        $this->assertIsInt($responsePriority);
-        $this->assertIsInt($requestPriority);
+        self::assertIsInt($responsePriority);
+        self::assertIsInt($requestPriority);
 
-        $this->assertLessThan($sessionListenerRequestPriority, $requestPriority);
-        $this->assertGreaterThan($sessionListenerResponsePriority, $responsePriority);
+        self::assertLessThan($sessionListenerRequestPriority, $requestPriority);
+        self::assertGreaterThan($sessionListenerResponsePriority, $responsePriority);
     }
 }

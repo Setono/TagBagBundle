@@ -2,3 +2,4 @@
 /composer.lock
 /build/
 /.phpunit.cache/
+.claude/settings.local.json
