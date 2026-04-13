@@ -90,8 +90,11 @@ jobs:
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
+            -   name: "Install composer-dependency-analyser"
+                run: "composer global require shipmonk/composer-dependency-analyser"
+
             -   name: "Run dependency analysis"
-                run: "vendor/bin/composer-dependency-analyser"
+                run: "composer-dependency-analyser"
 
     static-code-analysis:
         name: "Static Code Analysis"
