@@ -15,7 +15,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
+                    - "8.2"
 
                 dependencies:
                     - "highest"
@@ -56,9 +56,9 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
                     - "8.2"
                     - "8.3"
+                    - "8.4"
 
                 dependencies:
                     - "lowest"
@@ -66,11 +66,7 @@ jobs:
 
                 symfony:
                     - "~6.4.0"
-                    - "~7.0.0"
-
-                exclude:
-                    - php-version: "8.1"
-                      symfony: "~7.0.0"
+                    - "~7.4.0"
 
         steps:
             -   name: "Checkout"
@@ -82,7 +78,10 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: "composer-require-checker, composer-unused, flex"
+                    tools: "flex, composer-dependency-analyser"
+
+            -   name: "Remove require-dev section"
+                run: "composer config --unset require-dev"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
@@ -91,11 +90,8 @@ jobs:
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
-            -   name: "Run maglnet/composer-require-checker"
-                run: "composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
-
-            -   name: "Run composer-unused/composer-unused"
-                run: "composer-unused"
+            -   name: "Run dependency analysis"
+                run: "composer-dependency-analyser"
 
     static-code-analysis:
         name: "Static Code Analysis"
@@ -105,20 +101,16 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
                     - "8.2"
                     - "8.3"
+                    - "8.4"
 
                 dependencies:
                     - "highest"
 
                 symfony:
                     - "~6.4.0"
-                    - "~7.0.0"
-
-                exclude:
-                    - php-version: "8.1"
-                      symfony: "~7.0.0"
+                    - "~7.4.0"
 
         steps:
             -   name: "Checkout"
@@ -140,7 +132,7 @@ jobs:
                     SYMFONY_REQUIRE: "${{ matrix.symfony }}"
 
             -   name: "Static analysis"
-                run: "vendor/bin/psalm --php-version=${{ matrix.php-version }}"
+                run: "vendor/bin/phpstan analyse"
 
     unit-tests:
         name: "Unit tests"
@@ -150,9 +142,9 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.1"
                     - "8.2"
                     - "8.3"
+                    - "8.4"
 
                 dependencies:
                     - "lowest"
@@ -160,11 +152,7 @@ jobs:
 
                 symfony:
                     - "~6.4.0"
-                    - "~7.0.0"
-
-                exclude:
-                    - php-version: "8.1"
-                      symfony: "~7.0.0"
+                    - "~7.4.0"
 
         steps:
             -   name: "Checkout"
@@ -196,7 +184,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.3"
+                    - "8.4"
 
                 dependencies:
                     - "highest"
@@ -211,11 +199,14 @@ jobs:
                     coverage: "pcov"
                     extensions: "${{ env.PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
+                    tools: "flex"
 
             -   name: "Install composer dependencies"
                 uses: "ramsey/composer-install@v3"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
+                env:
+                    SYMFONY_REQUIRE: "~7.4.0"
 
             -   name: "Collect code coverage with pcov and phpunit/phpunit"
                 run: "vendor/bin/phpunit --coverage-clover=.build/logs/clover.xml"

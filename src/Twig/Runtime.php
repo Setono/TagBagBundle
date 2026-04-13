@@ -8,9 +8,9 @@ use Setono\TagBag\Tag\TagInterface;
 use Setono\TagBag\TagBagInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 
-final class Runtime implements RuntimeExtensionInterface
+final readonly class Runtime implements RuntimeExtensionInterface
 {
-    public function __construct(private readonly TagBagInterface $tagBag)
+    public function __construct(private TagBagInterface $tagBag)
     {
     }
 

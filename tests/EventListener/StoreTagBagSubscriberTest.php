@@ -52,8 +52,8 @@ final class StoreTagBagSubscriberTest extends TestCase
     public function it_listens_to_the_correct_event(): void
     {
         $subscribedEvents = StoreTagBagSubscriber::getSubscribedEvents();
-        $this->assertCount(1, $subscribedEvents);
-        $this->assertTrue(isset($subscribedEvents[KernelEvents::RESPONSE]));
+        self::assertCount(1, $subscribedEvents);
+        self::assertTrue(isset($subscribedEvents[KernelEvents::RESPONSE]));
     }
 
     /**
@@ -67,7 +67,7 @@ final class StoreTagBagSubscriberTest extends TestCase
         /** @psalm-suppress InternalMethod,PossiblyUndefinedArrayOffset */
         $sessionListenerPriority = SessionListener::getSubscribedEvents()[KernelEvents::RESPONSE][1];
 
-        $this->assertGreaterThan($sessionListenerPriority, $priority);
+        self::assertGreaterThan($sessionListenerPriority, $priority);
     }
 
     private function getResponseEvent(bool $masterRequest): ResponseEvent

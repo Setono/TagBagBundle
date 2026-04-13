@@ -34,6 +34,7 @@ final class SetonoTagBagBundleTest extends KernelTestCase
         return TestKernel::class;
     }
 
+    /** @phpstan-ignore missingType.iterableValue (parent signature has untyped array) */
     protected static function createKernel(array $options = []): KernelInterface
     {
         /**
@@ -90,9 +91,9 @@ final class SetonoTagBagBundleTest extends KernelTestCase
         ];
 
         foreach ($services as $service) {
-            $this->assertTrue($container->has($service['id']), sprintf('The container does not have a service with id: "%s"', $service['id']));
+            self::assertTrue($container->has($service['id']), sprintf('The container does not have a service with id: "%s"', $service['id']));
             $instance = $container->get($service['id']);
-            $this->assertInstanceOf($service['class'], $instance);
+            self::assertInstanceOf($service['class'], $instance);
         }
     }
 }

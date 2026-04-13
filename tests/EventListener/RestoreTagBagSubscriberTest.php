@@ -55,8 +55,8 @@ final class RestoreTagBagSubscriberTest extends TestCase
     public function it_listens_to_the_correct_event(): void
     {
         $subscribedEvents = RestoreTagBagSubscriber::getSubscribedEvents();
-        $this->assertCount(1, $subscribedEvents);
-        $this->assertTrue(isset($subscribedEvents[KernelEvents::REQUEST]));
+        self::assertCount(1, $subscribedEvents);
+        self::assertTrue(isset($subscribedEvents[KernelEvents::REQUEST]));
     }
 
     /**
@@ -70,6 +70,6 @@ final class RestoreTagBagSubscriberTest extends TestCase
         /** @psalm-suppress InternalMethod,PossiblyUndefinedArrayOffset */
         $sessionListenerPriority = SessionListener::getSubscribedEvents()[KernelEvents::REQUEST][1];
 
-        $this->assertLessThan($sessionListenerPriority, $priority);
+        self::assertLessThan($sessionListenerPriority, $priority);
     }
 }
