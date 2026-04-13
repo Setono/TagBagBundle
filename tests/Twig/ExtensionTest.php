@@ -50,6 +50,11 @@ final class ExtensionTest extends IntegrationTestCase
         ];
     }
 
+    public function getFixturesDir(): string
+    {
+        return __DIR__ . '/Fixtures/';
+    }
+
     protected static function getFixturesDirectory(): string
     {
         return __DIR__ . '/Fixtures/';
